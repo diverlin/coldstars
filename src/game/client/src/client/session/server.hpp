@@ -37,7 +37,7 @@ class Server : public IMachine {
 
 public:
     Server(bool dummy=false);
-    virtual ~Server();
+    ~Server() override final;
 
     BaseSession* session() const { return m_session; }
     control::World* world() const { return m_world.get(); }

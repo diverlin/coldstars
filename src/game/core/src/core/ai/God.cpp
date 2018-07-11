@@ -73,14 +73,10 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld(bool dummy)
+void God::createWorld()
 {
-    if (!dummy) {
-        core::GalaxyDescr* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
-        core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
-    } else {
-        //core::TelegramCreator::get().createDummyGalaxy();
-    }
+    core::GalaxyDescr* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
+    core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
 }
 
 void God::update()

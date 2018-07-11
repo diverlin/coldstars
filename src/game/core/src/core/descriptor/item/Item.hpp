@@ -30,9 +30,8 @@ class ItemDescr : public BaseDescr
 {
 public:
     ItemDescr() = default;
-    ~ItemDescr() = default;
+    ~ItemDescr() override = default;
 
-    void setRace(race::Type race) { m_race = race; }
     void setTech(tech::Type tech) { m_tech = tech; }
     void setSlotType(const core::SlotType& slotType) { m_slotType = slotType; }
     void setCondition(int condition) { m_condition = condition; }
@@ -40,7 +39,6 @@ public:
     void setMass(int mass) { m_mass = mass; }
     void setPrice(int price) { m_price = price; }
 
-    race::Type race() const { return m_race; }
     tech::Type tech() const { return m_tech; }
     const core::SlotType& slotType() const { return m_slotType; }
     int condition() const { return m_condition; }
@@ -49,7 +47,6 @@ public:
     int price() const { return m_price; }
 
 private:
-    race::Type m_race = race::Type::NONE;
     tech::Type m_tech = tech::Type::NONE;
     core::SlotType m_slotType = core::SlotType::NONE;
     int m_condition = 0;
@@ -61,7 +58,6 @@ protected:
     ceti::InfoTable info() const override {
         ceti::InfoTable result = ::core::BaseDescr::info();
         result.add("Item");
-        result.add("race", race::to_string(m_race));
         result.add("tech", tech::to_string(m_tech));
         result.add("slotType", core::to_string(m_slotType));
         result.add("condition", m_condition);
@@ -75,8 +71,8 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<::core::BaseDescr>(*this);
-        ar & m_race;
         ar & m_tech;
         ar & m_slotType;
         ar & m_condition;

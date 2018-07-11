@@ -18,37 +18,4 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-#include <ceti/Pack.hpp>
-
-#include <glm/glm.hpp>
-
-#include <string>
-#include <vector>
-
-namespace ceti {
-
-class InfoTable : public std::vector<std::pair<std::string, std::string>>
-{
-public:
-    InfoTable() = default;
-    ~InfoTable() = default;
-
-    void add(const std::string&);
-    void add(const std::string&, const std::string&);
-    void add(const std::string&, int);
-    void add(const std::string&, int_t);
-    void add(const std::string&, float);
-    void add(const std::string&, const glm::vec3&);
-    void add(const std::string&, const std::vector<int_t>&);
-
-    std::string toString() const;
-    std::string diff(const InfoTable&) const;
-
-private:
-    ceti::pack<std::string> __keys() const;
-    std::string __getValue(const std::string& key) const;
-};
-
-} // namespace ceti
-
+#define UNUSED(x) (void)x;

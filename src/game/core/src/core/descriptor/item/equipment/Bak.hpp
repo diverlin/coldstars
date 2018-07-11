@@ -43,9 +43,9 @@ public:
 
 public:
     BakDescr();
-    ~BakDescr() = default;
+    ~BakDescr() override = default;
     BakDescr(const std::string& data);
-    std::string data() const;
+    std::string data() const override final;
 
     void setFuel(int fuel) { m_fuel = fuel; }
 

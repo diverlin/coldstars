@@ -79,6 +79,8 @@ class TurrelDescr;
 namespace core {
 namespace manager {
 
+class TEST_Descriptors;
+
 class Descriptors
 {
 public:
@@ -135,11 +137,13 @@ public:
 
     core::TurrelDescr* randTurrel() const;
 
+    // world
     core::GalaxyDescr* galaxy(int_t) const;
     core::SectorDescr* sector(int_t) const;
     core::StarSystemDescr* starSystem(int_t) const;
     core::HyperSpaceDescr* hyperSpace(int_t) const;
 
+    // spaceobjects
     core::StarDescr* star(int_t) const;
     core::PlanetDescr* planet(int_t) const;
     core::WormHoleDescr* wormHole(int_t) const;
@@ -159,6 +163,7 @@ public:
     core::ShopDescr* shop(int_t) const;
     core::GovermentDescr* goverment(int_t) const;
 
+    // items
     core::ScanerDescr* scaner(int_t) const;
     core::DriveDescr* drive(int_t) const;
     core::BakDescr* bak(int_t) const;
@@ -200,8 +205,11 @@ private:
     void __resolveId(ceti::BaseDescr*);
 
     ceti::pack<int_t> __ids(core::Type) const;
+    ceti::pack<int_t> __ids() const;
 
     IdGenerator m_idGenerator;
+
+    friend class core::manager::TEST_Descriptors;
 };
 
 } // namespace manager

@@ -872,5 +872,15 @@ Descriptors::__ids(core::Type type) const
     return result;
 }
 
+ceti::pack<int_t>
+Descriptors::__ids() const
+{
+    ceti::pack<int_t> result;
+    for (const auto& it: m_descriptors) {
+        result.add(it.first);
+    }
+    return result;
+}
+
 } // namespace manager
 } // namespace core

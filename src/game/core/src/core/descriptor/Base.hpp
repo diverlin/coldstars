@@ -24,6 +24,7 @@
 
 #include <ceti/type/IdType.hpp>
 #include <ceti/InfoTable.hpp>
+#include <ceti/macros.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>

@@ -49,12 +49,11 @@ public:
     static const float HYPER_WEIGHT;
     static const float MODULES_NUM_WEIGHT;
 
-
 public:
     DriveDescr();
     DriveDescr(const std::string& data);
-    ~DriveDescr() = default;
-    std::string data() const;
+    ~DriveDescr() override = default;
+    std::string data() const override final;
 
     void setSpeed(int speed) { m_speed = speed; }
     void setHyper(int hyper) { m_hyper = hyper; }
@@ -78,6 +77,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        //UNUSED(version)
         ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_speed;
         ar & m_hyper;

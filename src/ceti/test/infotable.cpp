@@ -31,7 +31,7 @@ TEST(infotable, common)
     table.add("label5", std::vector<int_t>({1,2,3,4,5}));
 
     std::string expected("header:;label1:value1;label2:2;label3:3.10;label4:(1.00, 2.00, 3.00);label5:1,2,3,4,5,;");
-    EXPECT_EQ(expected, table.str());
+    EXPECT_EQ(expected, table.toString());
 
 
     ceti::InfoTable table2;

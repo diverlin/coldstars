@@ -24,6 +24,7 @@
 #include <core/communication/TelegramCreator.hpp>
 #include <core/session/ServerSession.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Ship.hpp>
 
@@ -35,6 +36,8 @@
 #include <client/session/server.hpp>
 #include <client/session/client.hpp>
 #include <client/pilot/Player.hpp>
+
+#include <ceti/macros.hpp>
 
 namespace {
 
@@ -58,17 +61,17 @@ core::control::StarSystem* getStarSystem(core::BaseSession* session, int_t id) {
     return session->entities()->starsystem(id);
 }
 
-core::control::Star* getStar(core::BaseSession* session, int_t id) {
-    return session->entities()->star(id);
-}
+//core::control::Star* getStar(core::BaseSession* session, int_t id) {
+//    return session->entities()->star(id);
+//}
 
-core::control::Planet* getPlanet(core::BaseSession* session, int_t id) {
-    return session->entities()->planet(id);
-}
+//core::control::Planet* getPlanet(core::BaseSession* session, int_t id) {
+//    return session->entities()->planet(id);
+//}
 
-core::control::Asteroid* getAsteroid(core::BaseSession* session, int_t id) {
-    return session->entities()->asteroid(id);
-}
+//core::control::Asteroid* getAsteroid(core::BaseSession* session, int_t id) {
+//    return session->entities()->asteroid(id);
+//}
 
 
 void update(const std::vector<core::IMachine*>& machines/*, int ticks*/) {
@@ -110,7 +113,7 @@ bool check_matches(T* left, T* right)
     return result;
 }
 
-void test_sessions_matches(core::BaseSession* session1, core::BaseSession* session2) {
+void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* session2) {
     core::control::Galaxy* session1_galaxy = getGalaxy(session1);
     core::control::Galaxy* session2_galaxy = getGalaxy(session2);
     EXPECT_TRUE(check_matches(session1_galaxy, session2_galaxy));
@@ -135,8 +138,57 @@ void test_sessions_matches(core::BaseSession* session1, core::BaseSession* sessi
     }
 }
 
-
 } // namespace
+
+namespace core {
+namespace manager {
+class TEST_Descriptors {
+public:
+    static void test_matches(const core::manager::Descriptors& descriptors1,
+                             const core::manager::Descriptors& descriptors2)
+    {
+        ceti::pack<int_t> ids = test_ids_matches(descriptors1, descriptors2);
+        for (int_t id: ids) {
+            test_descriptor_pair_match(descriptors1.get(id), descriptors2.get(id));
+        }
+    }
+
+private:
+    template<class T>
+    static void test_descriptor_pair_match(T* descriptor1, T* descriptor2)
+    {
+        EXPECT_TRUE(descriptor1);
+        EXPECT_TRUE(descriptor2);
+
+        std::string diff = descriptor1->info().diff(descriptor2->info());
+//        std::cout<<"session1: "<<descriptor1->info().toString()<<std::endl;
+//        std::cout<<"session2: "<<descriptor2->info().toString()<<std::endl;
+        if (diff != "") {
+            std::cout<<diff<<std::endl;
+        }
+        EXPECT_EQ("", diff);
+    }
+
+    static ceti::pack<int_t> test_ids_matches(const core::manager::Descriptors& descriptors1,
+                                              const core::manager::Descriptors& descriptors2)
+    {
+        ceti::pack<int_t> ids1 = descriptors1.__ids();
+        ceti::pack<int_t> ids2 = descriptors2.__ids();
+        EXPECT_TRUE(ids1 == ids2);
+
+        return ids1;
+    }
+
+};
+} // namespace manager
+} // namespace core
+
+void test_sessions_descriptors_matches(core::BaseSession* session1, core::BaseSession* session2) {
+    const core::manager::Descriptors& desriptors1 = *session1->descriptors();
+    const core::manager::Descriptors& desriptors2 = *session2->descriptors();
+
+    core::manager::TEST_Descriptors::test_matches(desriptors1, desriptors2);
+}
 
 TEST(sessions, player_creation)
 {
@@ -170,6 +222,16 @@ TEST(sessions, world_creation)
 
     update(machines);
 
-    test_sessions_matches(server.session(), client.session());
+    test_sessions_models_match(server.session(), client.session());
 }
 
+
+TEST(sessions, descriptors_are_equals)
+{
+    core::Server server;
+    client::Client client(1);
+    client::Client client2(2);
+
+    test_sessions_descriptors_matches(server.session(), client.session());
+    test_sessions_descriptors_matches(server.session(), client2.session());
+}

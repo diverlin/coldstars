@@ -26,7 +26,7 @@ class EquipmentDescr : public ItemDescr
 {
 public:
     EquipmentDescr() = default;
-    ~EquipmentDescr() = default;
+    ~EquipmentDescr() override = default;
 
     void setModules(int modules) { m_modules = modules; }
 
@@ -34,7 +34,7 @@ public:
 
 protected:
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = info();
+        ceti::InfoTable result = ItemDescr::info();
         result.add("Equipment");
         result.add("modules", m_modules);
         return result;
@@ -47,6 +47,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<ItemDescr>(*this);
         ar & m_modules;
     }
