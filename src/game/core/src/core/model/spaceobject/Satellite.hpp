@@ -31,13 +31,13 @@ namespace core {
 class SatelliteModel : public VehicleModel
 {
 public:
-    SatelliteModel(int_t);
-    ~SatelliteModel() = default;
+    SatelliteModel(int_t, int_t);
+    ~SatelliteModel() override = default;
     SatelliteModel(const std::string& data);
-    std::string data() const;
+    std::string data() const override final;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = SatelliteModel::info();
+        ceti::InfoTable result = VehicleModel::info();
         result.add("Satellite");
         return result;
     }
@@ -49,6 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<VehicleModel>(*this);
     }
 };

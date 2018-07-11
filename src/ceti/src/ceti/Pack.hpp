@@ -105,7 +105,7 @@ public:
         return meti::rand::get_element_or_die(*this);
     }
 
-    ceti::pack<T> random(int size) {
+    ceti::pack<T> random(int size) const {
         assert(!this->empty());
 
         std::set<T> set1(this->begin(), this->end());

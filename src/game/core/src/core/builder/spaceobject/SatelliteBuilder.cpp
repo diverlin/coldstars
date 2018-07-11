@@ -31,9 +31,9 @@
 namespace core {
 
 core::control::Satellite*
-SatelliteBuilder::__genTemplate(core::SatelliteDescr* descr)
+SatelliteBuilder::__genTemplate(core::SatelliteDescr* descr, int_t ob_id)
 {
-    SatelliteModel* model = new SatelliteModel(descr->id());
+    SatelliteModel* model = new SatelliteModel(descr->id(), ob_id);
     assert(model);
 
     core::control::Satellite* satellite = new core::control::Satellite(descr, model);

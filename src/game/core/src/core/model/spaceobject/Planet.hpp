@@ -32,9 +32,9 @@ class PlanetModel : public PlanetoidModel {
 
 public:
     PlanetModel(int_t, int_t);
-    ~PlanetModel() = default;
     PlanetModel(const std::string& data);
-    std::string data() const;
+    ~PlanetModel() override = default;
+    std::string data() const override final;
 
     void setPopulation(int_t population)  { m_population = population; }
     void setLand(int_t land)  { m_land = land; }
@@ -58,6 +58,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<PlanetoidModel>(*this);
         ar & m_land;
         ar & m_population;

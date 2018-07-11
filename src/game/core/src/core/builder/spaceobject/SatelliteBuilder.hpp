@@ -44,7 +44,7 @@ private:
     ~SatelliteBuilder() = default;
 
     static void __createInternals(core::control::Satellite*, core::SatelliteDescr*);
-    static core::control::Satellite* __genTemplate(core::SatelliteDescr*);
+    static core::control::Satellite* __genTemplate(core::SatelliteDescr*, int_t ob_id = NONE);
 }; 
 
 } // namespace core

@@ -23,7 +23,9 @@
 
 namespace core {
 
-SatelliteModel::SatelliteModel(int_t descriptor_id)
+SatelliteModel::SatelliteModel(int_t descriptor_id, int_t ob_id)
+    :
+      VehicleModel(descriptor_id, ob_id)
 {
     setDescriptor(descriptor_id);
 }

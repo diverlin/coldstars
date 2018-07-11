@@ -23,7 +23,7 @@
 
 namespace core {
 
-SpaceStationModel::SpaceStationModel(int_t descriptor_id)
+SpaceStationModel::SpaceStationModel(int_t descriptor_id, int_t ob_id)
 {
     setDescriptor(descriptor_id);
 }

@@ -24,9 +24,9 @@
 namespace core {
 
 ShipModel::ShipModel(int_t descriptor_id, int_t ob_id)
+    :
+      VehicleModel(descriptor_id, ob_id)
 {
-    setId(ob_id);
-    setDescriptor(descriptor_id);
 }
 
 ShipModel::ShipModel(const std::string& data)

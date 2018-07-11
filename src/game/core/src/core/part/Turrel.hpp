@@ -33,7 +33,9 @@ public:
     TurrelModel(int_t descriptor_id) {
         setDescriptor(descriptor_id);
     }
-    ~TurrelModel() {}
+    ~TurrelModel() override {}
+
+    std::string data() const override final { return ""; }
 
 private:
 };

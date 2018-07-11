@@ -28,7 +28,10 @@ namespace core {
 class VehicleModel : public SpaceObjectModel {
 public:
     VehicleModel() = default;
+    VehicleModel(int_t, int_t);
+    VehicleModel(const std::string& data);
     ~VehicleModel() override = default;
+    std::string data() const override;
 
     int_t npc() const { return m_npc; }
     int_t dock() const { return m_dock; }
@@ -38,7 +41,7 @@ public:
     void addItem(int_t id) { if (_isWritable()) m_items.add(id); }
     void removeItem(int_t id) { if (_isWritable()) m_items.remove(id); }
 
-    ceti::pack<int_t> items() const { return m_items; }
+    const ceti::pack<int_t>& items() const { return m_items; }
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = SpaceObjectModel::info();
@@ -61,6 +64,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<SpaceObjectModel>(*this);
         ar & m_npc;
         ar & m_dock;

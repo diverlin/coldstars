@@ -44,6 +44,7 @@ class BaseModel : public NonCopyable
 public:
     BaseModel() = default;
     virtual ~BaseModel() = default;
+    virtual std::string data() const = 0;
 
     void setIsAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }

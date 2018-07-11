@@ -28,7 +28,7 @@ class ItemModel : public BaseModel
 {
 public:
     ItemModel() = default;
-    ~ItemModel() = default;
+    ~ItemModel() override = default;
 
     void setSlot(int slot)  { m_slot = slot; }
     void setLockedTurns(int lockedTurns) { m_lockedTurns = lockedTurns; }

@@ -59,7 +59,7 @@ private:
     ~SpaceStationBuilder() = default;
 
     static void __createInternals(core::control::SpaceStation*, core::SpaceStationDescr*);
-    static core::control::SpaceStation* __genTemplate(core::SpaceStationDescr*);
+    static core::control::SpaceStation* __genTemplate(core::SpaceStationDescr*, int_t ob_id = NONE);
 }; 
 
 } // namespace core

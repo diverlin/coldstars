@@ -144,9 +144,9 @@ SpaceStationBuilder::__createInternals(core::control::SpaceStation* spacestation
 }
 
 core::control::SpaceStation*
-SpaceStationBuilder::__genTemplate(core::SpaceStationDescr* descr)
+SpaceStationBuilder::__genTemplate(core::SpaceStationDescr* descr, int_t id)
 {
-    SpaceStationModel* model = new SpaceStationModel(descr->id());
+    SpaceStationModel* model = new SpaceStationModel(descr->id(), id);
     assert(model);
 
     core::control::SpaceStation* spacestation = new core::control::SpaceStation(descr, model);

@@ -21,6 +21,8 @@
 
 #include <core/Base.hpp>
 
+#include <ceti/IdGenerator.hpp>
+
 #include <map>
 #include <cassert>
 #include <string>

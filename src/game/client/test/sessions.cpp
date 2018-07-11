@@ -27,6 +27,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Ship.hpp>
+#include <core/item/Item.hpp>
 
 #include <core/world/ALL>
 #include <core/model/ALL>
@@ -40,6 +41,10 @@
 #include <ceti/macros.hpp>
 
 namespace {
+
+core::control::Item* getItem(core::BaseSession* session, int_t id) {
+    return session->entities()->item(id);
+}
 
 core::control::Ship* getShip(core::BaseSession* session, int_t id) {
     return session->entities()->ship(id);
@@ -140,6 +145,14 @@ void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* 
 
                 test_data_match(session1_ship->model(), session2_ship->model());
                 test_data_match(session1_ship->npc()->model(), session2_ship->npc()->model());
+
+                for (int_t item_id: session1_ship->model()->items()) {
+                    core::control::Item* session1_item = getItem(session1, item_id);
+                    core::control::Item* session2_item = getItem(session2, item_id);
+
+//                    std::cout<<session1_item->model()->info().toString()<<std::endl;
+                    test_data_match(session1_item->model(), session2_item->model());
+                }
             }
         }
     }
@@ -149,6 +162,7 @@ void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* 
 
 namespace core {
 namespace manager {
+
 class TEST_Descriptors {
 public:
     static void test_matches(const core::manager::Descriptors& descriptors1,

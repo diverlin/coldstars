@@ -22,13 +22,7 @@
 #include <core/type/DescriptorType.hpp>
 
 #include <ceti/NonCopyable.hpp>
-#include <ceti/Base.hpp>
-//#include <ceti/InfoTable.hpp>
-
-//#include <boost/archive/text_oarchive.hpp>
-//#include <boost/archive/text_iarchive.hpp>
-
-//#include <vector>
+//#include <ceti/Base.hpp>
 
 namespace core {
 class BaseDescr;
@@ -69,17 +63,4 @@ private:
 } // namespace control
 } // namespace core
 
-//class Base : private NonCopyable
-//{
-//public:
-//    Base() = default;
-//    virtual ~Base() = default;
-
-//    void setId(int_t id) { m_id = id; }
-
-//    int_t id() { return m_id; }
-
-//private:
-//    int_t m_id = NONE;
-//};
 

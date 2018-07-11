@@ -82,6 +82,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<ceti::OrientationModel>(*this);
         ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_armor;
