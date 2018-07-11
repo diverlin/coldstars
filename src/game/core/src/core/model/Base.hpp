@@ -24,6 +24,7 @@
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
 #include <ceti/InfoTable.hpp>
+#include <ceti/macros.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -76,6 +77,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & m_isAlive;
         ar & m_id;
         ar & m_descriptor;

@@ -118,7 +118,7 @@ void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* 
     core::control::Galaxy* session2_galaxy = getGalaxy(session2);
     EXPECT_TRUE(check_matches(session1_galaxy, session2_galaxy));
 
-    for (int_t sector_id: session1_galaxy->descriptor()->sectors) {
+    for (int_t sector_id: session1_galaxy->model()->sectors()) {
         core::control::Sector* session1_sector = getSector(session1, sector_id);
         core::control::Sector* session2_sector = getSector(session2, sector_id);
         EXPECT_TRUE(check_matches(session1_sector, session2_sector));
