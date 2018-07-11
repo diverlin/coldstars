@@ -35,7 +35,7 @@ class PlanetoidModel : public SpaceObjectModel
 {
 public:
     PlanetoidModel() = default;
-    ~PlanetoidModel() = default;
+    ~PlanetoidModel() override = default;
     PlanetoidModel(const std::string& data);
     std::string data() const;
 

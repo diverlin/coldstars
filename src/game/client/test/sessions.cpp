@@ -95,44 +95,51 @@ void update(const std::vector<core::IMachine*>& machines/*, int ticks*/) {
     }
 }
 
-template<typename T>
-bool check_matches(T* left, T* right)
+template<class T>
+static void test_data_match(T* ob1, T* ob2)
 {
-    assert(left);
-    assert(right);
-    if (left->descriptor()->id() != right->descriptor()->id()) {
-        std::cout<<"left descriptor id="<<left->descriptor()->id()<<" right descriptor id="<<right->descriptor()->id();
-        assert(false);
-    }
+    EXPECT_TRUE(ob1);
+    EXPECT_TRUE(ob2);
 
-    bool result = (left->model()->data() == right->model()->data());
-    if (!result) {
-        std::cout<<"DIFF: \n"<<left->model()->info().diff(right->model()->info())<<std::endl;
-    }
+    bool result = (ob1->data() == ob2->data());
+    std::string diff = ob1->info().diff(ob2->info());
 
-    return result;
+    // std::cout<<"session1: "<<ob1->info().toString()<<std::endl;
+    // std::cout<<"session2: "<<ob2->info().toString()<<std::endl;
+
+    if (diff != "") {
+        std::cout<<"DIFF: \n"<<diff<<std::endl;
+    }
+    EXPECT_TRUE(result);
+    EXPECT_EQ("", diff);
 }
 
-void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* session2) {
+
+void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* session2)
+{
     core::control::Galaxy* session1_galaxy = getGalaxy(session1);
     core::control::Galaxy* session2_galaxy = getGalaxy(session2);
-    EXPECT_TRUE(check_matches(session1_galaxy, session2_galaxy));
+
+    test_data_match(session1_galaxy->model(), session2_galaxy->model());
 
     for (int_t sector_id: session1_galaxy->model()->sectors()) {
         core::control::Sector* session1_sector = getSector(session1, sector_id);
         core::control::Sector* session2_sector = getSector(session2, sector_id);
-        EXPECT_TRUE(check_matches(session1_sector, session2_sector));
+
+        test_data_match(session1_sector->model(), session2_sector->model());
 
         for (int_t starsystem_id: session1_sector->descriptor()->starsystems) {
             core::control::StarSystem* session1_starsystem = getStarSystem(session1, starsystem_id);
             core::control::StarSystem* session2_starsystem = getStarSystem(session2, starsystem_id);
-            EXPECT_TRUE(check_matches(session1_starsystem, session2_starsystem));
+
+            test_data_match(session1_starsystem->model(), session2_starsystem->model());
 
             for (int_t ship_id: session1_starsystem->model()->ships()) {
                 core::control::Ship* session1_ship = getShip(session1, ship_id);
                 core::control::Ship* session2_ship = getShip(session2, ship_id);
-                EXPECT_TRUE(check_matches(session1_ship, session2_ship));
-                EXPECT_TRUE(check_matches(session1_ship->npc(), session2_ship->npc()));
+
+                test_data_match(session1_ship->model(), session2_ship->model());
+                test_data_match(session1_ship->npc()->model(), session2_ship->npc()->model());
             }
         }
     }
@@ -149,26 +156,11 @@ public:
     {
         ceti::pack<int_t> ids = test_ids_matches(descriptors1, descriptors2);
         for (int_t id: ids) {
-            test_descriptor_pair_match(descriptors1.get(id), descriptors2.get(id));
+            test_data_match(descriptors1.get(id), descriptors2.get(id));
         }
     }
 
 private:
-    template<class T>
-    static void test_descriptor_pair_match(T* descriptor1, T* descriptor2)
-    {
-        EXPECT_TRUE(descriptor1);
-        EXPECT_TRUE(descriptor2);
-
-        std::string diff = descriptor1->info().diff(descriptor2->info());
-//        std::cout<<"session1: "<<descriptor1->info().toString()<<std::endl;
-//        std::cout<<"session2: "<<descriptor2->info().toString()<<std::endl;
-        if (diff != "") {
-            std::cout<<diff<<std::endl;
-        }
-        EXPECT_EQ("", diff);
-    }
-
     static ceti::pack<int_t> test_ids_matches(const core::manager::Descriptors& descriptors1,
                                               const core::manager::Descriptors& descriptors2)
     {
@@ -209,8 +201,8 @@ TEST(sessions, player_creation)
     EXPECT_TRUE(server_npc);
     EXPECT_TRUE(server_npc->vehicle());
 
-    EXPECT_TRUE(check_matches(server_npc, client_npc));
-    EXPECT_TRUE(check_matches(server_npc->vehicle(), client_npc->vehicle()));
+    test_data_match(server_npc->model(), client_npc->model());
+    test_data_match(server_npc->vehicle()->model(), client_npc->vehicle()->model());
 }
 
 TEST(sessions, world_creation)
@@ -224,7 +216,6 @@ TEST(sessions, world_creation)
 
     test_sessions_models_match(server.session(), client.session());
 }
-
 
 TEST(sessions, descriptors_are_equals)
 {
