@@ -74,6 +74,8 @@ genStarSystem(race::Type race)
     }
 
     descr->setRace(race);
+    descr->setStarsNum(1);
+    descr->setPlanetsNum(meti::rand::gen_int(1, 5));
 
     core::shortcuts::descriptors()->add(descr);
     return descr;

@@ -57,30 +57,34 @@ public:
     StarSystemDescr();
     StarSystemDescr(const std::string&);
     ~StarSystemDescr() override = default;
-    std::string data() const;
+    std::string data() const override final;
 
-    const std::vector<int_t>& stars() const { return m_stars; }
-    const std::vector<int_t>& planets() const { return m_planets; }
+    void setStarsNum(int starsNum) { m_starsNum = starsNum; }
+    void setPlanetsNum(int planetsNum) { m_planetsNum = planetsNum; }
+
+    int starsNum() const { return m_starsNum; }
+    int planetsNum() const { return m_planetsNum; }
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
         result.add("StarSystem");
-        result.add("stars", m_stars);
-        result.add("planets", m_planets);
+        result.add("starsNum", m_starsNum);
+        result.add("planetsNum", m_planetsNum);
         return result;
     }
 
 private:
-    std::vector<int_t> m_stars;
-    std::vector<int_t> m_planets;
+    int m_starsNum = 0;
+    int m_planetsNum = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<BaseDescr>(*this);
-        ar & m_stars;
-        ar & m_planets;
+        ar & m_starsNum;
+        ar & m_planetsNum;
     }
 }; 
 
