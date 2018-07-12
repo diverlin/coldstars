@@ -23,51 +23,6 @@
 
 #include <gtest/gtest.h>
 
-//struct Node {
-//    std::string type;
-//    std::string pos;
-//    ceti::pack<std::string> tags;
-//    ceti::pack<Node*> children;
-//};
-
-
-//void parse(Node* root, std::string graph) {
-
-//}
-
-//void nested(std::string graph) {
-
-//}
-
-//std::string get_nested_child(const std::string& text) {
-//    return ceti::get_nested(text, "{", "}");
-//}
-
-//std::string parse_tags(const std::string& text)
-//{
-//    return ceti::get_nested(text, "[", "]");
-//}
-
-//std::string parse_name(const std::string& text)
-//{
-//    std::string nested = get_nested_child(text);
-//    if (!nested.empty()) {
-//        std::string name = ceti::replace(text, nested, "");
-//        name = ceti::replace(name, "{}", "");
-//        return name;
-//    }
-//    return "";
-//}
-
-//void parse_node(Node* node, std::string graph)
-//{
-//    std::string nested = get_nested_child(graph);
-//    if (!nested.empty()) {
-//        std::string name = ceti::replace(graph, nested, "");
-//        std::cout<<
-
-//    }
-//}
 
 class Node;
 std::vector<Node> parse(const std::string& graph);
@@ -210,27 +165,29 @@ bool validate_syntax(const std::string& input)
 
     if (counter_open1 != counter_close1) {
         log("the number of \"{\" doesn't match to \"}\", please check you file");
-        assert(false);
+        return false;
     }
     if (counter_open2 != counter_close2) {
         log("the number of \"[\" doesn't match to \"]\", please check you file");
-        assert(false);
+        return false;
     }
     if (counter_open3 != counter_close3) {
         log("the number of \"(\" doesn't match to \")\", please check you file");
-        assert(false);
+        return false;
     }
+
+    return true;
 }
 
 std::vector<Node> parse(const std::string& input)
 {
     std::string graph = input;
     processing_magic(graph);
-    validate_syntax(graph);
+    assert(validate_syntax(graph));
 
     std::vector<Node> result;
 
-    int nest_level = 0;
+    int nested_level = 0;
 
     std::string name_buffer;
     std::string tags_buffer;
@@ -241,23 +198,36 @@ std::vector<Node> parse(const std::string& input)
     bool collecting_body = false;
 
     unsigned int count = 0;
+    bool dump_requested = false;
     for (const char& ch: graph) {
         count++;
 
-        // enter body
+        if (!collecting_name && !collecting_body) {
+            collecting_name = true;
+        }
+
+        // start collecting body
         if (ch == '{') {
             log2("{");
-            nest_level++;
+            nested_level++;
             collecting_name = false;
             collecting_body = true;
         }
-        // leave body
+        // end collecting body
         if (ch == '}') {
             log2("}");
-            nest_level--;
+            nested_level--;
+            if (nested_level==0) {
+                dump_requested = true;
+            }
         }
 
-        // collect buffers
+        // skip coma at the beginning
+        if (name_buffer.empty() && ch == ',') {
+            continue;
+        }
+
+        /// collect buffers depending on mode
         if (collecting_name) {
             name_buffer += ch;
         }
@@ -265,47 +235,30 @@ std::vector<Node> parse(const std::string& input)
             body_buffer += ch;
         }
 
-        // to handle items without body {}
-        if ((collecting_name == true) && (name_buffer.find('[') == name_buffer.npos) && (ch == ','))
-        {
-            if (name_buffer[0] != ',') {
-                log2("empty body");
-                collecting_name = true;
-                collecting_body = false;
-
-                Node node = process_buffers(name_buffer, position_buffer, tags_buffer, body_buffer);
-                result.push_back(node);
-                continue;
-            }
+        // dump desicion
+        if (collecting_name && (count == graph.length())) {
+            dump_requested = true;
         }
 
-        // on body ends we dump result
-        if ((collecting_body == true) && (nest_level == 0)) {
-            log2("close body");
-            collecting_name = true;
-            collecting_body = false;
+        if (collecting_name && (name_buffer.find('[') == name_buffer.npos) && (ch==',')) {
+            dump_requested = true;
+        }
 
+        if (dump_requested) {
             Node node = process_buffers(name_buffer, position_buffer, tags_buffer, body_buffer);
             result.push_back(node);
-            continue;
-        }
 
-        // corner case to process last element of {starsystem, starsystem, starsystem}
-        if ((collecting_name == true) && (count == graph.length())) {
-            log2("close body");
+            // reset flags
+            dump_requested = false;
             collecting_name = false;
             collecting_body = false;
-
-            Node node = process_buffers(name_buffer, position_buffer, tags_buffer, body_buffer);
-            result.push_back(node);
-            continue;
         }
     }
 
     return result;
 }
 
-TEST(graph, parser)
+TEST(graph, parse)
 {
     std::string input = "starsystem[alien,small]{star,planet[ice]{kosmoport}}, starsystem[(140,70)]{blackhole,asteroid}, starsystem{star,star}";
     std::vector<Node> nodes = parse(input);
@@ -316,17 +269,17 @@ TEST(graph, parser)
     EXPECT_NE(Node("starsystem", "", "", "star, star").toString(), nodes[2].toString());
 }
 
-TEST(graph, parser_simple)
+TEST(graph, parse_simple)
 {
-    std::string input = "starsystem, starsystem, hyperspace1";
+    std::string input = "s1{}, s2, h1[(100,0)]";
     std::vector<Node> nodes = parse(input);
     assert(nodes.size()==3);
-    EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[0].toString());
-    EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[1].toString());
-    EXPECT_EQ(Node("hyperspace1", "", "", "").toString(), nodes[2].toString());
+    EXPECT_EQ(Node("s1", "", "", "").toString(), nodes[0].toString());
+    EXPECT_EQ(Node("s2", "", "", "").toString(), nodes[1].toString());
+    EXPECT_EQ(Node("h1", "100,0", "", "").toString(), nodes[2].toString());
 }
 
-TEST(graph, nodes)
+TEST(graph, parse_complex)
 {
     std::string input ="\
     galaxy {\
@@ -337,7 +290,7 @@ TEST(graph, nodes)
             planet[water],\
             ship[kualkua],\
             ship[vorlon] {drive, lazer, rocket},\
-            lazer,\
+            lazer_error,\
             drive[(100,0)]\
         },\
         starsystem[small,radioactive] {\
@@ -394,7 +347,7 @@ TEST(graph, nodes)
     EXPECT_EQ("rocket", starsystem1_ship2.children()[2].type());
 
     const Node& starsystem1_lazer = starsystem1.children()[6];
-    EXPECT_EQ("lazer", starsystem1_lazer.type());
+    EXPECT_EQ("lazer_error", starsystem1_lazer.type());
 
     const Node& starsystem1_drive = starsystem1.children()[7];
     EXPECT_EQ("drive", starsystem1_drive.type());
