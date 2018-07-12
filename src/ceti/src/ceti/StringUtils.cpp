@@ -127,6 +127,12 @@ void strip(std::string& str) {
     str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
 }
 
+void strip(std::vector<std::string>& v) {
+    for(std::string& element: v) {
+        strip(element);
+    }
+}
+
 std::string get_nested(const std::string& str, const char* open, const char* close) {
     unsigned long begin = str.find_first_of(open);
     unsigned long end = str.find_last_of(close);
