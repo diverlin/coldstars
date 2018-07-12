@@ -69,7 +69,7 @@
 
 namespace core {
 
-Server::Server(bool dummy)
+Server::Server(WorldType type)
     :
       IMachine(0)
     , m_session(new BaseSession)
@@ -81,7 +81,7 @@ Server::Server(bool dummy)
     global::get().telegramHub().subscribe(m_telegramHandler);
 
     Data data(/*graphic*/false); // q: why we need it on server? a: to generate/load descriptors
-    m_world = WorldPtr(new control::World(dummy));
+    m_world = WorldPtr(new control::World(type));
 }
 
 Server::~Server()

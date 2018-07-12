@@ -58,6 +58,15 @@ std::string to_string(const std::vector<int_t>& ids)
     return result;
 }
 
+std::string to_string(const pack<int>& data)
+{
+    std::string result;
+    for (int id: data) {
+        result += std::to_string(id) + ",";
+    }
+    return result;
+}
+
 std::string to_string(const std::string& label, const std::vector<int_t>& ids)
 {
     std::string result = label;

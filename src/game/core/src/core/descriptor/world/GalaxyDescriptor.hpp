@@ -30,6 +30,8 @@ public:
     ~GalaxyDescr() override = default;
     std::string data() const override final;
 
+    bool isMinimal() const { return m_starsystemsNum == 2; }
+
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
         result.add("Galaxy");

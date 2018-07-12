@@ -16,6 +16,8 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <core/type/WorldType.hpp>
+
 #include <client/session/imachine.hpp>
 
 #include <vector>
@@ -36,7 +38,7 @@ using WorldPtr = std::shared_ptr<control::World>;
 class Server : public IMachine {
 
 public:
-    Server(bool dummy=false);
+    Server(WorldType type = WorldType::NORMAL);
     ~Server() override final;
 
     BaseSession* session() const { return m_session; }

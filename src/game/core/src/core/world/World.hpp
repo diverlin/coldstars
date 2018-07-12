@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <core/type/WorldType.hpp>
+
 namespace core {
 namespace control {
 
@@ -25,7 +27,8 @@ class Galaxy;
 
 class World {
 public:
-    World(bool dummy=false);
+
+    World(WorldType type = WorldType::NORMAL);
     ~World();
 
     Galaxy* galaxy() const;

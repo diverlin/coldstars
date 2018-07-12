@@ -305,7 +305,13 @@ void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
 
     // create starsystems
     for(int i=0; i<galaxy_descriptor->starsystemsNum(); ++i) {
-        core::StarSystemDescr* starsystem_descriptor = shortcuts::descriptors()->randStarSystem();
+        core::StarSystemDescr* starsystem_descriptor = nullptr;
+        bool minimal = galaxy_descriptor->isMinimal();
+        if (minimal) {
+            starsystem_descriptor = shortcuts::descriptors()->minimalStarSystem();
+        } else {
+            starsystem_descriptor = shortcuts::descriptors()->randStarSystem();
+        }
         int_t starsystem_id = createPureStarsystem(starsystem_descriptor->id());
         __addStarSystemToGalaxy(starsystem_id, galaxy_id);
 
@@ -318,7 +324,10 @@ void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
         __createPlanets(starsystem_id, planets_num);
 
         // create ships
-        int ships_num = 10;
+        int ships_num = 2;
+        if (!minimal) {
+            ships_num = 5*planets_num;
+        }
         createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
     }
 }

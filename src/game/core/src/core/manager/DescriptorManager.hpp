@@ -97,6 +97,9 @@ public:
     core::BaseDescr* rand(core::Type) const;
     bool hasType(core::Type) const;
 
+    core::GalaxyDescr* minimalGalaxy() const { return m_minimalGalaxy; }
+    core::StarSystemDescr* minimalStarSystem() const { return m_minimalStarSystem; }
+
     core::GalaxyDescr* randGalaxy() const;
     core::StarSystemDescr* randStarSystem() const;
     core::HyperSpaceDescr* randHyperSpace() const;
@@ -188,6 +191,9 @@ private:
 
     std::map<int_t, core::BaseDescr*> m_descriptors;
     std::map<core::Type, std::vector<core::BaseDescr*>> m_descriptorsTypes;
+
+    core::GalaxyDescr* m_minimalGalaxy = nullptr;
+    core::StarSystemDescr* m_minimalStarSystem = nullptr;
 
     void __generate();
 //    void clear();

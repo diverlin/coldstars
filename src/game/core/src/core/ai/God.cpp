@@ -72,9 +72,14 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld()
+void God::createWorld(bool minimal)
 {
-    core::GalaxyDescr* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
+    core::GalaxyDescr* galaxy_descriptor = nullptr;
+    if (minimal) {
+        galaxy_descriptor = core::shortcuts::descriptors()->minimalGalaxy();
+    } else {
+        galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
+    }
     core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
 }
 

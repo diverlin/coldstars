@@ -23,6 +23,7 @@
 #include <core/type/RaceType.hpp>
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/StringUtils.hpp>
 #include <ceti/InfoTable.hpp>
 #include <ceti/macros.hpp>
 
@@ -30,6 +31,11 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace core {
+
+
+//enum TagType {
+//    DUMMY
+//};
 
 class BaseDescr
 {
@@ -48,6 +54,9 @@ public:
     void setRace(race::Type race) { m_race = race; }
     void setMesh(int_t mesh) { m_mesh = mesh; }
     void setMaterial(int_t texture) { m_texture = texture; }
+//    void addTag(TagType tag) {
+//        m_tags.add(tag);
+//    }
 
     int_t id() const { return m_id; }
     core::Type type() const { return m_type; }
@@ -69,6 +78,7 @@ public:
         result.add("race", race::to_string(m_race));
         result.add("mesh", m_mesh);
         result.add("material", m_texture);
+//        result.add("tags", ceti::to_string(m_tags));
         return result;
     }
 
@@ -84,11 +94,13 @@ private:
     race::Type m_race = race::Type::NONE;
     int_t m_mesh = NONE;
     int_t m_texture = NONE;
+//    ceti::pack<int> m_tags;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
+        UNUSED(version)
         ar & m_id;
         ar & m_type;
         ar & m_obType;
@@ -97,6 +109,7 @@ private:
         ar & m_race;
         ar & m_mesh;
         ar & m_texture;
+//        ar & m_tags;
     }
 };
 

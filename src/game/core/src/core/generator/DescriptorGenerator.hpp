@@ -68,7 +68,9 @@ class TurrelDescr;
 
 /* world */
 core::GalaxyDescr* genGalaxy();
-core::StarSystemDescr* genStarSystem(race::Type race = race::Type::NONE);
+core::GalaxyDescr* genMinimalGalaxy();
+core::StarSystemDescr* genStarSystem();
+core::StarSystemDescr* genMinimalStarSystem();
 core::HyperSpaceDescr* genHyperSpace();
 
 /* spaceobjects */

@@ -49,7 +49,7 @@ namespace core {
 namespace {
 
 glm::vec3 randPlanetoidDirection() {
-    return glm::normalize(glm::vec3(meti::rand::gen_float(0.1, 0.3), 1.0, -1.0));
+    return glm::normalize(glm::vec3(meti::rand::gen_float(0.1f, 0.3f), 1.0f, -1.0f));
 }
 
 } // namespace
@@ -58,26 +58,35 @@ glm::vec3 randPlanetoidDirection() {
 core::GalaxyDescr*
 genGalaxy() {
     core::GalaxyDescr* descr = new core::GalaxyDescr;
-    int num = meti::rand::gen_int(2,3);
+    descr->setStarSystemsNum(meti::rand::gen_int(10,20));
+    core::shortcuts::descriptors()->add(descr);
+    return descr;
+}
 
-    descr->setStarSystemsNum(num);
+core::GalaxyDescr*
+genMinimalGalaxy() {
+    core::GalaxyDescr* descr = new core::GalaxyDescr;
+    descr->setStarSystemsNum(2);
+    return descr;
+}
+
+core::StarSystemDescr*
+genStarSystem()
+{
+    core::StarSystemDescr* descr = new core::StarSystemDescr;
+    descr->setStarsNum(1);
+    descr->setPlanetsNum(meti::rand::gen_int(2, 5));
+
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
 
 core::StarSystemDescr*
-genStarSystem(race::Type race)
+genMinimalStarSystem()
 {
     core::StarSystemDescr* descr = new core::StarSystemDescr;
-    if (race == race::Type::NONE) {
-        race = race::Type::R0;
-    }
-
-    descr->setRace(race);
     descr->setStarsNum(1);
-    descr->setPlanetsNum(meti::rand::gen_int(1, 5));
-
-    core::shortcuts::descriptors()->add(descr);
+    descr->setPlanetsNum(2);
     return descr;
 }
 

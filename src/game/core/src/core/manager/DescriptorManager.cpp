@@ -51,8 +51,9 @@ Descriptors::Descriptors()
     :
       m_meshes(new Collector<core::MeshDescr>(""))
     , m_materials(new Collector<core::MaterialDescr>(""))
+    , m_minimalGalaxy(genMinimalGalaxy())
+    , m_minimalStarSystem(genMinimalStarSystem())
 {
-
 }
 
 void Descriptors::init()
@@ -750,13 +751,21 @@ Descriptors::__generate()
 {
     __clear();
 
+    // world
+    core::genGalaxy();
+
+    int num = 10;
+    for(int i=0; i<num; ++i) {
+        core::genStarSystem();
+    }
+
     for (int i=0; i<5; ++i) {
         core::genBullet(); // nested for rocket, so must be generated firstly
     }
     //core::genGoods();
 
     int base = 1;
-    int num = base * 20;
+    num = base * 20;
     // items
     for(int i=0; i<num; ++i) {
         core::genBak();
@@ -783,19 +792,11 @@ Descriptors::__generate()
         core::genContainer();
     }
 
-    // world
-    num = base * 10;
-    for(int i=0; i<num; ++i) {
-        core::genStarSystem();
-    }
-
     // npc
     num = 5;
     for(int i=0; i<num; ++i) {
         core::genNpc();
     }
-
-    core::genGalaxy();
 }
 
 //void

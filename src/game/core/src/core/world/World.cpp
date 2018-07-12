@@ -32,10 +32,17 @@
 namespace core {
 namespace control {
 
-World::World(bool dummy)
+World::World(WorldType type)
 {
-    if (!dummy) {
+    switch(type) {
+    case WorldType::DUMMY:
+        break;
+    case WorldType::MINIMAL:
+        core::global::get().god().createWorld(/*minimal=*/true);
+        break;
+    case WorldType::NORMAL:
         core::global::get().god().createWorld();
+        break;
     }
 }
 

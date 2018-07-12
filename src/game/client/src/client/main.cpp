@@ -141,7 +141,7 @@
 
 int main()
 {
-    core::Server server(true);
+    core::Server server;
     client::Client client(1);
 
     //client::shortcuts::screen()->window().close()

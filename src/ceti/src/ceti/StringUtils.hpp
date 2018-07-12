@@ -20,6 +20,7 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/Pack.hpp>
 
 #include <glm/glm.hpp>
 
@@ -36,6 +37,7 @@ std::string to_string(const glm::vec2&, int digits = STRING_FLOAT_PRECISION);
 std::string to_string(const glm::vec3&, int digits = STRING_FLOAT_PRECISION);
 std::string to_string(float, int digits = STRING_FLOAT_PRECISION);
 std::string to_string(const std::vector<int_t>&);
+std::string to_string(const pack<int>&);
 std::string to_string(const std::string& label, const std::vector<int_t>& ids);
 
 int to_int(const std::string&);

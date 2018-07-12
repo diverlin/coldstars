@@ -187,7 +187,7 @@ void test_sessions_descriptors_matches(core::BaseSession* session1, core::BaseSe
 
 TEST(sessions, player_creation)
 {
-    core::Server server(true);
+    core::Server server(WorldType::DUMMY);
     client::Client client(1);
     client.connect();
 
@@ -222,7 +222,7 @@ TEST(sessions, world_creation)
 
 TEST(sessions, descriptors_are_equals)
 {
-    core::Server server;
+    core::Server server(WorldType::DUMMY);
     client::Client client(1);
     client::Client client2(2);
 
