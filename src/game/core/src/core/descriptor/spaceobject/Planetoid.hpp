@@ -26,7 +26,7 @@ struct PlanetoidDescr : public SpaceObjectDescr
 {
 public:
     PlanetoidDescr() = default;
-    ~PlanetoidDescr() = default;
+    ~PlanetoidDescr() override = default;
 
     void setRadiusA(int radiusA) { m_radiusA = radiusA; }
     void setRadiusB(int radiusB) { m_radiusB = radiusB; }
@@ -65,6 +65,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<SpaceObjectDescr>(*this);
         ar & m_radiusA;
         ar & m_radiusB;
