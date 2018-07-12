@@ -108,6 +108,7 @@ private:
 
     std::vector<glm::vec3> __genImpulses(int num) const;
 
+    void __createStars(int_t starsystem_id, int num) const;
     void __createPlanets(int_t starsystem_id, int num) const;
 
     int_t __createPureBak(int_t descriptor_id) const;

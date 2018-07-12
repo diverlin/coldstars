@@ -326,28 +326,36 @@ void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
 
     // create starsystems
     for(int i=0; i<galaxy_descriptor->starsystemsNum(); ++i) {
-        int_t starsystem_descriptor_id = shortcuts::descriptors()->randStarSystem()->id();
-        int_t starsystem_id = createPureStarsystem(starsystem_descriptor_id);
+        core::StarSystemDescr* starsystem_descriptor = shortcuts::descriptors()->randStarSystem();
+        int_t starsystem_id = createPureStarsystem(starsystem_descriptor->id());
         __addStarSystemToGalaxy(starsystem_id, galaxy_id);
 
         // create star
-        int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
-        int_t star_id = createPureStar(star_descriptor_id);
-        __addStarToStarsystem(star_id, starsystem_id);
+        int stars_num = starsystem_descriptor->starsNum();
+        __createStars(starsystem_id, stars_num);
 
-//        // create planets
-//        int planets_num = meti::rand::gen_int(2,5);
+        // create planets
+       int planets_num = starsystem_descriptor->planetsNum();
 //        __createPlanets(starsystem_id, planets_num);
 
-//        // create ships
-//        int ships_num = 10;
-//        createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
+        // create ships
+        int ships_num = 10;
+        createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
     }
 }
 
-void TelegramCreator::__createPlanets(int_t starsystem_id, int planets_num) const
+void TelegramCreator::__createStars(int_t starsystem_id, int num) const
 {
-    for(int i=0; i<planets_num; ++i) {
+    for(int i=0; i<num; ++i) {
+        int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
+        int_t star_id = createPureStar(star_descriptor_id);
+        __addStarToStarsystem(star_id, starsystem_id);
+    }
+}
+
+void TelegramCreator::__createPlanets(int_t starsystem_id, int num) const
+{
+    for(int i=0; i<num; ++i) {
         int_t planet_descriptor_id = shortcuts::descriptors()->randPlanet()->id();
         int_t planet_id = createPurePlanet(planet_descriptor_id);
         __addPlanetToStarsystem(planet_id, starsystem_id);
