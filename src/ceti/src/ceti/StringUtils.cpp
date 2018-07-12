@@ -123,30 +123,28 @@ std::string replace(const std::string& src, const std::string& from, const std::
     return result;
 }
 
-void strip(std::string& str) {
+void remove_whitespaces(std::string& str) {
     if (str.empty()) {
         return;
     }
     str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
 }
 
-void superstrip(std::string& str, const char& dirty) {
+void trim_char(std::string& str, const char& dirty) {
     if (str.empty()) {
         return;
     }
-    strip(str);
     if (str[0] == dirty) {
         str = str.substr(1, str.size()-1);
     }
     if (str[str.size()-1] == dirty) {
         str.erase(str.end()-1);
     }
-    //strip(str);
 }
 
-void strip(std::vector<std::string>& v) {
+void remove_whitespaces(std::vector<std::string>& v) {
     for(std::string& element: v) {
-        strip(element);
+        remove_whitespaces(element);
     }
 }
 

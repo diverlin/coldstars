@@ -61,9 +61,9 @@ TEST(string_utils, strip)
     std::string input1("           star      ");
     std::string input2(" star");
     std::string input3("star ");
-    ceti::strip(input1);
-    ceti::strip(input2);
-    ceti::strip(input3);
+    ceti::remove_whitespaces(input1);
+    ceti::remove_whitespaces(input2);
+    ceti::remove_whitespaces(input3);
     EXPECT_EQ("star", input1);
     EXPECT_EQ("star", input2);
     EXPECT_EQ("star", input3);

@@ -34,7 +34,7 @@ void TagsComponent::reg(const std::string& tag) {
     } else {
         std::vector<std::string> v = ceti::split(tag, ",");
         for (std::string& s: v) {
-            ceti::strip(s);
+            ceti::remove_whitespaces(s);
             __reg(s);
         }
     }
@@ -74,7 +74,7 @@ void TagsComponent::add(const std::string& tag) {
     } else {
         std::vector<std::string> v = ceti::split(tag, ",");
         for (std::string& s: v) {
-            ceti::strip(s);
+            ceti::remove_whitespaces(s);
             __add(s);
         }
     }
@@ -113,7 +113,7 @@ ceti::pack<int> TagsComponent::ids_from(const std::string& tags) {
     } else {
         std::vector<std::string> v = ceti::split(tags, ",");
         for (std::string& s: v) {
-            ceti::strip(s);
+            ceti::remove_whitespaces(s);
             result.add(__id(s));
         }
     }

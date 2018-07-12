@@ -84,7 +84,7 @@ public:
     {
         if (!tags.empty()) {
             m_tags = ceti::split(tags, ",");
-            ceti::strip(m_tags);
+            ceti::remove_whitespaces(m_tags);
         }
     }
 
@@ -128,7 +128,7 @@ private:
 };
 
 void log(const std::string& msg){
-    //std::cout<<msg<<std::endl;
+    std::cout<<msg<<std::endl;
 }
 
 
@@ -137,8 +137,7 @@ Node process_buffers(std::string& name_buffer,
                      std::string& tags_buffer,
                      std::string& body_buffer)
 {
-    ceti::superstrip(name_buffer, ',');
-//  ceti::superstrip(body_buffer, ',');
+    ceti::trim_char(name_buffer, ',');
 
     body_buffer = ceti::get_nested(body_buffer, '{', '}');
     tags_buffer = ceti::get_nested(name_buffer, '[', ']');
@@ -160,8 +159,11 @@ Node process_buffers(std::string& name_buffer,
     return node;
 }
 
-std::vector<Node> parse(const std::string& graph)
+std::vector<Node> parse(const std::string& input)
 {
+    std::string graph = input;
+    ceti::remove_whitespaces(graph);
+
     std::vector<Node> result;
 
     int nest_level = 0;
@@ -177,6 +179,8 @@ std::vector<Node> parse(const std::string& graph)
     unsigned int count = 0;
     for (const char& ch: graph) {
         count++;
+        std::string mystring = std::string(ch);
+        log(mystring);
 
         // enter body
         if (ch == '{') {
@@ -199,14 +203,9 @@ std::vector<Node> parse(const std::string& graph)
             body_buffer += ch;
         }
 
-        if (ch == '1') {
-            int a = 1;
-        }
-
         // to handle items without body {}
         if ((name_start == true) && (name_buffer.find('[') == name_buffer.npos) && (ch == ','))
         {
-            ceti::strip(name_buffer);
             if (name_buffer[0] != ',') {
                 log("empty body");
                 name_start = true;
@@ -262,7 +261,7 @@ std::vector<Node> parse(const std::string& graph)
 //    }
 //}
 
-TEST(graph, common1)
+TEST(graph, parser)
 {
     std::string input = "starsystem[alien,small]{star,planet[ice]{kosmoport}}, starsystem[(140,70)]{blackhole,asteroid}, starsystem{star,star}";
     std::vector<Node> nodes = parse(input);
@@ -273,7 +272,7 @@ TEST(graph, common1)
     EXPECT_NE(Node("starsystem", "", "", "star, star").toString(), nodes[2].toString());
 }
 
-TEST(graph, common2)
+TEST(graph, parser_simple)
 {
     std::string input = "starsystem, starsystem, hyperspace1";
     std::vector<Node> nodes = parse(input);
@@ -282,3 +281,33 @@ TEST(graph, common2)
     EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[1].toString());
     EXPECT_EQ(Node("hyperspace1", "", "", "").toString(), nodes[2].toString());
 }
+
+TEST(graph, nodes)
+{
+    std::string input ="\
+    galaxy {\
+        starsystem {\
+            star,\
+            planet[ice] {land},\
+            planet[rock] {kosmoport { shop {korpus, lazer} } },\
+            planet[whater],\
+            ship,\
+            ship {drive, lazer, rocket},\
+            lazer,\
+            drive[(100,0)]\
+        },\
+        starsystem {\
+            star,\
+            planet {land},\
+            planet {kosmoport { angar { ship } }\
+        }\
+    }";
+
+    std::vector<Node> nodes = parse(input);
+    assert(nodes.size()==1);
+//    EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[0].toString());
+//    EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[1].toString());
+//    EXPECT_EQ(Node("hyperspace1", "", "", "").toString(), nodes[2].toString());
+}
+
+
