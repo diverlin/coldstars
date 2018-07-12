@@ -31,7 +31,6 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 #include <world/starsystem.hpp>
-#include <world/Sector.hpp>
 
 #include <core/dock/Kosmoport.hpp>
 #include <core/slot/ItemSlot.hpp>

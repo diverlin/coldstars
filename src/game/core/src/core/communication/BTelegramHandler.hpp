@@ -29,8 +29,7 @@ protected:
     virtual void _process(const Telegram&) const = 0;
 
     /** TRANSITION */
-    void _addSectorToGalaxy(const Telegram& telegram) const;
-    void _addStarSystemToSector(const Telegram& telegram) const;
+    void _addStarSystemToGalaxy(const Telegram& telegram) const;
     void _addNpcToShip(const Telegram&) const;
 
     // items

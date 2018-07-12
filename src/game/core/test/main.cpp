@@ -31,13 +31,11 @@
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Asteroid.hpp>
 #include <core/model/world/starsystem.hpp>
-#include <core/model/world/Sector.hpp>
 #include <core/model/world/galaxy.hpp>
 
 #include <core/builder/spaceobject/AsteroidBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/builder/world/GalaxyBuilder.hpp>
-#include <core/builder/world/SectorBuilder.hpp>
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/item/other/BombBuilder.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
@@ -51,7 +49,6 @@
 #include <core/communication/descriptor/AddToStarsystem.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
-#include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/ExplosionDescriptor.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
@@ -172,21 +169,6 @@ TEST(clone, galaxy)
     core::control::Galaxy* clone = new core::control::Galaxy(galaxy->descriptor(), model);
 
     EXPECT_EQ(galaxy->model()->data(), clone->model()->data());
-
-    // clear
-    delete model;
-    delete clone;
-}
-
-TEST(clone, sector)
-{
-    core::control::Sector* sector = core::SectorBuilder::gen();
-
-    // clone
-    SectorModel* model = new SectorModel(sector->model()->data());
-    core::control::Sector* clone = new core::control::Sector(sector->descriptor(), model);
-
-    EXPECT_EQ(sector->model()->data(), clone->model()->data());
 
     // clear
     delete model;

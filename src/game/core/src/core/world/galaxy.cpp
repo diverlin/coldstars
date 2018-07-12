@@ -18,8 +18,9 @@
 
 #include <core/world/galaxy.hpp>
 #include <core/model/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
-#include <core/model/world/Sector.hpp>
+#include <core/model/world/starsystem.hpp>
+#include <core/world/starsystem.hpp>
+
 #include <common/constants.hpp>
 #include <common/Global.hpp>
 #include <common/common.hpp>
@@ -57,40 +58,69 @@ void Galaxy::putChildrenToGarbage() const
 //    }
 }
 
-void Galaxy::add(Sector* sector, const meti::vec3& center)
+void Galaxy::add(StarSystem* starsystem, const meti::vec3& center)
 { 
-    sector->model()->setGalaxy(id());
-    sector->model()->setPosition(center);
-    m_sectors.push_back(sector);
+    starsystem->model()->setPosition(center);
+    m_starsystems.add(starsystem);
 }
 
-Sector*
-Galaxy::randomSector()
+StarSystem*
+Galaxy::randomStarSystem(int condition_id)
 {
-    return meti::rand::get_element_or_die(m_sectors);
-}
-
-Sector*
-Galaxy::closestSectorTo(Sector* toSector)
-{
-    Sector* result = nullptr;
-
-    float dist_min = INCREDIBLY_MAX_FLOAT;
-    for (auto sector : m_sectors) {
-        float dist = meti::distance(toSector->model()->position(), sector->model()->position());
-        if (dist < dist_min) {
-            dist_min = dist;
-            result = sector;
+    StarSystem* result = nullptr;
+    if (condition_id == NONE) {
+        result = meti::rand::get_element_or_die(m_starsystems);
+    } else {
+        std::vector<StarSystem*> ss_vec;
+        for (StarSystem* starsystem: m_starsystems) {
+            if (starsystem->conditionId() == condition_id) {
+                ss_vec.push_back(starsystem);
+            }
+        }
+        if (ss_vec.size()) {
+            result = meti::rand::get_element_or_die(ss_vec);
         }
     }
 
     return result;
 }
 
-void Galaxy::update(int time)
+
+StarSystem*
+Galaxy::closestStarSystemTo(StarSystem* toStarSystem, int condition_id)
 {
-    for (Sector* sector: m_sectors) {
-        sector->update(time);
+    StarSystem* result = nullptr;
+
+    float dist_min = INCREDIBLY_MAX_FLOAT;
+    for (auto starsystem: m_starsystems) {
+        if (starsystem->id() == toStarSystem->id()) {
+            continue;
+        }
+
+        if ( (starsystem->conditionId() == condition_id) || (condition_id == NONE) ) {
+            float dist = meti::distance(starsystem->position(), toStarSystem->position());
+            if (dist < dist_min) {
+                dist_min = dist;
+                result = starsystem;
+            }
+        }
+
+    }
+
+    return result;
+}
+
+void Galaxy::update_server(int time)
+{
+    for (StarSystem* starsystem: m_starsystems) {
+        starsystem->update_server(time);
+    }
+}
+
+void Galaxy::update_client(int time)
+{
+    for (StarSystem* starsystem: m_starsystems) {
+        starsystem->update_client(time);
     }
 }
 

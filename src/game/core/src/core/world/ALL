@@ -1,4 +1,3 @@
 #include "galaxy.hpp"
 #include "HyperSpace.hpp"
-#include "Sector.hpp"
 #include "starsystem.hpp"

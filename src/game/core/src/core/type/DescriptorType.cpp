@@ -31,7 +31,6 @@ std::string to_string(Type type)
         // world
         case Type::GALAXY:         { return "Type::GALAXY";  }
         case Type::STARSYSTEM:     { return "Type::STARSYSTEM"; }
-        case Type::SECTOR:     { return "Type::SECTOR"; }
 
         // pilots
         case Type::NPC:             { return "Type::NPC"; }
@@ -72,7 +71,9 @@ std::string to_string(Type type)
         case Type::FREEZER_MODULE:     { return "Type::FREEZER_MODULE"; }
         case Type::GRAPPLE_MODULE:     { return "Type::GRAPPLE_MODULE"; }
         case Type::SCANER_MODULE:     { return "Type::SCANER_MODULE"; }
-        
+
+//        case Type::GOODS:     { return "Type::GOODS"; }
+
         // artefact
         case Type::GRAVITY_ARTEFACT:     { return "Type::GRAVITY_ARTEFACT"; }
         case Type::PROTECTOR_ARTEFACT:     { return "Type::PROTECTOR_ARTEFACT"; }

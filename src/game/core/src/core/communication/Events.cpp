@@ -25,7 +25,6 @@
 #include <core/slot/ItemSlot.hpp>
 
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/world/HyperSpace.hpp>
 
@@ -52,17 +51,13 @@ namespace core {
 namespace event {
 
 /** TRANSITION */
-void addSectorToGalaxy(int_t object, int_t parent, const glm::vec3& position)
+void addStarSystemToGalaxy(int_t object, int_t parent, const glm::vec3& position)
 {
-    control::Sector* sector = shortcuts::entities()->sector(object);
-    control::Galaxy* galaxy = shortcuts::entities()->galaxy(parent);
-    galaxy->add(sector, position);
-}
-void addStarSystemToSector(int_t object, int_t parent, const glm::vec3& position) {
     control::StarSystem* starsystem = shortcuts::entities()->starsystem(object);
-    control::Sector* sector = shortcuts::entities()->sector(parent);
-    sector->add(starsystem, position);
+    control::Galaxy* galaxy = shortcuts::entities()->galaxy(parent);
+    galaxy->add(starsystem, position);
 }
+
 void addNpcToShip(int_t object, int_t parent) {
     control::Npc* npc = shortcuts::entities()->npc(object);
     control::Ship* ship = shortcuts::entities()->ship(parent);
@@ -87,10 +82,6 @@ void createGalaxy(int_t descriptor, int_t object) {
     core::control::Galaxy* galaxy = core::GalaxyBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(galaxy);
     core::shortcuts::entities()->setGalaxy(galaxy);
-}
-void createSector(int_t descriptor, int_t object) {
-    core::control::Sector* sector = core::SectorBuilder::gen(descriptor, object);
-    core::shortcuts::entities()->add(sector);
 }
 void createStarSystem(int_t descriptor, int_t object) {
     core::control::StarSystem* starsystem = core::StarSystemBuilder::gen(descriptor, object);

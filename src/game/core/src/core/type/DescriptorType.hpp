@@ -29,7 +29,6 @@ enum class Type {
 
     // world
     GALAXY,
-    SECTOR,
     STARSYSTEM,
     HYPERSPACE,
 

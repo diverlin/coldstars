@@ -38,21 +38,21 @@ class GalaxyModel : public BaseModel {
 
 public:
     GalaxyModel(int_t, int_t);
-    ~GalaxyModel() override = default;
     GalaxyModel(const std::string& data);
-    std::string data() const;
+    ~GalaxyModel() override = default;
+    std::string data() const override final;
 
-    void add(int_t sector) { m_sectors.add(sector); }
-    const ceti::pack<int_t>& sectors() const { return m_sectors; }
+    void addStarSystem(int_t starsystem) { m_starsystems.add(starsystem); }
+    const ceti::pack<int_t>& starsystems() const { return m_starsystems; }
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseModel::info();
-        result.add("sectors", m_sectors);
+        result.add("starsystems", m_starsystems);
         return result;
     }
 
 private:
-    ceti::pack<int_t> m_sectors;
+    ceti::pack<int_t> m_starsystems;
 
 private:
     friend class boost::serialization::access;
@@ -60,7 +60,7 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         UNUSED(version)
         ar & boost::serialization::base_object<core::BaseModel>(*this);
-        ar & m_sectors;
+        ar & m_starsystems;
     }
 };
 

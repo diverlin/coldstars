@@ -21,7 +21,6 @@
 #include <core/pilot/Npc.hpp>
 
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 
 #include <core/spaceobject/Asteroid.hpp>
@@ -42,13 +41,11 @@ void Observation::__findEchievableStarSystems(control::Galaxy* galaxy)
 {
     m_starsystem_pairs.clear();
 
-    for (control::Sector* sector: galaxy->sectors()) {
-        for (control::StarSystem* starsystem: sector->starSystems()) {
-            const glm::vec3& starsystem_pos = m_owner->vehicle()->starsystem()->position();
-            float dist = meti::distance(starsystem_pos, starsystem->position());
-            if (dist < m_owner->vehicle()->properties().hyper) {
-                m_starsystem_pairs.push_back( Pair<control::StarSystem*>(starsystem, dist) );
-            }
+    for (control::StarSystem* starsystem: galaxy->starsystems()) {
+        const glm::vec3& starsystem_pos = m_owner->vehicle()->starsystem()->position();
+        float dist = meti::distance(starsystem_pos, starsystem->position());
+        if (dist < m_owner->vehicle()->properties().hyper) {
+            m_starsystem_pairs.push_back( Pair<control::StarSystem*>(starsystem, dist) );
         }
     }
 

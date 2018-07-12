@@ -27,7 +27,6 @@ enum class Type : int
     NONE
     /** CREATE */
     , CREATE_GALAXY
-    , CREATE_SECTOR
     , CREATE_STARSYSTEM
     , CREATE_NPC
     // spaceobjects
@@ -68,8 +67,7 @@ enum class Type : int
     , MOUNT_ITEM
 
     /** TRANSITION */
-    , ADD_SECTOR_TO_GALAXY
-    , ADD_STARSYSTEM_TO_SECTOR
+    , ADD_STARSYSTEM_TO_GALAXY
     , ADD_STAR_TO_STARSYSTEM
     , ADD_PLANET_TO_STARSYSTEM
     , ADD_ASTEROID_TO_STARSYSTEM

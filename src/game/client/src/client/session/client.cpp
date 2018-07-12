@@ -29,7 +29,6 @@
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/communication/TelegramHub.hpp>
 #include <core/resource/Data.hpp>

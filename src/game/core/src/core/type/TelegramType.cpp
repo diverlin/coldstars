@@ -29,7 +29,6 @@ std::string to_string(Type type)
 
         /** CREATE */
     case Type::CREATE_GALAXY: { return "telegram::Type::CREATE_GALAXY"; }
-    case Type::CREATE_SECTOR: { return "telegram::Type::CREATE_SECTOR"; }
     case Type::CREATE_STARSYSTEM: { return "telegram::Type::CREATE_STARSYSTEM"; }
 //    case Type::CREATE_PLAYER: { return "telegram::Type::CREATE_PLAYER"; }
     case Type::CREATE_NPC: { return "telegram::Type::CREATE_NPC"; }
@@ -74,8 +73,7 @@ std::string to_string(Type type)
     case Type::MOUNT_ITEM: { return "telegram::Type::MOUNT_ITEM"; }
 
         /** TRANSITION */
-    case Type::ADD_SECTOR_TO_GALAXY: { return "telegram::Type::ADD_SECTOR_TO_GALAXY"; }
-    case Type::ADD_STARSYSTEM_TO_SECTOR: { return "telegram::Type::ADD_STARSYSTEM_TO_SECTOR"; }
+    case Type::ADD_STARSYSTEM_TO_GALAXY: { return "telegram::Type::ADD_STARSYSTEM_TO_GALAXY"; }
     case Type::ADD_STAR_TO_STARSYSTEM: { return "telegram::Type::ADD_STAR_TO_STARSYSTEM"; }
     case Type::ADD_PLANET_TO_STARSYSTEM: { return "telegram::Type::ADD_PLANET_TO_STARSYSTEM"; }
     case Type::ADD_ASTEROID_TO_STARSYSTEM: { return "telegram::Type::ADD_ASTEROID_TO_STARSYSTEM"; }

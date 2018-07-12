@@ -25,7 +25,6 @@
 #include <core/slot/ItemSlot.hpp>
 
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/world/HyperSpace.hpp>
 
@@ -60,7 +59,6 @@ void TelegramHandler::_process(const Telegram& telegram) const
     switch(telegram.type()) {
     /** CREATE */
     case telegram::Type::CREATE_GALAXY: _createGalaxy(telegram); break;
-    case telegram::Type::CREATE_SECTOR: _createSector(telegram); break;
     case telegram::Type::CREATE_STARSYSTEM: _createStarSystem(telegram); break;
     case telegram::Type::CREATE_NPC: _createNpc(telegram); break;
     // spaceobjects
@@ -88,8 +86,7 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::LOAD_ITEM: _loadItem(telegram); break;
 
     /** TRANSITION */
-    case telegram::Type::ADD_SECTOR_TO_GALAXY: _addSectorToGalaxy(telegram); break;
-    case telegram::Type::ADD_STARSYSTEM_TO_SECTOR: _addStarSystemToSector(telegram); break;
+    case telegram::Type::ADD_STARSYSTEM_TO_GALAXY: _addStarSystemToGalaxy(telegram); break;
     /** */
 
     /** ADD TO STARSYSTEM */

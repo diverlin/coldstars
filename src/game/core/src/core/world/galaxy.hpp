@@ -39,7 +39,6 @@ class StarSystemsConditionData;
 namespace core {
 namespace control {
 
-class Sector;
 class StarSystem;
 
 class Galaxy : public Base
@@ -50,13 +49,14 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(Sector*, const meti::vec3&);
+    void add(StarSystem*, const meti::vec3&);
 
-    Sector* randomSector();
-    Sector* closestSectorTo(Sector*);
-    const std::vector<Sector*>& sectors() const { return m_sectors; }
+    StarSystem* randomStarSystem(int condition_id = NONE);
+    StarSystem* closestStarSystemTo(StarSystem*, int condition_id = NONE);
+    const ceti::pack<StarSystem*>& starsystems() const { return m_starsystems; }
 
-    void update(int);
+    void update_server(int);
+    void update_client(int);
 
     void analizeStarSystemsCondition(StarSystemsConditionData&) const;
 
@@ -71,7 +71,7 @@ private:
     GalaxyDescr* m_descriptor_galaxy = nullptr;
     GalaxyModel* m_model_galaxy = nullptr;
 
-    std::vector<Sector*> m_sectors;
+    ceti::pack<StarSystem*> m_starsystems;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

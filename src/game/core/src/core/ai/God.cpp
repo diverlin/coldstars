@@ -27,7 +27,6 @@
 #include <core/communication/TelegramCreator.hpp>
 
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/model/world/starsystem.hpp>
 
@@ -92,7 +91,11 @@ void God::update()
     // shortcuts
 
     turnTimer.update(/*threshold*/-100);
-    m_galaxy->update(/*time*/turnTimer.ticksLeft());
+    if (core::shortcuts::session()->isServer()) {
+        m_galaxy->update_server(/*time*/turnTimer.ticksLeft());
+    } else {
+        m_galaxy->update_client(/*time*/turnTimer.ticksLeft());
+    }
 
     if (m_DateLastUpdate - gameDate >= GOD_REST_IN_DAYS) {
         LOG("God::Update");
@@ -150,7 +153,7 @@ void God::__createInvasion(control::Galaxy* galaxy, GalaxyDescr* descriptor) con
     //!!!!
 
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-        control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
+        control::StarSystem* starsystem = galaxy->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
         assert(starsystem);
         race::Type race_id = (race::Type)meti::rand::gen_int((int)race::Type::R6, (int)race::Type::R7);
         int ship_num = meti::rand::gen_int(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);

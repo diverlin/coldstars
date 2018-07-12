@@ -1,4 +1,3 @@
 #include "GalaxyDescriptor.hpp"
 #include "HyperSpace.hpp"
-#include "SectorDescriptor.hpp"
 #include "StarSystemDescriptor.hpp"

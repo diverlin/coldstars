@@ -37,7 +37,6 @@
 namespace core {
 
 class GalaxyDescr;
-class SectorDescr;
 class StarSystemDescr;
 class HyperSpaceDescr;
 
@@ -99,7 +98,6 @@ public:
     bool hasType(core::Type) const;
 
     core::GalaxyDescr* randGalaxy() const;
-    core::SectorDescr* randSector() const;
     core::StarSystemDescr* randStarSystem() const;
     core::HyperSpaceDescr* randHyperSpace() const;
 
@@ -139,7 +137,6 @@ public:
 
     // world
     core::GalaxyDescr* galaxy(int_t) const;
-    core::SectorDescr* sector(int_t) const;
     core::StarSystemDescr* starSystem(int_t) const;
     core::HyperSpaceDescr* hyperSpace(int_t) const;
 

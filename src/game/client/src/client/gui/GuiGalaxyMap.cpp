@@ -31,7 +31,6 @@
 #include <client/resources/TextureCollector.hpp>
 
 #include <world/starsystem.hpp>
-#include <world/Sector.hpp>
 #include <world/galaxy.hpp>
 
 #include <jeti/Render.hpp>

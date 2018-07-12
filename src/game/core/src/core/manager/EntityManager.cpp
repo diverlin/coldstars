@@ -25,7 +25,6 @@
 #include <core/pilot/Npc.hpp>
 
 #include "../world/galaxy.hpp"
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 
 #include <builder/item/equipment/ALL>
@@ -136,13 +135,6 @@ Entities::npc(int_t id) const
 control::Galaxy*
 Entities::galaxy(int_t id) const {
     control::Galaxy* control = static_cast<control::Galaxy*>(base(id));
-    assert(control);
-    return control;
-}
-
-control::Sector*
-Entities::sector(int_t id) const {
-    control::Sector* control = static_cast<control::Sector*>(base(id));
     assert(control);
     return control;
 }

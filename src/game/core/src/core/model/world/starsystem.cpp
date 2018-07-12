@@ -18,7 +18,6 @@
 
 
 #include "starsystem.hpp"
-#include <world/Sector.hpp>
 
 #include <meti/VectorUtils.hpp>
 

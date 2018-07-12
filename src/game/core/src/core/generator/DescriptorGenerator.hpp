@@ -28,7 +28,6 @@
 namespace core {
 
 class GalaxyDescr;
-class SectorDescr;
 class StarSystemDescr;
 class HyperSpaceDescr;
 
@@ -68,8 +67,7 @@ class GoodsDescr;
 class TurrelDescr;
 
 /* world */
-core::GalaxyDescr* genGalaxy(const std::vector<int_t>&);
-core::SectorDescr* genSector(const std::vector<int_t>&);
+core::GalaxyDescr* genGalaxy();
 core::StarSystemDescr* genStarSystem(race::Type race = race::Type::NONE);
 core::HyperSpaceDescr* genHyperSpace();
 

@@ -18,7 +18,6 @@
 
 
 #include <core/world/starsystem.hpp>
-#include <core/world/Sector.hpp>
 
 #include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>

@@ -181,7 +181,7 @@ private:
     bool m_unique_update_inStatic_done = false;
 
     int m_condition_id;
-    unsigned int m_container_num_max = CONTAINER_NUM_MAX_DEFAULT;
+    int m_container_num_max = CONTAINER_NUM_MAX_DEFAULT;
 
     Sector* m_sector = nullptr;
     glm::vec4 m_color;

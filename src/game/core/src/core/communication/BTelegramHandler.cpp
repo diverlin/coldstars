@@ -44,17 +44,12 @@ void BTelegramHandler::update()
 
 
 /** TRANSITION */
-void BTelegramHandler::_addSectorToGalaxy(const Telegram& telegram) const {
+void BTelegramHandler::_addStarSystemToGalaxy(const Telegram& telegram) const {
     AddPositionalComDescr data(telegram.data());
     LOG_COMM_DIP1(data.info());
-    event::addSectorToGalaxy(data.firstId(), data.parent(), data.position());
+    event::addStarSystemToGalaxy(data.firstId(), data.parent(), data.position());
 }
 
-void BTelegramHandler::_addStarSystemToSector(const Telegram& telegram) const {
-    AddPositionalComDescr data(telegram.data());
-    LOG_COMM_DIP1(data.info());
-    event::addStarSystemToSector(data.firstId(), data.parent(), data.position());
-}
 void BTelegramHandler::_addNpcToShip(const Telegram& telegram) const {
     DoubleIdDescr data(telegram.data());
     LOG_COMM_DIP1(data.info());
@@ -80,11 +75,6 @@ void BTelegramHandler::_createGalaxy(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM_DIP1(data.info());
     event::createGalaxy(data.descriptor(), data.firstId());
-}
-void BTelegramHandler::_createSector(const Telegram& telegram) const {
-    CreateComDescr data(telegram.data());
-    LOG_COMM_DIP1(data.info());
-    event::createSector(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createStarSystem(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());

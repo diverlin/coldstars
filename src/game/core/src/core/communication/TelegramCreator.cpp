@@ -69,19 +69,6 @@ int_t TelegramCreator::createPureGalaxy(int_t descriptor_id) const
     return galaxy_id;
 }
 
-int_t TelegramCreator::createPureSector(int_t descriptor_id) const
-{
-    if (descriptor_id == -1) {
-        descriptor_id = shortcuts::descriptors()->randSector()->id();
-    }
-    int_t sector_id = shortcuts::entities()->nextId();
-
-    CreateComDescr telegram_descriptor(descriptor_id, sector_id);
-    m_telegramHub.add(Telegram(telegram::Type::CREATE_SECTOR, telegram_descriptor.data()));
-
-    return sector_id;
-}
-
 int_t TelegramCreator::createPureStarsystem(int_t descriptor_id) const
 {
     if (descriptor_id == -1) {
@@ -139,18 +126,11 @@ int_t TelegramCreator::createPureNpc(int_t descriptor_id) const
     return npc_id;
 }
 
-void TelegramCreator::__addSectorToGalaxy(int_t sector_id, int_t galaxy_id) const
+void TelegramCreator::__addStarSystemToGalaxy(int_t starsystem_id, int_t sector_id) const
 {
     glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
-    AddPositionalComDescr telegram_descriptor(sector_id, galaxy_id, position);
-    m_telegramHub.add(Telegram(telegram::Type::ADD_SECTOR_TO_GALAXY, telegram_descriptor.data()));
-}
-
-void TelegramCreator::__addStarsystemToSector(int_t starsystem_id, int_t sector_id) const
-{
-    glm::vec3 position = meti::rand::gen_vec3xy(3, 8);
     AddPositionalComDescr telegram_descriptor(starsystem_id, sector_id, position);
-    m_telegramHub.add(Telegram(telegram::Type::ADD_STARSYSTEM_TO_SECTOR, telegram_descriptor.data()));
+    m_telegramHub.add(Telegram(telegram::Type::ADD_STARSYSTEM_TO_GALAXY, telegram_descriptor.data()));
 }
 
 void TelegramCreator::__addStarToStarsystem(int_t star_id, int_t starsystem_id) const
@@ -324,13 +304,9 @@ void TelegramCreator::createDummyGalaxy(int ships_num, int planets_num) const
     int_t galaxy_descriptor_id = shortcuts::descriptors()->randGalaxy()->id();
     int_t galaxy_id = createPureGalaxy(galaxy_descriptor_id);
 
-    // create sector
-    int_t sector_id = createPureSector();
-    __addSectorToGalaxy(sector_id, galaxy_id);
-
     // create starsystem
     int_t starsystem_id = createPureStarsystem();
-    __addStarsystemToSector(starsystem_id, sector_id);
+    __addStarSystemToGalaxy(starsystem_id, galaxy_id);
 
 //    // create star
 //    int_t star_id = createPureStar();
@@ -348,30 +324,24 @@ void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
     // create galaxy
     int_t galaxy_id = createPureGalaxy(galaxy_descriptor->id());
 
-    // create sectors
-    for(int_t sector_descriptor_id: galaxy_descriptor->sectors()) {
-        int_t sector_id = createPureSector(sector_descriptor_id);
-        __addSectorToGalaxy(sector_id, galaxy_id);
+    // create starsystems
+    for(int i=0; i<galaxy_descriptor->starsystemsNum(); ++i) {
+        int_t starsystem_descriptor_id = shortcuts::descriptors()->randStarSystem()->id();
+        int_t starsystem_id = createPureStarsystem(starsystem_descriptor_id);
+        __addStarSystemToGalaxy(starsystem_id, galaxy_id);
 
-        // create starsystems
-        core::SectorDescr* sector_descriptor = core::shortcuts::descriptors()->sector(sector_descriptor_id);
-        for(const auto& starsystem_descriptor_id: sector_descriptor->starsystems) {
-            int_t starsystem_id = createPureStarsystem(starsystem_descriptor_id);
-            __addStarsystemToSector(starsystem_id, sector_id);
+        // create star
+        int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
+        int_t star_id = createPureStar(star_descriptor_id);
+        __addStarToStarsystem(star_id, starsystem_id);
 
-            // create star
-            int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
-            int_t star_id = createPureStar(star_descriptor_id);
-            __addStarToStarsystem(star_id, starsystem_id);
+//        // create planets
+//        int planets_num = meti::rand::gen_int(2,5);
+//        __createPlanets(starsystem_id, planets_num);
 
-            // create planets
-            int planets_num = meti::rand::gen_int(2,5);
-            __createPlanets(starsystem_id, planets_num);
-
-            // create ships
-            int ships_num = 10;
-            createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
-        }
+//        // create ships
+//        int ships_num = 10;
+//        createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
     }
 }
 

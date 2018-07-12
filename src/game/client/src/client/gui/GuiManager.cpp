@@ -23,7 +23,6 @@
 #include <core/dock/Kosmoport.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <world/Sector.hpp>
 #include <world/starsystem.hpp>
 
 //#include <ceti/StringUtils.hpp>

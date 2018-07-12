@@ -46,7 +46,6 @@
 #include <core/pilot/Npc.hpp>
 
 #include <world/starsystem.hpp>
-#include <world/Sector.hpp>
 
 #include <core/slot/ItemSlot.hpp>
 

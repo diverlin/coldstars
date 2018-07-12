@@ -78,15 +78,13 @@ public:
     int_t createEquipedShipWithNpc() const;
 
     int_t createPureGalaxy(int_t descriptor_id = -1) const;
-    int_t createPureSector(int_t descriptor_id = -1) const;
     int_t createPureStarsystem(int_t descriptor_id = -1) const;
     int_t createPureStar(int_t descriptor_id = -1) const;
     int_t createPurePlanet(int_t descriptor_id = -1) const;
     int_t createPureShip(int_t descriptor_id = -1) const;
     int_t createPureNpc(int_t descriptor_id = -1) const;
 
-    void __addSectorToGalaxy(int_t sector_id, int_t galaxy_id) const;
-    void __addStarsystemToSector(int_t starsystem_id, int_t sector_id) const;
+    void __addStarSystemToGalaxy(int_t starsystem_id, int_t sector_id) const;
     void __addStarToStarsystem(int_t star_id, int_t starsystem_id) const;
     void __addPlanetToStarsystem(int_t planet_id, int_t starsystem_id) const;
     void addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center = glm::vec3()) const;

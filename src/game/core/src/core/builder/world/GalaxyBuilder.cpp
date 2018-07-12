@@ -18,7 +18,6 @@
 
 
 #include <builder/world/GalaxyBuilder.hpp>
-#include <builder/world/SectorBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <core/world/galaxy.hpp>
@@ -38,7 +37,7 @@ GalaxyBuilder::gen()
 {
     core::GalaxyDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(core::Type::GALAXY)) {
-        descr = core::genGalaxy({0});
+        descr = core::genGalaxy();
     } else {
         descr = core::shortcuts::descriptors()->randGalaxy();
     }

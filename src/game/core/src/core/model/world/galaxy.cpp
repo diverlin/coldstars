@@ -17,7 +17,6 @@
 */
 
 #include "galaxy.hpp"
-#include "Sector.hpp"
 #include <common/constants.hpp>
 #include <common/Global.hpp>
 #include <common/common.hpp>

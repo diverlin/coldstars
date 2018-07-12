@@ -153,13 +153,6 @@ Descriptors::randGalaxy() const
     assert(descr);
     return descr;
 }
-core::SectorDescr*
-Descriptors::randSector() const
-{
-    core::SectorDescr* descr = static_cast<core::SectorDescr*>(rand(core::Type::SECTOR));
-    assert(descr);
-    return descr;
-}
 core::StarSystemDescr*
 Descriptors::randStarSystem() const
 {
@@ -386,13 +379,6 @@ core::GalaxyDescr*
 Descriptors::galaxy(int_t id) const
 {
     core::GalaxyDescr* descr = static_cast<core::GalaxyDescr*>(get(id));
-    assert(descr);
-    return descr;
-}
-core::SectorDescr*
-Descriptors::sector(int_t id) const
-{
-    core::SectorDescr* descr = static_cast<core::SectorDescr*>(get(id));
     assert(descr);
     return descr;
 }
@@ -699,7 +685,6 @@ Descriptors::__build_descriptor(Type type, const std::string& data) const
     switch(type) {
     case Type::GALAXY:       { descr = new GalaxyDescr(data); break; }
     case Type::STARSYSTEM:   { descr = new StarSystemDescr(data); break; }
-    case Type::SECTOR:       { descr = new SectorDescr(data); break; }
 
     // pilots
     case Type::NPC:          { descr = new NpcDescr(data); break; }
@@ -810,14 +795,7 @@ Descriptors::__generate()
         core::genNpc();
     }
 
-    num = 4;
-    for(int i=0; i<num; ++i) {
-        const auto& ids = __ids(core::Type::STARSYSTEM).random(5);
-        core::genSector(ids);
-    }
-
-    const auto& ids = __ids(core::Type::SECTOR).random(2);
-    core::genGalaxy(ids);
+    core::genGalaxy();
 }
 
 //void

@@ -24,7 +24,6 @@
 #include <core/spaceobject/Asteroid.hpp>
 
 #include <world/starsystem.hpp>
-#include <world/Sector.hpp>
 #include <core/manager/EntityManager.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include <math/rand.hpp>

@@ -58,10 +58,6 @@ core::control::Galaxy* getGalaxy(core::BaseSession* session) {
     return session->entities()->galaxy();
 }
 
-core::control::Sector* getSector(core::BaseSession* session, int_t id) {
-    return session->entities()->sector(id);
-}
-
 core::control::StarSystem* getStarSystem(core::BaseSession* session, int_t id) {
     return session->entities()->starsystem(id);
 }
@@ -127,32 +123,25 @@ void test_sessions_models_match(core::BaseSession* session1, core::BaseSession* 
 
     test_data_match(session1_galaxy->model(), session2_galaxy->model());
 
-    for (int_t sector_id: session1_galaxy->model()->sectors()) {
-        core::control::Sector* session1_sector = getSector(session1, sector_id);
-        core::control::Sector* session2_sector = getSector(session2, sector_id);
+    for (int_t starsystem_id: session1_galaxy->model()->starsystems()) {
+        core::control::StarSystem* session1_starsystem = getStarSystem(session1, starsystem_id);
+        core::control::StarSystem* session2_starsystem = getStarSystem(session2, starsystem_id);
 
-        test_data_match(session1_sector->model(), session2_sector->model());
+        test_data_match(session1_starsystem->model(), session2_starsystem->model());
 
-        for (int_t starsystem_id: session1_sector->descriptor()->starsystems) {
-            core::control::StarSystem* session1_starsystem = getStarSystem(session1, starsystem_id);
-            core::control::StarSystem* session2_starsystem = getStarSystem(session2, starsystem_id);
+        for (int_t ship_id: session1_starsystem->model()->ships()) {
+            core::control::Ship* session1_ship = getShip(session1, ship_id);
+            core::control::Ship* session2_ship = getShip(session2, ship_id);
 
-            test_data_match(session1_starsystem->model(), session2_starsystem->model());
+            test_data_match(session1_ship->model(), session2_ship->model());
+            test_data_match(session1_ship->npc()->model(), session2_ship->npc()->model());
 
-            for (int_t ship_id: session1_starsystem->model()->ships()) {
-                core::control::Ship* session1_ship = getShip(session1, ship_id);
-                core::control::Ship* session2_ship = getShip(session2, ship_id);
+            for (int_t item_id: session1_ship->model()->items()) {
+                core::control::Item* session1_item = getItem(session1, item_id);
+                core::control::Item* session2_item = getItem(session2, item_id);
 
-                test_data_match(session1_ship->model(), session2_ship->model());
-                test_data_match(session1_ship->npc()->model(), session2_ship->npc()->model());
-
-                for (int_t item_id: session1_ship->model()->items()) {
-                    core::control::Item* session1_item = getItem(session1, item_id);
-                    core::control::Item* session2_item = getItem(session2, item_id);
-
-//                    std::cout<<session1_item->model()->info().toString()<<std::endl;
-                    test_data_match(session1_item->model(), session2_item->model());
-                }
+                // std::cout<<session1_item->model()->info().toString()<<std::endl;
+                test_data_match(session1_item->model(), session2_item->model());
             }
         }
     }

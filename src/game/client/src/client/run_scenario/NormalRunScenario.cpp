@@ -28,7 +28,6 @@
 
 #include <ai/God.hpp>
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <common/Global.hpp>
 

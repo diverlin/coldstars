@@ -8,8 +8,7 @@ namespace core {
 namespace event {
 
 /** TRANSITION */
-void addSectorToGalaxy(int_t object, int_t parent, const glm::vec3& position);
-void addStarSystemToSector(int_t object, int_t parent, const glm::vec3& position);
+void addStarSystemToGalaxy(int_t object, int_t parent, const glm::vec3& position);
 void addNpcToShip(int_t object, int_t parent);
 
 // items
@@ -19,7 +18,6 @@ void loadItem(int_t object, int_t parent);
 
 /** CREATE */
 void createGalaxy(int_t descriptor, int_t object);
-void createSector(int_t descriptor, int_t object);
 void createStarSystem(int_t descriptor, int_t object);
 void createNpc(int_t descriptor, int_t object);
 

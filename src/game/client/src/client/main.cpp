@@ -55,7 +55,6 @@
 #include <core/manager/EntityManager.hpp>
 
 #include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/world/World.hpp>
 #include <ai/God.hpp>

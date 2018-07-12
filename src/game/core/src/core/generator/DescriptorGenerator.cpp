@@ -20,7 +20,6 @@
 #include "DescriptorGenerator.hpp"
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
-#include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 #include <core/descriptor/world/HyperSpace.hpp>
 #include <core/descriptor/pilot/Npc.hpp>
@@ -57,24 +56,11 @@ glm::vec3 randPlanetoidDirection() {
 
 /* world */
 core::GalaxyDescr*
-genGalaxy(const std::vector<int_t>& sectors) {
+genGalaxy() {
     core::GalaxyDescr* descr = new core::GalaxyDescr;
-    int num = meti::rand::gen_int(1,3);
-    num = std::min(int(sectors.size()), num);
-    for(int i=0; i<num; ++i) {
-        descr->addSector(sectors.at(i)/*meti::rand::get_element_or_die(sectors)*/);
-    }
-    core::shortcuts::descriptors()->add(descr);
-    return descr;
-}
+    int num = meti::rand::gen_int(2,3);
 
-core::SectorDescr*
-genSector(const std::vector<int_t>& starsystems) {
-    core::SectorDescr* descr = new core::SectorDescr;
-    int num = meti::rand::gen_int(1,3);
-    for(int i=0; i<num; ++i) {
-        descr->starsystems.push_back(meti::rand::get_element_or_die(starsystems));
-    }
+    descr->setStarSystemsNum(num);
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
