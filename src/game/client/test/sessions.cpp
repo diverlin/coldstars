@@ -208,7 +208,19 @@ TEST(sessions, player_creation)
     test_data_match(server_npc->vehicle()->model(), client_npc->vehicle()->model());
 }
 
-TEST(sessions, world_creation)
+TEST(sessions, minimal_world_creation)
+{
+    core::Server server(WorldType::MINIMAL);
+    client::Client client(1);
+
+    std::vector<core::IMachine*> machines = {&server, &client};
+
+    update(machines);
+
+    test_sessions_models_match(server.session(), client.session());
+}
+
+TEST(sessions, normal_world_creation)
 {
     core::Server server;
     client::Client client(1);
