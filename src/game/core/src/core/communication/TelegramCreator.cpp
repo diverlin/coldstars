@@ -349,7 +349,7 @@ void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
     int_t galaxy_id = createPureGalaxy(galaxy_descriptor->id());
 
     // create sectors
-    for(int_t sector_descriptor_id: galaxy_descriptor->sectors) {
+    for(int_t sector_descriptor_id: galaxy_descriptor->sectors()) {
         int_t sector_id = createPureSector(sector_descriptor_id);
         __addSectorToGalaxy(sector_id, galaxy_id);
 

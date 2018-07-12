@@ -22,8 +22,6 @@
 
 #include <ceti/StringUtils.hpp>
 
-#include <vector>
-
 namespace core {
 
 struct GalaxyDescr : public BaseDescr
@@ -37,19 +35,23 @@ public:
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
         result.add("Galaxy");
-        result.add("sectors", ceti::to_string(sectors));
+        result.add("sectors", ceti::to_string(m_sectors));
         return result;
     }
 
-public:
-    std::vector<int_t> sectors;
+    void addSector(int_t sector) { m_sectors.add(sector); }
+    const ceti::pack<int_t>& sectors() const { return m_sectors; }
+
+private:
+    ceti::pack<int_t> m_sectors;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        UNUSED(version)
         ar & boost::serialization::base_object<BaseDescr>(*this);
-        ar & sectors;
+        ar & m_sectors;
     }
 }; 
 

@@ -45,7 +45,6 @@
 
 #include <ceti/IdGenerator.hpp>
 
-
 namespace core {
 
 namespace {
@@ -61,8 +60,9 @@ core::GalaxyDescr*
 genGalaxy(const std::vector<int_t>& sectors) {
     core::GalaxyDescr* descr = new core::GalaxyDescr;
     int num = meti::rand::gen_int(1,3);
+    num = std::min(int(sectors.size()), num);
     for(int i=0; i<num; ++i) {
-        descr->sectors.push_back(meti::rand::get_element_or_die(sectors));
+        descr->addSector(sectors.at(i)/*meti::rand::get_element_or_die(sectors)*/);
     }
     core::shortcuts::descriptors()->add(descr);
     return descr;
