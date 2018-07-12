@@ -65,8 +65,6 @@ public:
 
     void genBullets_DEBUG(control::StarSystem*, int) const;
 
-//    void createPlayer(int_t, int_t);
-    void createDummyGalaxy(int ships_num=2, int planets_num=1) const;
     void createGalaxy(core::GalaxyDescr*) const;
 
     void moveVehicle(int_t, const glm::vec3&) const;

@@ -71,6 +71,8 @@ PlanetBuilder::__createInternals(core::control::Planet* planet, core::PlanetDesc
     /// SpaceObject
     planet->model()->setArmor(descr->armor());
 
+    std::cout<<"TODO: fix this"<<std::endl;
+    return;
     core::control::Kosmoport* kosmoport = core::KosmoportBuilder::gen();
     planet->bindLand(kosmoport);
 

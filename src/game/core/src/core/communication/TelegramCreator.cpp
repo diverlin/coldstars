@@ -298,27 +298,6 @@ void TelegramCreator::__equipShip(int_t ship_id) const
     }
 }
 
-void TelegramCreator::createDummyGalaxy(int ships_num, int planets_num) const
-{
-    // create galaxy
-    int_t galaxy_descriptor_id = shortcuts::descriptors()->randGalaxy()->id();
-    int_t galaxy_id = createPureGalaxy(galaxy_descriptor_id);
-
-    // create starsystem
-    int_t starsystem_id = createPureStarsystem();
-    __addStarSystemToGalaxy(starsystem_id, galaxy_id);
-
-//    // create star
-//    int_t star_id = createPureStar();
-//    __addStarToStarsystem(star_id, starsystem_id);
-
-//    // create planet
-//    __createPlanets(starsystem_id, planets_num);
-
-//    // create ships
-//    createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
-}
-
 void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
 {
     // create galaxy
@@ -335,8 +314,8 @@ void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const
         __createStars(starsystem_id, stars_num);
 
         // create planets
-       int planets_num = starsystem_descriptor->planetsNum();
-//        __createPlanets(starsystem_id, planets_num);
+        int planets_num = starsystem_descriptor->planetsNum();
+        __createPlanets(starsystem_id, planets_num);
 
         // create ships
         int ships_num = 10;
@@ -556,13 +535,6 @@ void TelegramCreator::hit(control::SpaceObject* object, int damage)
     HitComDescr descriptor(object->id(), object->id(), damage);
     m_telegramHub.add(Telegram(telegram::Type::HIT, descriptor.data()));
 }
-
-//void TelegramCreator::createPlayer(int_t player_id, int_t npc_id)
-//{
-//    CreatePlayerComDescr descriptor(player_id, npc_id);
-//    m_telegramHub.add(Telegram(telegram::Type::CREATE_PLAYER, descriptor.data()));
-//}
-
 
 // client
 void TelegramCreator::moveVehicle(int_t vehicle_id, const glm::vec3& position) const
