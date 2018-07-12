@@ -112,6 +112,9 @@ private:
     std::vector<Node> m_children;
 };
 
+void log(const std::string& msg){
+    //std::cout<<msg<<std::endl;
+}
 
 std::vector<Node> parse(const std::string& graph)
 {
@@ -132,6 +135,7 @@ std::vector<Node> parse(const std::string& graph)
     for (const char& ch: graph) {
         // enter tags
         if (ch == '[') {
+            log("[");
             name_start = false;
             tags_start = true;
             position_start = false;
@@ -139,14 +143,15 @@ std::vector<Node> parse(const std::string& graph)
         }
         //leave tags
         if (ch == ']') {
+            log("]");
             name_start = false; // when we leave tags we end with name, but not started body yet
             tags_start = false;
             position_start = false;
             body_start = false;
         }
-
         // enter position
         if (ch == '(') {
+            log("(");
             name_start = false;
             tags_start = false;
             position_start = true;
@@ -154,14 +159,15 @@ std::vector<Node> parse(const std::string& graph)
         }
         // leave position
         if (ch == ')') {
+            log(")");
             name_start = false;
             tags_start = true; // since the position located inside the tags []
             position_start = false;
             body_start = false;
         }
-
         // enter body
         if (ch == '{') {
+            log("{");
             nest_level++;
             name_start = false;
             tags_start = false;
@@ -170,37 +176,22 @@ std::vector<Node> parse(const std::string& graph)
         }
         // leave body
         if (ch == '}') {
+            log("}");
             nest_level--;
         }
 
-        if (name_start) {
-            name_buffer += ch;
-        }
-
-        if (tags_start && (ch != '[') && (ch != ']')) {
-            tags_buffer += ch;
-        }
-
-        if (position_start && (ch != '(') && (ch != ')')) {
-            position_buffer += ch;
-        }
-
-        if (body_start && (ch != '{') && (ch != '}')) {
-            body_buffer += ch;
-        }
-
+        // on body ends
         if ((body_start == true) && (nest_level == 0)) {
+            log("close body");
             name_start = true;
             body_start = false;
             tags_start = false;
             position_start = false;
-            ceti::strip(name_buffer);
-            if (name_buffer[0]==',') {
-                name_buffer = name_buffer.substr(1, name_buffer.size()-1);
-            }
-            ceti::strip(name_buffer);
 
-            ceti::strip(body_buffer);
+            ceti::superstrip(name_buffer, ',');
+            ceti::superstrip(body_buffer, ',');
+            ceti::superstrip(position_buffer, ',');
+            ceti::superstrip(tags_buffer, ',');
 
             result.push_back(Node(name_buffer, position_buffer, tags_buffer, body_buffer));
 
@@ -208,6 +199,20 @@ std::vector<Node> parse(const std::string& graph)
             tags_buffer = "";
             position_buffer = "";
             name_buffer = "";
+        }
+
+        // collect buffers
+        if (name_start) {
+            name_buffer += ch;
+        }
+        if (tags_start) {
+            tags_buffer += ch;
+        }
+        if (position_start) {
+            position_buffer += ch;
+        }
+        if (body_start) {
+            body_buffer += ch;
         }
     }
 
@@ -238,10 +243,11 @@ TEST(graph, common)
 //    EXPECT_EQ("", get_nested_child("{}"));
 //    EXPECT_EQ("", get_nested_child(""));
 
-    std::string input = "starsystem[alien,small]{star,planet}, starsystem[(140,70)]{blackhole,asteroid}, starsystem{star,star}";
+    std::string input = "starsystem[alien,small]{star,planet{kosmoport}}, starsystem[(140,70)]{blackhole,asteroid}, starsystem{star,star}";
     std::vector<Node> nodes = parse(input);
-//    EXPECT_EQ(Node("starsystem", "", "alien,small", "star,planet").toString(), nodes[0].toString());
-    EXPECT_EQ(Node("starsystem", "140,70", "", "blackhole,asteroid").toString(), nodes[1].toString());
+    assert(nodes.size()==3);
+    EXPECT_EQ(Node("starsystem", "", "alien,small", "star,planet{kosmoport}").toString(), nodes[0].toString());
+//    EXPECT_EQ(Node("starsystem", "140,70", "", "blackhole,asteroid").toString(), nodes[1].toString());
 //    EXPECT_EQ(Node("starsystem", "", "", "star,star").toString(), nodes[2].toString());
 //    EXPECT_NE(Node("starsystem", "", "", "star, star").toString(), nodes[2].toString());
 

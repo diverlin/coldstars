@@ -47,6 +47,7 @@ std::vector<std::string> split(const std::string& to_string, const std::string& 
 std::string join(const std::vector<std::string>& v, const std::string& delim);
 std::string replace(const std::string&, const std::string&, const std::string&);
 void strip(std::string&);
+void superstrip(std::string&, const char&);
 void strip(std::vector<std::string>&);
 
 std::string get_nested(const std::string& str, const char* open="{", const char* close="}");
