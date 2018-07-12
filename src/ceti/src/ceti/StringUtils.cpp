@@ -150,7 +150,7 @@ void strip(std::vector<std::string>& v) {
     }
 }
 
-std::string get_nested(const std::string& str, const char* open, const char* close) {
+std::string get_nested(const std::string& str, const char& open, const char& close) {
     unsigned long begin = str.find_first_of(open);
     unsigned long end = str.find_last_of(close);
     if ((begin == str.npos) && (end != str.npos)) {

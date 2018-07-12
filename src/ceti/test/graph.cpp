@@ -123,55 +123,17 @@ std::vector<Node> parse(const std::string& graph)
     int nest_level = 0;
 
     std::string name_buffer;
-    std::string tags_buffer;
-    std::string position_buffer;
     std::string body_buffer;
 
     bool name_start = true;
-    bool tags_start = false;
-    bool position_start = false;
     bool body_start = false;
 
     for (const char& ch: graph) {
-        // enter tags
-        if (ch == '[') {
-            log("[");
-            name_start = false;
-            tags_start = true;
-            position_start = false;
-            body_start = false;
-        }
-        //leave tags
-        if (ch == ']') {
-            log("]");
-            name_start = false; // when we leave tags we end with name, but not started body yet
-            tags_start = false;
-            position_start = false;
-            body_start = false;
-        }
-        // enter position
-        if (ch == '(') {
-            log("(");
-            name_start = false;
-            tags_start = false;
-            position_start = true;
-            body_start = false;
-        }
-        // leave position
-        if (ch == ')') {
-            log(")");
-            name_start = false;
-            tags_start = true; // since the position located inside the tags []
-            position_start = false;
-            body_start = false;
-        }
         // enter body
         if (ch == '{') {
             log("{");
             nest_level++;
             name_start = false;
-            tags_start = false;
-            position_start = false;
             body_start = true;
         }
         // leave body
@@ -180,39 +142,38 @@ std::vector<Node> parse(const std::string& graph)
             nest_level--;
         }
 
-        // on body ends
-        if ((body_start == true) && (nest_level == 0)) {
-            log("close body");
-            name_start = true;
-            body_start = false;
-            tags_start = false;
-            position_start = false;
-
-            ceti::superstrip(name_buffer, ',');
-            ceti::superstrip(body_buffer, ',');
-            ceti::superstrip(position_buffer, ',');
-            ceti::superstrip(tags_buffer, ',');
-
-            result.push_back(Node(name_buffer, position_buffer, tags_buffer, body_buffer));
-
-            body_buffer = "";
-            tags_buffer = "";
-            position_buffer = "";
-            name_buffer = "";
-        }
-
         // collect buffers
         if (name_start) {
             name_buffer += ch;
         }
-        if (tags_start) {
-            tags_buffer += ch;
-        }
-        if (position_start) {
-            position_buffer += ch;
-        }
         if (body_start) {
             body_buffer += ch;
+        }
+
+        // on body ends we dump result
+        if ((body_start == true) && (nest_level == 0)) {
+            log("close body");
+            name_start = true;
+            body_start = false;
+
+            ceti::superstrip(name_buffer, ',');
+//            ceti::superstrip(body_buffer, ',');
+
+            body_buffer = ceti::get_nested(body_buffer, '{', '}');
+            std::string tags_buffer = ceti::get_nested(name_buffer, '[', ']');
+            std::string position_buffer;
+            if (!tags_buffer.empty()) {
+                name_buffer = ceti::replace(name_buffer, "["+tags_buffer+"]", "");
+                position_buffer = ceti::get_nested(tags_buffer, '(', ')');
+                if (!position_buffer.empty()) {
+                    tags_buffer = ceti::replace(tags_buffer, "("+position_buffer+")", "");
+                }
+            }
+
+            result.push_back(Node(name_buffer, position_buffer, tags_buffer, body_buffer));
+
+            name_buffer = "";
+            body_buffer = "";
         }
     }
 
@@ -243,13 +204,13 @@ TEST(graph, common)
 //    EXPECT_EQ("", get_nested_child("{}"));
 //    EXPECT_EQ("", get_nested_child(""));
 
-    std::string input = "starsystem[alien,small]{star,planet{kosmoport}}, starsystem[(140,70)]{blackhole,asteroid}, starsystem{star,star}";
+    std::string input = "starsystem[alien,small]{star,planet[ice]{kosmoport}}, starsystem[(140,70)]{blackhole,asteroid}, starsystem{star,star}";
     std::vector<Node> nodes = parse(input);
     assert(nodes.size()==3);
-    EXPECT_EQ(Node("starsystem", "", "alien,small", "star,planet{kosmoport}").toString(), nodes[0].toString());
-//    EXPECT_EQ(Node("starsystem", "140,70", "", "blackhole,asteroid").toString(), nodes[1].toString());
-//    EXPECT_EQ(Node("starsystem", "", "", "star,star").toString(), nodes[2].toString());
-//    EXPECT_NE(Node("starsystem", "", "", "star, star").toString(), nodes[2].toString());
+    EXPECT_EQ(Node("starsystem", "", "alien,small", "star,planet[ice]{kosmoport}").toString(), nodes[0].toString());
+    EXPECT_EQ(Node("starsystem", "140,70", "", "blackhole,asteroid").toString(), nodes[1].toString());
+    EXPECT_EQ(Node("starsystem", "", "", "star,star").toString(), nodes[2].toString());
+    EXPECT_NE(Node("starsystem", "", "", "star, star").toString(), nodes[2].toString());
 
 //    std::vector<std::string> parse(const std::string& graph)
 

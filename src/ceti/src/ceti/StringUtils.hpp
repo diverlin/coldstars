@@ -50,6 +50,6 @@ void strip(std::string&);
 void superstrip(std::string&, const char&);
 void strip(std::vector<std::string>&);
 
-std::string get_nested(const std::string& str, const char* open="{", const char* close="}");
+std::string get_nested(const std::string& str, const char& open='{', const char& close='}');
 
 } // namespace ceti
