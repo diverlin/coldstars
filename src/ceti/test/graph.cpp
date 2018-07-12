@@ -88,6 +88,11 @@ public:
         }
     }
 
+    const std::string& type() const { return m_type; }
+    const std::string& position() const { return m_position; }
+    std::string tagsAsString() const { return ceti::join(m_tags, ","); }
+    const std::vector<Node>& children() const { return m_children; }
+
     void bornChildren() {
         if (m_body.empty()){
             return;
@@ -110,7 +115,7 @@ public:
         }
         if (!m_tags.empty()) {
             result += ":tags=";
-            result += ceti::join(m_tags, ",");
+            result += tagsAsString();
         }
         if (!m_body.empty()) {
             result += ":body=";
@@ -131,6 +136,9 @@ void log(const std::string& msg){
     std::cout<<msg<<std::endl;
 }
 
+void log2(const std::string& msg){
+    //std::cout<<msg<<std::endl;
+}
 
 Node process_buffers(std::string& name_buffer,
                      std::string& position_buffer,
@@ -159,10 +167,66 @@ Node process_buffers(std::string& name_buffer,
     return node;
 }
 
+void processing_magic(std::string& input)
+{
+    // write now the case
+    // angar{ship[damaged,equiped], ship}
+    // not parsed well, but
+    // angar{ship[damaged,equiped]{}, ship}
+    // so the idea is to add {} where it's needed to simulate empty body
+    ceti::remove_whitespaces(input);
+    input = ceti::replace(input, "],", "]{},");
+}
+
+bool validate_syntax(const std::string& input)
+{
+    int counter_open1 = 0;
+    int counter_close1 = 0;
+    int counter_open2 = 0;
+    int counter_close2 = 0;
+    int counter_open3 = 0;
+    int counter_close3 = 0;
+
+    for (const char& ch: input) {
+        if (ch =='{') {
+            counter_open1++;
+        }
+        if (ch =='}') {
+            counter_close1++;
+        }
+        if (ch =='[') {
+            counter_open2++;
+        }
+        if (ch ==']') {
+            counter_close2++;
+        }
+        if (ch =='(') {
+            counter_open3++;
+        }
+        if (ch ==')') {
+            counter_close3++;
+        }
+    }
+
+    if (counter_open1 != counter_close1) {
+        log("the number of \"{\" doesn't match to \"}\", please check you file");
+        assert(false);
+    }
+    if (counter_open2 != counter_close2) {
+        log("the number of \"[\" doesn't match to \"]\", please check you file");
+        assert(false);
+    }
+    if (counter_open3 != counter_close3) {
+        log("the number of \"(\" doesn't match to \")\", please check you file");
+        assert(false);
+    }
+}
+
 std::vector<Node> parse(const std::string& input)
 {
     std::string graph = input;
-    ceti::remove_whitespaces(graph);
+    processing_magic(graph);
+    validate_syntax(graph);
 
     std::vector<Node> result;
 
@@ -173,43 +237,41 @@ std::vector<Node> parse(const std::string& input)
     std::string position_buffer;
     std::string body_buffer;
 
-    bool name_start = true;
-    bool body_start = false;
+    bool collecting_name = true;
+    bool collecting_body = false;
 
     unsigned int count = 0;
     for (const char& ch: graph) {
         count++;
-        std::string mystring = std::string(ch);
-        log(mystring);
 
         // enter body
         if (ch == '{') {
-            log("{");
+            log2("{");
             nest_level++;
-            name_start = false;
-            body_start = true;
+            collecting_name = false;
+            collecting_body = true;
         }
         // leave body
         if (ch == '}') {
-            log("}");
+            log2("}");
             nest_level--;
         }
 
         // collect buffers
-        if (name_start) {
+        if (collecting_name) {
             name_buffer += ch;
         }
-        if (body_start) {
+        if (collecting_body) {
             body_buffer += ch;
         }
 
         // to handle items without body {}
-        if ((name_start == true) && (name_buffer.find('[') == name_buffer.npos) && (ch == ','))
+        if ((collecting_name == true) && (name_buffer.find('[') == name_buffer.npos) && (ch == ','))
         {
             if (name_buffer[0] != ',') {
-                log("empty body");
-                name_start = true;
-                body_start = false;
+                log2("empty body");
+                collecting_name = true;
+                collecting_body = false;
 
                 Node node = process_buffers(name_buffer, position_buffer, tags_buffer, body_buffer);
                 result.push_back(node);
@@ -218,10 +280,10 @@ std::vector<Node> parse(const std::string& input)
         }
 
         // on body ends we dump result
-        if ((body_start == true) && (nest_level == 0)) {
-            log("close body");
-            name_start = true;
-            body_start = false;
+        if ((collecting_body == true) && (nest_level == 0)) {
+            log2("close body");
+            collecting_name = true;
+            collecting_body = false;
 
             Node node = process_buffers(name_buffer, position_buffer, tags_buffer, body_buffer);
             result.push_back(node);
@@ -229,10 +291,10 @@ std::vector<Node> parse(const std::string& input)
         }
 
         // corner case to process last element of {starsystem, starsystem, starsystem}
-        if ((name_start == true) && (count == graph.length())) {
-            log("close body");
-            name_start = false;
-            body_start = false;
+        if ((collecting_name == true) && (count == graph.length())) {
+            log2("close body");
+            collecting_name = false;
+            collecting_body = false;
 
             Node node = process_buffers(name_buffer, position_buffer, tags_buffer, body_buffer);
             result.push_back(node);
@@ -242,24 +304,6 @@ std::vector<Node> parse(const std::string& input)
 
     return result;
 }
-
-//galaxy {
-//    starsystem {
-//        star,
-//        planet[ice] {land},
-//        planet[rock] {kosmoport { shop {korpus, lazer} } },
-//        planet[whater],
-//        ship,
-//        ship {drive, lazer, rocket},
-//        lazer,
-//        drive[(100,0)]
-//    },
-//    starsystem {
-//        star,
-//        planet {land},
-//        planet {kosmoport { angar { ship } },
-//    }
-//}
 
 TEST(graph, parser)
 {
@@ -287,27 +331,125 @@ TEST(graph, nodes)
     std::string input ="\
     galaxy {\
         starsystem {\
-            star,\
-            planet[ice] {land},\
-            planet[rock] {kosmoport { shop {korpus, lazer} } },\
-            planet[whater],\
-            ship,\
-            ship {drive, lazer, rocket},\
+            star[pulsar],\
+            planet[ice,giant] {land},\
+            planet[rock] {kosmoport[kualkua,friend] { shop {korpus, lazer} } },\
+            planet[water],\
+            ship[kualkua],\
+            ship[vorlon] {drive, lazer, rocket},\
             lazer,\
             drive[(100,0)]\
         },\
-        starsystem {\
+        starsystem[small,radioactive] {\
             star,\
             planet {land},\
-            planet {kosmoport { angar { ship } }\
+            planet {kosmoport { angar { ship, ship[equiped,damaged], ship } } }\
         }\
     }";
 
     std::vector<Node> nodes = parse(input);
     assert(nodes.size()==1);
-//    EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[0].toString());
-//    EXPECT_EQ(Node("starsystem", "", "", "").toString(), nodes[1].toString());
-//    EXPECT_EQ(Node("hyperspace1", "", "", "").toString(), nodes[2].toString());
-}
+    Node& galaxy = nodes[0];
+    galaxy.bornChildren();
+
+    EXPECT_EQ("galaxy", galaxy.type());
+    EXPECT_EQ(2, galaxy.children().size());
+
+    const Node& starsystem1 = galaxy.children()[0];
+    const Node& starsystem2 = galaxy.children()[1];
+
+    EXPECT_EQ("starsystem", starsystem1.type());
+    EXPECT_EQ("starsystem", starsystem2.type());
+    EXPECT_EQ("", starsystem1.tagsAsString());
+    EXPECT_EQ("small,radioactive", starsystem2.tagsAsString());
+
+    // starsystem1 children
+    EXPECT_EQ(8, starsystem1.children().size());
+    const Node& starsystem1_star1 = starsystem1.children()[0];
+    EXPECT_EQ("star", starsystem1_star1.type());
+    EXPECT_EQ("pulsar", starsystem1_star1.tagsAsString());
+
+    const Node& starsystem1_planet1 = starsystem1.children()[1];
+    EXPECT_EQ("planet", starsystem1_planet1.type());
+    EXPECT_EQ("ice,giant", starsystem1_planet1.tagsAsString());
+
+    const Node& starsystem1_planet2 = starsystem1.children()[2];
+    EXPECT_EQ("planet", starsystem1_planet2.type());
+    EXPECT_EQ("rock", starsystem1_planet2.tagsAsString());
+
+    const Node& starsystem1_planet3 = starsystem1.children()[3];
+    EXPECT_EQ("planet", starsystem1_planet3.type());
+    EXPECT_EQ("water", starsystem1_planet3.tagsAsString());
+
+    const Node& starsystem1_ship1 = starsystem1.children()[4];
+    EXPECT_EQ("ship", starsystem1_ship1.type());
+    EXPECT_EQ("kualkua", starsystem1_ship1.tagsAsString());
+
+    const Node& starsystem1_ship2 = starsystem1.children()[5];
+    EXPECT_EQ("ship", starsystem1_ship2.type());
+    EXPECT_EQ("vorlon", starsystem1_ship2.tagsAsString());
+    EXPECT_EQ(3, starsystem1_ship2.children().size());
+    EXPECT_EQ("drive", starsystem1_ship2.children()[0].type());
+    EXPECT_EQ("lazer", starsystem1_ship2.children()[1].type());
+    EXPECT_EQ("rocket", starsystem1_ship2.children()[2].type());
+
+    const Node& starsystem1_lazer = starsystem1.children()[6];
+    EXPECT_EQ("lazer", starsystem1_lazer.type());
+
+    const Node& starsystem1_drive = starsystem1.children()[7];
+    EXPECT_EQ("drive", starsystem1_drive.type());
+    EXPECT_EQ("100,0", starsystem1_drive.position());
+
+    // starsystem1_planet2 nesting
+    EXPECT_EQ(1, starsystem1_planet2.children().size());
+    const Node& starsystem1_planet2_kosmoport = starsystem1_planet2.children()[0];
+    EXPECT_EQ("kosmoport", starsystem1_planet2_kosmoport.type());
+    EXPECT_EQ("kualkua,friend", starsystem1_planet2_kosmoport.tagsAsString());
+
+    EXPECT_EQ(1, starsystem1_planet2_kosmoport.children().size());
+    const Node& starsystem1_planet2_kosmoport_shop = starsystem1_planet2_kosmoport.children()[0];
+    EXPECT_EQ(2, starsystem1_planet2_kosmoport_shop.children().size());
+
+    const Node& starsystem1_planet2_kosmoport_shop_korpus = starsystem1_planet2_kosmoport_shop.children()[0];
+    const Node& starsystem1_planet2_kosmoport_shop_lazer = starsystem1_planet2_kosmoport_shop.children()[1];
+    EXPECT_EQ("korpus", starsystem1_planet2_kosmoport_shop_korpus.type());
+    EXPECT_EQ("lazer", starsystem1_planet2_kosmoport_shop_lazer.type());
+
+    // starsystem2 children
+    EXPECT_EQ(3, starsystem2.children().size());
+
+    const Node& starsystem2_star = starsystem2.children()[0];
+    EXPECT_EQ("star", starsystem2_star.type());
+
+    const Node& starsystem2_planet1 = starsystem2.children()[1];
+    EXPECT_EQ("planet", starsystem2_planet1.type());
+
+    const Node& starsystem2_planet2 = starsystem2.children()[2];
+    EXPECT_EQ("planet", starsystem2_planet2.type());
+
+
+    // starsystem2-planet1 children
+    EXPECT_EQ(1, starsystem2_planet1.children().size());
+    const Node& starsystem2_planet1_land = starsystem2_planet1.children()[0];
+    EXPECT_EQ("land", starsystem2_planet1_land.type());
+
+    // starsystem2-planet2 nesting
+    EXPECT_EQ(1, starsystem2_planet2.children().size());
+    const Node& starsystem2_planet2_kosmoport = starsystem2_planet2.children()[0];
+    EXPECT_EQ("kosmoport", starsystem2_planet2_kosmoport.type());
+
+    EXPECT_EQ(1, starsystem2_planet2_kosmoport.children().size());
+    const Node& starsystem2_planet2_kosmoport_angar = starsystem2_planet2_kosmoport.children()[0];
+    EXPECT_EQ("angar", starsystem2_planet2_kosmoport_angar.type());
+
+    EXPECT_EQ(3, starsystem2_planet2_kosmoport_angar.children().size());
+    const Node& starsystem2_planet2_kosmoport_angar_ship1 = starsystem2_planet2_kosmoport_angar.children()[0];
+    const Node& starsystem2_planet2_kosmoport_angar_ship2 = starsystem2_planet2_kosmoport_angar.children()[1];
+    const Node& starsystem2_planet2_kosmoport_angar_ship3 = starsystem2_planet2_kosmoport_angar.children()[2];
+
+    EXPECT_EQ("ship", starsystem2_planet2_kosmoport_angar_ship1.type());
+    EXPECT_EQ("ship", starsystem2_planet2_kosmoport_angar_ship2.type());
+    EXPECT_EQ("ship", starsystem2_planet2_kosmoport_angar_ship3.type());
+    }
 
 
