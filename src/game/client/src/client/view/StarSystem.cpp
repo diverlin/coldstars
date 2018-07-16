@@ -100,12 +100,12 @@ StarSystemViewer::StarSystemViewer()
     m_distantStars = ::effect::genDistantStars();
     m_distantNebulas = ::effect::genDistantNebulas();
 
-    bool debug = false;
+    bool debug = true;
     if (debug) {
         m_show.setStar(false);
         m_show.setStars(false);
         m_show.setNebulas(false);
-        m_show.setSpaceobjects(false);
+        m_show.setSpaceobjects(true);
         m_show.setCollisionRadius(false);
         m_show.setAxis(false);
         m_show.setHud(false);
@@ -737,52 +737,52 @@ void StarSystemViewer::__add(Satellite* view)
 //    m_shockwaves.push_back(view);
 //}
 
-void StarSystemViewer::__renderBackground(jeti::Render& render) const {
+void StarSystemViewer::__renderBackground() const {
     if (!m_show.background()) {
         return;
     }
 
     if (m_show.backgroundFbo()) {
-        render.fboBackGround().activate(render.size().x, render.size().y);
+        m_render->fboBackGround().activate(m_render->size().x, m_render->size().y);
     }
 
     if (m_show.nebulas()) {
         // projection
-        render.applyOrthogonalProjection();
+        m_render->applyOrthogonalProjection();
         //render.applyPerspectiveProjection();
 
         m_distantNebulas->update();
-        m_distantNebulas->draw(render);
+        m_distantNebulas->draw(*m_render);
     }
     if (m_show.stars()) {
         // projection
-        render.applyPerspectiveProjection();
+        m_render->applyPerspectiveProjection();
 
-        m_distantStars->draw(render);
+        m_distantStars->draw(*m_render);
     }
     if (m_show.backgroundFbo()) {
-        render.fboBackGround().deactivate();
+        m_render->fboBackGround().deactivate();
     }
 }
 
-void StarSystemViewer::__renderStarPostEffect(jeti::Render& render) const {
+void StarSystemViewer::__renderStarPostEffect() const {
     if (!m_show.star()) {
         return;
     }
 
     // projection
-    render.applyOrthogonalProjection();
+    m_render->applyOrthogonalProjection();
 
-    render.drawStar(render.fboBackGround().colorBuffer());
+    m_render->drawStar(m_render->fboBackGround().colorBuffer());
 }
 
-void StarSystemViewer::__renderSpaceObjects(jeti::Render& render) const {
+void StarSystemViewer::__renderSpaceObjects() const {
     if (!m_show.spaceobjects()) {
         return;
     }
 
     // projections
-    render.applyOrthogonalProjection();
+    m_render->applyOrthogonalProjection();
 
     for(Star* star: m_stars) {
         star->update();
@@ -791,32 +791,32 @@ void StarSystemViewer::__renderSpaceObjects(jeti::Render& render) const {
 
     for(Planet* planet: m_planets) {
         planet->update();
-        planet->draw(render);
+        planet->draw(*m_render);
     }
 
     for(WormHole* wormhole: m_wormholes) {
         wormhole->update();
-        wormhole->draw(render);
+        wormhole->draw(*m_render);
     }
 
     for(Asteroid* asteroid: m_asteroids) {
         asteroid->update();
-        asteroid->draw(render);
+        asteroid->draw(*m_render);
     }
 
     for(Ship* ship: m_ships) {
         ship->update();
-        ship->draw(render);
+        ship->draw(*m_render);
     }
 
     for(Bullet* bullet: m_bullets) {
         bullet->update();
-        bullet->draw(render);
+        bullet->draw(*m_render);
     }
 
     for(Container* container: m_containers) {
         container->update();
-        container->draw(render);
+        container->draw(*m_render);
     }
 
     // beams
@@ -824,7 +824,7 @@ void StarSystemViewer::__renderSpaceObjects(jeti::Render& render) const {
         beam->update();
     }
     for(::effect::Beam* beam: m_visible_beams) {
-        beam->draw(render);
+        beam->draw(*m_render);
     }
     //
 
@@ -833,33 +833,33 @@ void StarSystemViewer::__renderSpaceObjects(jeti::Render& render) const {
         ps->update();
     }
     for(std::shared_ptr<jeti::particlesystem::Base> ps: m_visible_particlesystems) {
-        ps->draw(render);
+        ps->draw(*m_render);
     }
     //
 
     if (m_player) {
-        m_player->cursor().renderFocusedObjectStuff(render);
+        m_player->cursor().renderFocusedObjectStuff(*m_render);
     }
 }
 
 
-void StarSystemViewer::__renderSpaceObjectsMeta(jeti::Render& render) const {
+void StarSystemViewer::__renderSpaceObjectsMeta() const {
     if (!m_show.spaceobjects_meta()) {
         return;
     }
 
     // projection
-    render.applyOrthogonalProjection();
+    m_render->applyOrthogonalProjection();
 
     if (m_show.collisionRadius()) {
-        __drawCollisionRadius(render);
+        __drawCollisionRadius(*m_render);
     }
     if (m_show.axis()) {
-        __drawAxis(render);
+        __drawAxis(*m_render);
     }
 }
 
-void StarSystemViewer::__renderHUD(jeti::Render& render) const {
+void StarSystemViewer::__renderHUD() const {
     if (!m_show.hud()) {
         return;
     }
@@ -870,7 +870,7 @@ void StarSystemViewer::__renderHUD(jeti::Render& render) const {
     }
 }
 
-void StarSystemViewer::__renderTexts(jeti::Render& render) const {
+void StarSystemViewer::__renderTexts() const {
     // texts
     for(::effect::Text* text: m_texts) {
         text->update();
@@ -885,26 +885,26 @@ void StarSystemViewer::__renderTexts(jeti::Render& render) const {
     //
 }
 
-void StarSystemViewer::__renderExperiment(jeti::Render& render) const {
+void StarSystemViewer::__renderExperiment() const {
     if (!m_show.experimental()) {
         return;
     }
 
     // projection
-    render.applyOrthogonalProjection();
+    m_render->applyOrthogonalProjection();
 }
 
-void StarSystemViewer::__render(jeti::Render& render)
+void StarSystemViewer::__render()
 {
-    render.clearColorAndDepthBuffers();
+    m_render->clearColorAndDepthBuffers();
 
-    __renderBackground(render);
-    __renderStarPostEffect(render);
-    __renderSpaceObjects(render);
-    __renderSpaceObjectsMeta(render);
-    __renderTexts(render);
-    __renderExperiment(render);
-    __renderHUD(render);
+    __renderBackground();
+    __renderStarPostEffect();
+    __renderSpaceObjects();
+    __renderSpaceObjectsMeta();
+    __renderTexts();
+    __renderExperiment();
+    __renderHUD();
 }
 
 Base*
@@ -988,7 +988,14 @@ void StarSystemViewer::draw(core::control::StarSystem* starsystem)
     m_render->update();
 
     __updateVisible(starsystem);
-    __render(*m_render);
+    __render();
+
+    if (m_player) {
+        gui::Manager::get().update(player());
+        gui::Manager::get().render(*m_render, player());
+    }
+
+    m_screen->draw();
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();

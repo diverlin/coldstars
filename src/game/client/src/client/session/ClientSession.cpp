@@ -40,10 +40,6 @@ ClientSession::ClientSession(int id, bool use_graphic)
 
 ClientSession::~ClientSession()
 {
-//    delete m_render;
-//    delete m_camera;
-//    delete m_screen;
-//    delete m_inputs;
     delete m_view;
     delete m_player;
 }
@@ -55,16 +51,6 @@ ClientSession::init(bool save) {
     }
 
     srand(time(0));
-
-    if (m_useGraphic) {
-//        m_screen = new jeti::Screen;
-//        m_camera = new jeti::Camera;
-//        m_render = new jeti::Render(m_camera);
-//        m_inputs = new gui::UserInputInSpace;
-
-        /// in a name of god don't change order below
-        //assert(false);
-    }
 
     core::Data data(save);
 

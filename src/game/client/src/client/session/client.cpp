@@ -80,7 +80,7 @@ Player* Client::player() const { return m_session->player(); }
 
 bool Client::sessionIsRunning() const {
     if (m_graphic) {
-        return _screen()->window().isOpen();
+        return _view()->isOpened();
     } else {
         return true;
     }
@@ -147,11 +147,6 @@ void Client::update() {
 
         _view()->update(_inputs()->scrollAccel());
         _view()->draw(starsystem);
-
-        gui::Manager::get().update(player());
-        gui::Manager::get().render(*_render(), player());
-
-        _screen()->draw();
     }
 }
 

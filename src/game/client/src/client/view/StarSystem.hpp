@@ -108,7 +108,7 @@ public:
     StarSystemViewer();
     ~StarSystemViewer();
 
-    bool isOpened() const { return true; }
+    bool isOpened() const { return m_screen->window().isOpen(); }
 
     client::Player* player() const { return m_player; }
 
@@ -190,7 +190,7 @@ private:
 
     void __updateVisible(core::control::StarSystem* starsystem);
 
-    void __render(jeti::Render&);
+    void __render();
     void __drawCollisionRadius(const jeti::Render&) const;
     void __drawAxis(const jeti::Render&) const;
 
@@ -240,13 +240,13 @@ private:
     bool __isObjectOnScreen(ceti::control::Orientation*) const;
     bool __isPointInsideObject(const glm::vec3&, ceti::control::Orientation*) const;
 
-    void __renderBackground(jeti::Render& renderer) const;
-    void __renderStarPostEffect(jeti::Render& renderer) const;
-    void __renderSpaceObjects(jeti::Render& renderer) const;
-    void __renderTexts(jeti::Render& renderer) const;
-    void __renderSpaceObjectsMeta(jeti::Render& renderer) const;
-    void __renderHUD(jeti::Render& renderer) const;
-    void __renderExperiment(jeti::Render& renderer) const;
+    void __renderBackground() const;
+    void __renderStarPostEffect() const;
+    void __renderSpaceObjects() const;
+    void __renderTexts() const;
+    void __renderSpaceObjectsMeta() const;
+    void __renderHUD() const;
+    void __renderExperiment() const;
 
 
     void __render_DEPRECATED(jeti::Render&);

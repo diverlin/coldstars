@@ -33,6 +33,7 @@ int main()
     while(viewer->isOpened()) {
         viewer->update();
         viewer->draw(starsystem);
+        usleep(20);
     }
 
     return 0;
