@@ -168,7 +168,8 @@ public:
     Mesh* quadMesh() const { return m_meshQuad; }
 
     void drawTestFlatLight(const glm::vec3& center,
-                                   float radius) const;
+                           float angle,
+                           float radius) const;
 
     void drawDebugCircle(const glm::vec3& center,
                          float radius,
@@ -210,6 +211,8 @@ private:
     Mesh* m_meshCircle = nullptr;
     control::Material* m_materialCollisionRadius = nullptr;
     control::Material* m_materialPerlin = nullptr;
+    control::Material* m_materialNormalMap = nullptr;
+    control::Material* m_materialDemo = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;
@@ -219,7 +222,7 @@ private:
 
     // buffer rendering
     mutable glm::mat4 m_translateMatrix;
-    //    mutable glm::mat4 m_rotateMatrix;
+    mutable glm::mat4 m_rotateMatrix;
     mutable glm::mat4 m_scaleMatrix;
     mutable glm::mat4 m_modelMatrix;
     //

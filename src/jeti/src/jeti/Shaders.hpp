@@ -44,6 +44,7 @@ struct Shaders
     GLuint particle_blink = 0;
     GLuint star = 0;
     GLuint starfield = 0;
+    GLuint flatlight = 0;
 };
 
 

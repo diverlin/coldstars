@@ -877,6 +877,10 @@ void StarSystemViewer::__renderTexts() const {
     }
     sf::RenderWindow& window = client::shortcuts::screen()->window();
 
+    if (m_visible_texts.empty()) {
+        return;
+    }
+
     window.pushGLStates();
     for(::effect::Text* text: m_visible_texts) {
         text->draw(window, m_camera->position());
@@ -986,7 +990,9 @@ void StarSystemViewer::draw()
     m_render->update();
     __render();
 
-    m_render->drawTestFlatLight(glm::vec3(0.0f), 500);
+    float angle = 3*m_render->time();
+    m_render->drawTestFlatLight(glm::vec3(0.0f), angle, 500);
+    //m_render->drawTestFlatLight(glm::vec3(-250.0f, 0.0f, 0.0f), 500);
 
     m_screen->draw();
 }

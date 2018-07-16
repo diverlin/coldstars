@@ -319,6 +319,16 @@ void Render::init(int w, int h)
         m_materialPerlin = new control::Material(model);
     }
 
+    {
+        auto model = new MaterialModel("data/conus2_nm.png");
+        //auto model = new MaterialModel("data/ship/race1_warrior_10_nm.png");
+        m_materialNormalMap = new control::Material(model);
+    }
+
+    {
+        auto model = new MaterialModel("data/ship/race1_warrior_10.png");
+        m_materialDemo = new control::Material(model);
+    }
 
     m_initialized = true;
 
@@ -578,10 +588,15 @@ void Render::drawFlatMeshLight(const control::Material& material, const glm::mat
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
         glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_color"), 1, glm::value_ptr(color));
+        glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_time"), m_time);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.flatlight, "u_texture"), 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, m_materialNormalMap->model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.flatlight, "u_normalmap"), 1);
 
         __drawMesh(*m_meshQuad);
     }
@@ -1292,7 +1307,6 @@ void drawInfoIn2Column(
         }
     }  
     //glPopMatrix();
-
 */
 }
 
@@ -1309,13 +1323,14 @@ void Render::__updateFps()
     }
 }
 
-void Render::drawTestFlatLight(const glm::vec3& center, float radius) const
+void Render::drawTestFlatLight(const glm::vec3& center, float angle, float radius) const
 {
     m_translateMatrix = glm::translate(center);
     m_scaleMatrix = glm::scale(glm::vec3(radius, radius, 1.0f));
-    m_modelMatrix = m_translateMatrix * m_scaleMatrix;
+    m_rotateMatrix = glm::rotate(angle, meti::OZ);
+    m_modelMatrix = m_translateMatrix * m_scaleMatrix * m_rotateMatrix;
 
-    drawFlatMeshLight(*m_materialCollisionRadius, m_modelMatrix);
+    drawFlatMeshLight(*m_materialDemo, m_modelMatrix);
 }
 
 void Render::drawDebugCircle(const glm::vec3& center,
