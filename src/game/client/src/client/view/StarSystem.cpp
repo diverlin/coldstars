@@ -990,7 +990,7 @@ void StarSystemViewer::draw()
     m_render->update();
     __render();
 
-    float angle = 3*m_render->time();
+    float angle = m_render->time();
     m_render->drawTestFlatLight(glm::vec3(0.0f), angle, 500);
     //m_render->drawTestFlatLight(glm::vec3(-250.0f, 0.0f, 0.0f), 500);
 

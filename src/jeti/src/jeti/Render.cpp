@@ -49,8 +49,8 @@ Render::Render(Camera* camera)
       m_camera(camera)
 {
     m_light.position    = glm::vec3(0.0f, 0.0f, -300.0f);
-    m_light.ambient     = glm::vec4(0.2f);
-    m_light.diffuse     = glm::vec4(1.0f);
+    m_light.ambient     = glm::vec4(0.4f, 0.4f, 0.6f, 1.0f);
+    m_light.diffuse     = glm::vec4(1.0f, 1.0f, 0.6f, 1.0f);
 //    m_light.specular    = glm::vec4(1.5f); // visual artefact
     m_light.specular    = glm::vec4(0.0f);
     m_light.attenuation = glm::vec3(0.1f);
@@ -580,15 +580,23 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
     }
 }
 
-void Render::drawFlatMeshLight(const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+void Render::drawFlatMeshLight(const control::Material& material,
+                               const glm::mat4& modelMatrix,
+                               float angle,
+                               const glm::vec4& color) const
 {
+    //glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(modelMatrix)));
+
     __useProgram(m_shaders.flatlight);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+        //glUniformMatrix3fv(glGetUniformLocation(m_shaders.flatlight, "u_normalMatrix")        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
 
-        glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_color"), 1, glm::value_ptr(color));
+        glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_ambientColor"), 1, glm::value_ptr(m_light.ambient));
+        glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_diffuseColor"), 1, glm::value_ptr(m_light.diffuse));
         glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_time"), m_time);
+        glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_angle"), -angle);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->texture);
@@ -1330,7 +1338,7 @@ void Render::drawTestFlatLight(const glm::vec3& center, float angle, float radiu
     m_rotateMatrix = glm::rotate(angle, meti::OZ);
     m_modelMatrix = m_translateMatrix * m_scaleMatrix * m_rotateMatrix;
 
-    drawFlatMeshLight(*m_materialDemo, m_modelMatrix);
+    drawFlatMeshLight(*m_materialDemo, m_modelMatrix, angle);
 }
 
 void Render::drawDebugCircle(const glm::vec3& center,

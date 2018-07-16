@@ -6,15 +6,18 @@ layout(location = FRAG_OUTPUT0) out vec4 color;
 	
 uniform mat4 u_modelMatrix;
 uniform mat4 u_projectionViewMatrix;
+uniform mat3 u_normalMatrix;
 	
 uniform sampler2D u_texture;
 uniform sampler2D u_normalmap;
 
-uniform vec4 u_color;
+uniform vec4 u_ambientColor;
+uniform vec4 u_diffuseColor;
 
 uniform float u_time;
 
 in vec2 v_texCoord;
+in mat2 v_rotateMat2;
 
 void main (void)
 {
@@ -28,27 +31,29 @@ void main (void)
 	//ly = dist*cos(speed*u_time); // [-dist, dist]
 	
 	// Extract color from color map  	  
-	vec3 texel = texture2D(u_texture, v_texCoord.st).rgb; 
+	vec4 texel = texture2D(u_texture, v_texCoord.st); 
 	
 	// Extract the normal from the normal map 
-	vec3 normal = normalize(texture2D(u_normalmap, v_texCoord.st).rgb * 2.0 - 1.0);  
-	  
+	//vec3 normal = vec3(0.0, 0.0, 1.0);
+	vec3 normal = normalize(texture2D(u_normalmap, v_texCoord.st).rgb * 2.0 - 1.0);
+	vec2 normal2 = v_rotateMat2 * normal.xy;
+	normal = vec3(normal2, normal.z);	  
+
 	// Determine where the light is positioned (this can be set however you like)  
-	vec3 light_pos = normalize(vec3(lx, ly, lz));  
-	  
+	vec3 light_pos = normalize(vec3(lx, ly, lz));
+	
 	// Calculate the lighting diffuse value  
 	float diffuse = max(dot(normal, light_pos), 0.0);  
 
 	float avr = (texel.r+texel.g+texel.b)/3;
-	diffuse *= (10*avr);
+	diffuse *= (6*avr);
 
 	// apply ambient component
-	vec3 color3 = 0.4*texel;
+	color = texel*u_ambientColor;
 
 	// apply diffuse
-	color3 += diffuse*texel;
+	color += diffuse*texel*u_diffuseColor;
 
 	// Set the output color of our current pixel  	
-	float a = texture2D(u_texture, v_texCoord.st).a;
-	color = vec4(color3, a);
+	color.a = texel.a;
 }	

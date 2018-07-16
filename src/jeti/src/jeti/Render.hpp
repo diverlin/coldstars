@@ -114,6 +114,7 @@ public:
 
     void drawFlatMeshLight(const control::Material& material,
                            const glm::mat4& modelMatrix,
+                           float angle,
                            const glm::vec4& color = glm::vec4(1.0f)) const;
 
     void drawMeshWithPerlin(const Mesh&,
