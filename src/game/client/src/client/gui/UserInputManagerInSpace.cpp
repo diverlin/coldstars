@@ -32,6 +32,7 @@
 #include <client/pilot/Player.hpp>
 #include <client/gui/GuiManager.hpp>
 #include <client/session/Shortcuts.hpp>
+#include <client/view/StarSystem.hpp>
 
 namespace gui {
 
@@ -183,11 +184,11 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             //            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
             //            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
 
-        case sf::Keyboard::X: { player->show().setAxis(true); break; }
-        case sf::Keyboard::Z: { player->show().setAxis(false); break; }
+        case sf::Keyboard::X: { client::shortcuts::view()->show().setAxis(true); break; }
+        case sf::Keyboard::Z: { client::shortcuts::view()->show().setAxis(false); break; }
 
-        case sf::Keyboard::B: { player->show().setCollisionRadius(true); break; }
-        case sf::Keyboard::N: { player->show().setCollisionRadius(false); break; }
+        case sf::Keyboard::B: { client::shortcuts::view()->show().setCollisionRadius(true); break; }
+        case sf::Keyboard::N: { client::shortcuts::view()->show().setCollisionRadius(false); break; }
         }
     }
 }

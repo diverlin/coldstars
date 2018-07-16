@@ -1,43 +1,38 @@
-#include "main.hpp"
+#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
+#include <core/world/starsystem.hpp>
 
-namespace sandbox {
+#include <core/session/Sessions.hpp>
+#include <core/resource/Data.hpp>
 
-void
-StarSystemView::refresh() {
-    for(ShipView* view: m_ships) {
-        delete view;
-    }
-    m_ships.clear();
+#include <client/view/StarSystem.hpp>
+#include <client/session/client.hpp>
+#include <client/session/ClientSession.hpp>
 
-    auto ships = m_model->ships();
-    for(int id: ships) {
-        ShipModel* model = ENTITIES->getShip(id);
-        ShipView* ship = new ShipView(model);
-        m_ships.push_back(ship);
-    }
-}
-
-} // namespace sandbox
 
 int main()
 {
-    using namespace sandbox;
+    int session_id = 1;
+    bool use_graphics = true;
+    ClientSession* session = new ClientSession(session_id, use_graphics);
+    core::Sessions::get().add(session);
+    core::Sessions::get().activate(session_id);
 
-    ENTITIES = new Enteties;
+    bool save = true;
+    session->init(save);
 
-    StarSystemModel* ss_model = reg(new StarSystemModel(/*id=*/1));
-    StarSystem* ss_control = new StarSystem(ss_model);
-    StarSystemView* ss_view = new StarSystemView(ss_model);
+    core::control::StarSystem* starsystem = core::StarSystemBuilder::gen();
+    core::control::Ship* ship = core::ShipBuilder::gen();
 
-    for(int i=2; i<5; ++i) {
-        ShipModel* model = reg(new ShipModel(/*id=*/i));
-        ss_control->add(model, 10*i);
-    }
-//    descr::Ship* descr = new descr::Ship(/*id=*/1, /*prop=*/100);
+    starsystem->add(ship);
 
-    for(int i=0; i<2; ++i) {
-        ss_control->update();
-        ss_view->draw();
+    view::StarSystemViewer* viewer = session->view();
+    //view::StarSystemViewer* view = new view::StarSystemViewer;
+    assert(viewer);
+
+    while(viewer->isOpened()) {
+        viewer->update();
+        viewer->draw(starsystem);
     }
 
     return 0;

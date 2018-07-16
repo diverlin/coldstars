@@ -71,11 +71,11 @@ Client::~Client()
     delete m_session;
 }
 
-jeti::Camera* Client::_camera() const { return m_session->camera(); }
-jeti::Render* Client::_render() const { return m_session->render(); }
-jeti::Screen* Client::_screen() const { return m_session->screen(); }
-view::StarSystem* Client::_view() const { return m_session->view(); }
-gui::UserInputInSpace* Client::_inputs() const { return m_session->inputs(); }
+jeti::Camera* Client::_camera() const { return m_session->view()->camera(); }
+jeti::Render* Client::_render() const { return m_session->view()->renderer(); }
+jeti::Screen* Client::_screen() const { return m_session->view()->screen(); }
+gui::UserInputInSpace* Client::_inputs() const { return m_session->view()->inputs(); }
+view::StarSystemViewer* Client::_view() const { return m_session->view(); }
 Player* Client::player() const { return m_session->player(); }
 
 bool Client::sessionIsRunning() const {
@@ -101,24 +101,35 @@ void Client::update() {
 
     m_telegramHandler->update();
 
+    std::cout<<"111"<<std::endl;
     if (!m_isConnected) {
         return; // used for testing
     }
 
+    std::cout<<"222"<<std::endl;
     if (!player()->npc()) {
         requestCreatePlayerNpc();
         return;
     }
 
+    std::cout<<"333"<<std::endl;
     if (!player()->npc()->vehicle()) {
         requestCreatePlayerVehicle();
         return;
     }
 
+    std::cout<<"444"<<std::endl;
+//    // WORKAROUND
+//    core::control::Galaxy* galaxy = m_session->entities()->galaxy();
+//    core::control::StarSystem* starsystem = galaxy->starsystems()[0];
+////    starsystem->add(static_cast<core::control::Ship*>(player()->npc()->vehicle()));
+//    // END WORKAROUND
+
     if (!player()->npc()->vehicle()->starsystem()) {
         return;
     }
 
+    std::cout<<"555"<<std::endl;
     core::control::StarSystem* starsystem = player()->npc()->vehicle()->starsystem();
 
     // simulate model(repeate what server is doing)
@@ -135,7 +146,7 @@ void Client::update() {
         player()->cursor().updateMouseInput(*_render());
 
         _view()->update(_inputs()->scrollAccel());
-        _view()->render(starsystem);
+        _view()->draw(starsystem);
 
         gui::Manager::get().update(player());
         gui::Manager::get().render(*_render(), player());

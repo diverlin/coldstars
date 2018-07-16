@@ -20,7 +20,7 @@
 
 #include "SFMLWrapper.hpp"
 
-#include <MyGl.hpp>
+#include <jeti/MyGl.hpp>
 
 #include <meti/VectorUtils.hpp>
 #include <ceti/rect.hpp>

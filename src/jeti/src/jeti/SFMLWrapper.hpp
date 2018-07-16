@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <meti/VectorUtils.hpp>
 
-#include <MyGl.hpp>
+#include <jeti/MyGl.hpp>
 //#include <FreeType.h>
 
 namespace jeti {

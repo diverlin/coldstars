@@ -188,7 +188,7 @@ void test_sessions_descriptors_matches(core::BaseSession* session1, core::BaseSe
 TEST(sessions, player_creation)
 {
     core::Server server(WorldType::DUMMY);
-    client::Client client(1);
+    client::Client client(1, false);
     client.connect();
 
     std::vector<core::IMachine*> machines = {&server, &client};
@@ -211,7 +211,7 @@ TEST(sessions, player_creation)
 TEST(sessions, minimal_world_creation)
 {
     core::Server server(WorldType::MINIMAL);
-    client::Client client(1);
+    client::Client client(1, false);
 
     std::vector<core::IMachine*> machines = {&server, &client};
 
@@ -223,7 +223,7 @@ TEST(sessions, minimal_world_creation)
 TEST(sessions, normal_world_creation)
 {
     core::Server server;
-    client::Client client(1);
+    client::Client client(1, false);
 
     std::vector<core::IMachine*> machines = {&server, &client};
 
@@ -235,8 +235,8 @@ TEST(sessions, normal_world_creation)
 TEST(sessions, descriptors_are_equals)
 {
     core::Server server(WorldType::DUMMY);
-    client::Client client(1);
-    client::Client client2(2);
+    client::Client client(1, false);
+    client::Client client2(2, false);
 
     test_sessions_descriptors_matches(server.session(), client.session());
     test_sessions_descriptors_matches(server.session(), client2.session());

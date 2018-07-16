@@ -57,33 +57,23 @@
 
 namespace client {
 
-Player::Player(int_t id, bool graphic)
+Player::Player(int_t id, bool use_graphic)
     :
       core::Player(id)
+    , m_useGraphic(use_graphic)
 { 
-    if (graphic) {
-        gui::Manager::get().setPlayer(this);
-        m_cursor = new gui::Cursor;
-    }
-
-    bool debug = false;
-    if (debug) {
-        m_show.setStar(false);
-        m_show.setStars(false);
-        m_show.setNebulas(false);
-        m_show.setSpaceobjects(false);
-        m_show.setCollisionRadius(false);
-        m_show.setAxis(false);
-        m_show.setHud(false);
-        m_show.setExperimental(true);
-    } else {
-        m_show.setExperimental(false);
-    }
-
 }
     
 Player::~Player()
 {}  
+
+void Player::initGraphic()
+{
+    if (m_useGraphic) {
+        gui::Manager::get().setPlayer(this);
+        m_cursor = new gui::Cursor;
+    }
+}
 
 bool Player::isAnyWeaponSelected() const
 {

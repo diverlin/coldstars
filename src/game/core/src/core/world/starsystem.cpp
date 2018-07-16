@@ -189,7 +189,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
 {
     for (Vehicle* _vehicle: m_vehicles) {
         if (_vehicle->id() == vehicle->id()) {
-            //LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
+            LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
             exit(1);
         }
     }

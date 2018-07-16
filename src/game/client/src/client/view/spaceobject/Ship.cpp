@@ -47,13 +47,14 @@ Ship::Ship(core::control::Ship* control)
 
     for(core::ItemSlot* slot: control->weaponSlots()) {
         // don't create resources, try to get existed from cache
-        core::control::Turrel* turrel_control = core::TurrelBuilder().gen();
-        glm::vec3 pos(meti::rand::gen_float(-0.7f, 0.7f), meti::rand::gen_float(-0.7f, 0.7f), 0);
-        turrel_control->setPosition(pos);
+        std::cout<<"WARNING: Turrel is commented"<<std::endl;
+//        core::control::Turrel* turrel_control = core::TurrelBuilder().gen();
+//        glm::vec3 pos(meti::rand::gen_float(-0.7f, 0.7f), meti::rand::gen_float(-0.7f, 0.7f), 0);
+//        turrel_control->setPosition(pos);
 
-        Turrel* turrel = new Turrel(turrel_control);
-        _addChild(turrel);
-        m_slots_turrels.insert(std::make_pair(slot, turrel));
+//        Turrel* turrel = new Turrel(turrel_control);
+//        _addChild(turrel);
+//        m_slots_turrels.insert(std::make_pair(slot, turrel));
     }
 
     {

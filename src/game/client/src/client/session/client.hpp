@@ -28,7 +28,7 @@ class Screen;
 } // namespace jeti
 
 namespace view {
-class StarSystem;
+class StarSystemViewer;
 } // namespace view
 
 namespace gui {
@@ -44,7 +44,7 @@ class TelegramHandler;
 
 class Client : public core::IMachine {
 public:
-    Client(int id, bool graphic = false);
+    Client(int id, bool graphic=true);
     ~Client() override final;
 
     ClientSession* session() const { return m_session; }
@@ -67,7 +67,7 @@ protected:
     jeti::Camera* _camera() const;
     jeti::Render* _render() const;
     jeti::Screen* _screen() const;
-    view::StarSystem* _view() const;
+    view::StarSystemViewer* _view() const;
     gui::UserInputInSpace* _inputs() const;
 
 private:

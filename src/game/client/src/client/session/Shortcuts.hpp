@@ -28,7 +28,7 @@ class Screen;
 } // namespace jeti
 
 namespace view {
-class StarSystem;
+class StarSystemViewer;
 } // namespace view
 
 namespace gui {
@@ -46,7 +46,7 @@ jeti::Render* render();
 jeti::Camera* camera();
 jeti::Screen* screen();
 gui::UserInputInSpace* inputs();
-view::StarSystem* view();
+view::StarSystemViewer* view();
 client::Player* player();
 } // namespace shortcuts
 

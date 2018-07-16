@@ -20,6 +20,7 @@
 
 #include <core/session/Sessions.hpp>
 
+#include <client/view/StarSystem.hpp>
 #include <client/session/ClientSession.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 
@@ -31,22 +32,22 @@ namespace client {
 namespace shortcuts {
 
 jeti::Render* render() {
-    return static_cast<ClientSession*>(core::Sessions::get().session())->render();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->view()->renderer();
 }
 
 jeti::Camera* camera() {
-    return static_cast<ClientSession*>(core::Sessions::get().session())->camera();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->view()->camera();
 }
 
 jeti::Screen* screen() {
-    return static_cast<ClientSession*>(core::Sessions::get().session())->screen();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->view()->screen();
 }
 
 gui::UserInputInSpace* inputs() {
-    return static_cast<ClientSession*>(core::Sessions::get().session())->inputs();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->view()->inputs();
 }
 
-view::StarSystem* view() {
+view::StarSystemViewer* view() {
     return static_cast<ClientSession*>(core::Sessions::get().session())->view();
 }
 

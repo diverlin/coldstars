@@ -46,6 +46,9 @@ void Sessions::add(BaseSession* session)
 }
 
 void Sessions::activate(int id) {
+    if (m_active == id) {
+        return;
+    }
     auto it = m_sessions.find(id);
     if (it == m_sessions.end()) {
         ceti::abort("attempt to activate id =" + std::to_string(id) + " which doesn't exists");

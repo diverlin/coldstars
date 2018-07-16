@@ -22,7 +22,6 @@
 
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/view/StarSystem.hpp>
-#include <client/resources/GuiTextureObCollector.hpp>
 #include <client/pilot/Player.hpp>
 
 #include <jeti/Render.hpp>
@@ -35,51 +34,47 @@
 ClientSession::ClientSession(int id, bool use_graphic)
     :
       core::BaseSession(id)
-    , m_use_graphic(use_graphic)
+    , m_useGraphic(use_graphic)
 {
-    if (m_use_graphic) {
-        m_camera = new jeti::Camera;
-        m_render = new jeti::Render(m_camera);
-        m_screen = new jeti::Screen;
-        m_inputs = new gui::UserInputInSpace;
-    }
-
-    m_player = new client::Player(id);
 }
 
 ClientSession::~ClientSession()
 {
-    delete m_render;
-    delete m_camera;
-    delete m_screen;
-    delete m_inputs;
+//    delete m_render;
+//    delete m_camera;
+//    delete m_screen;
+//    delete m_inputs;
     delete m_view;
     delete m_player;
 }
 
 void
 ClientSession::init(bool save) {
-    if (m_init) {
+    if (m_initialized) {
         return;
     }
 
     srand(time(0));
 
-    if (m_use_graphic) {
+    if (m_useGraphic) {
+//        m_screen = new jeti::Screen;
+//        m_camera = new jeti::Camera;
+//        m_render = new jeti::Render(m_camera);
+//        m_inputs = new gui::UserInputInSpace;
+
         /// in a name of god don't change order below
-        m_screen->init();
-        m_render->init(m_screen->width(), m_screen->height());
+        //assert(false);
     }
 
     core::Data data(save);
 
-    if (m_use_graphic) {
-        gui::MaterialCollector::get().load();
+    m_player = new client::Player(id(), m_useGraphic);
 
-        m_view = new view::StarSystem(*m_render, *m_screen);
+    if (m_useGraphic) {
+        m_view = new view::StarSystemViewer;
+        m_player->initGraphic(); // run it after view
     }
-    ///
 
-    m_init = true;
+    m_initialized = true;
 }
 

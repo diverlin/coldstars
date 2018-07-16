@@ -21,8 +21,6 @@
 
 #include <core/pilot/Player.hpp>
 
-#include <client/pilot/Show.hpp>
-
 #include <client/gui/Cursor.hpp>
 
 #include <jeti/Render.hpp>
@@ -58,10 +56,10 @@ namespace client {
 class Player : public core::Player
 {
 public:
-    Player(int_t, bool graphic = false);
+    Player(int_t, bool graphic=true);
     ~Player();
 
-    Show& show() { return m_show; }
+    void initGraphic();
 
     bool isAnyWeaponSelected() const;
 
@@ -95,8 +93,8 @@ public:
     void pressRightMouseButtonEvent();
 
 private:
+    bool m_useGraphic = true;
     gui::Cursor* m_cursor = nullptr;
-    Show m_show;
 
     bool m_blockSpaceNavigation = false;
 

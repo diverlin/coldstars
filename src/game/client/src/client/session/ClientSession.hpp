@@ -21,22 +21,9 @@
 
 #include <core/session/BaseSession.hpp>
 
-namespace gui {
-class UserInputInSpace;
-}
-
-namespace type {
-class Collector;
-} // namespace type
-
-namespace jeti {
-class Render;
-class Camera;
-class Screen;
-} // namespace jeti
 
 namespace view {
-class StarSystem;
+class StarSystemViewer;
 } // namespace view
 
 namespace client {
@@ -51,24 +38,14 @@ public:
     void init(bool) override final;
 
     client::Player* player() const { return m_player; }
-
-    jeti::Render* render() const { assert(m_use_graphic); return m_render; }
-    jeti::Camera* camera() const { assert(m_use_graphic); return m_camera; }
-    jeti::Screen* screen() const { assert(m_use_graphic); return m_screen; }
-    view::StarSystem* view() const { assert(m_use_graphic); return m_view; }
-    gui::UserInputInSpace* inputs() const { assert(m_use_graphic); return m_inputs; }
+    view::StarSystemViewer* view() const { assert(m_view); return m_view; }
 
 private:
-    bool m_use_graphic = true;
-    bool m_init = false;
+    bool m_useGraphic = true;
+    bool m_initialized = false;
 
-    jeti::Camera* m_camera = nullptr;
-    jeti::Render* m_render = nullptr;
-    jeti::Screen* m_screen = nullptr;
-    view::StarSystem* m_view = nullptr;
+    view::StarSystemViewer* m_view = nullptr;
     client::Player* m_player = nullptr;
-
-    gui::UserInputInSpace* m_inputs = nullptr;
 };
 
 

@@ -143,6 +143,7 @@ int main()
 {
     core::Server server;
     client::Client client(1);
+    client.connect();
 
     //client::shortcuts::screen()->window().close()
 

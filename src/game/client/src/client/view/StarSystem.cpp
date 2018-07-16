@@ -20,6 +20,8 @@
 
 #include "Base.hpp"
 
+#include <client/resources/GuiTextureObCollector.hpp>
+
 #include <core/type/MeshType.hpp>
 #include <core/common/constants.hpp>
 #include <core/world/starsystem.hpp>
@@ -63,6 +65,7 @@
 
 #include <ceti/Collision.hpp>
 
+#include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
 #include <client/gui/info/starsystem.hpp>
 #include <client/gui/info/Camera.hpp>
@@ -81,29 +84,49 @@ class Screen;
 
 namespace view {
 
-StarSystem::StarSystem(jeti::Render& render, jeti::Screen& screen)
+StarSystemViewer::StarSystemViewer()
     :
-      m_render(render)
-    , m_camera(*render.camera())
-    , m_guiDemo(new gui::Demo(&screen))
-    , m_distantStars(::effect::genDistantStars())
-    , m_distantNebulas(::effect::genDistantNebulas())
-//    , m_lastTime(std::chrono::steady_clock::now())
+      m_screen(new jeti::Screen)
+    , m_camera(new jeti::Camera)
+    , m_render(new jeti::Render(m_camera))
+    , m_inputs(new gui::UserInputInSpace)
+    , m_guiDemo(new gui::Demo(m_screen))
 {
+    m_screen->init();
+    m_render->init(m_screen->width(), m_screen->height());
+
+    gui::MaterialCollector::get().load();
+
+    m_distantStars = ::effect::genDistantStars();
+    m_distantNebulas = ::effect::genDistantNebulas();
+
+    bool debug = false;
+    if (debug) {
+        m_show.setStar(false);
+        m_show.setStars(false);
+        m_show.setNebulas(false);
+        m_show.setSpaceobjects(false);
+        m_show.setCollisionRadius(false);
+        m_show.setAxis(false);
+        m_show.setHud(false);
+        m_show.setExperimental(true);
+    } else {
+        m_show.setExperimental(false);
+    }
 }
 
-StarSystem::~StarSystem()
+StarSystemViewer::~StarSystemViewer()
 {}                                    
 
 void
-StarSystem::add(std::shared_ptr<jeti::particlesystem::Base> ps, const glm::vec3& center)
+StarSystemViewer::add(std::shared_ptr<jeti::particlesystem::Base> ps, const glm::vec3& center)
 {
     ps->setCenter(center);
     m_particlesystems.push_back(ps);
 }
 
 void
-StarSystem::__updateVisible(core::control::StarSystem* starsystem)
+StarSystemViewer::__updateVisible(core::control::StarSystem* starsystem)
 {
     __clear();
 
@@ -177,10 +200,10 @@ StarSystem::__updateVisible(core::control::StarSystem* starsystem)
     {
         // update ui
         auto info = m_guiDemo->infoCamera();
-        info->setLookFrom(ceti::to_string(m_render.camera()->position()));
-        info->setLookAt(ceti::to_string(m_render.camera()->target()));
-        info->setUp(ceti::to_string(m_render.camera()->up()));
-        info->setSpeed(ceti::to_string(m_render.camera()->speed()));
+        info->setLookFrom(ceti::to_string(m_render->camera()->position()));
+        info->setLookAt(ceti::to_string(m_render->camera()->target()));
+        info->setUp(ceti::to_string(m_render->camera()->up()));
+        info->setSpeed(ceti::to_string(m_render->camera()->speed()));
     }
 
     {
@@ -190,14 +213,18 @@ StarSystem::__updateVisible(core::control::StarSystem* starsystem)
         info->setZFar(std::to_string(jeti::ZFAR));
         info->setScreenQuadZ(std::to_string(jeti::SCREEN_QUAD_ZPOS));
 
-        info->setScale(std::to_string(m_render.scaleBase()));
-        info->setWidth(ceti::to_string(m_render.width()));
-        info->setHeight(ceti::to_string(m_render.height()));
+        info->setScale(std::to_string(m_render->scaleBase()));
+        info->setWidth(ceti::to_string(m_render->width()));
+        info->setHeight(ceti::to_string(m_render->height()));
+    }
+
+    if (!m_player) {
+        return;
     }
 
     {
         // update ui
-        m_guiDemo->updateFps(m_render.fps());
+        m_guiDemo->updateFps(m_render->fps());
 
         const glm::vec3 screen_coord = glm::vec3(m_player->cursor().mouseData().screenCoord(), 0.0f);
         const glm::vec3 world_coord = m_player->cursor().mouseData().worldCoord();
@@ -206,7 +233,7 @@ StarSystem::__updateVisible(core::control::StarSystem* starsystem)
         m_guiDemo->setMousePosWorldCoord(world_coord.x, world_coord.y);
 
         Base* view = mouseInterraction(screen_coord);
-        m_player->update(m_render, view);
+        m_player->update(*m_render, view);
 
         if (view) {
             m_guiDemo->windowObjectProperties()->Show(true);
@@ -220,7 +247,7 @@ StarSystem::__updateVisible(core::control::StarSystem* starsystem)
     }
 }
 
-void StarSystem::__clear()
+void StarSystemViewer::__clear()
 {
     // entities
     m_stars.clear();
@@ -268,14 +295,14 @@ void StarSystem::__clear()
     //
 }
 
-void StarSystem::__applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
+void StarSystemViewer::__applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
 {
     jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::rand::gen_float(0.001, 0.01));
     view->setAnimationRotation(animation);
 }
 
 bool
-StarSystem::__addIfVisible(core::control::Star* star)
+StarSystemViewer::__addIfVisible(core::control::Star* star)
 {
     assert(star);
     if (!__isObjectOnScreen(star)) {
@@ -296,7 +323,7 @@ StarSystem::__addIfVisible(core::control::Star* star)
 }
 
 bool
-StarSystem::__addIfVisible(core::control::Planet* planet)
+StarSystemViewer::__addIfVisible(core::control::Planet* planet)
 {
     assert(planet);
     if (!__isObjectOnScreen(planet)) {
@@ -317,7 +344,7 @@ StarSystem::__addIfVisible(core::control::Planet* planet)
 }
 
 bool
-StarSystem::__addIfVisible(core::control::Asteroid* asteroid)
+StarSystemViewer::__addIfVisible(core::control::Asteroid* asteroid)
 {
     assert(asteroid);
     if (!__isObjectOnScreen(asteroid)) {
@@ -342,14 +369,16 @@ StarSystem::__addIfVisible(core::control::Asteroid* asteroid)
 
 
 bool
-StarSystem::__addIfVisible(core::control::Ship* ship)
+StarSystemViewer::__addIfVisible(core::control::Ship* ship)
 {
     assert(ship);
     if (!__isObjectOnScreen(ship)) {
         return false;
     }
-    if (!ceti::isPointInCircle(ship->position(), m_player->position(), m_player->radius())) {
-        return false;
+    if (m_player) {
+        if (!ceti::isPointInCircle(ship->position(), m_player->position(), m_player->radius())) {
+            return false;
+        }
     }
 
     Base* view = m_cache.get(ship->id());
@@ -366,7 +395,7 @@ StarSystem::__addIfVisible(core::control::Ship* ship)
 }
 
 bool
-StarSystem::__addIfVisible(core::control::SpaceStation* spacestation)
+StarSystemViewer::__addIfVisible(core::control::SpaceStation* spacestation)
 {
     assert(spacestation);
     if (!__isObjectOnScreen(spacestation)) {
@@ -389,7 +418,7 @@ StarSystem::__addIfVisible(core::control::SpaceStation* spacestation)
 }
 
 bool
-StarSystem::__addIfVisible(core::control::Satellite* satellite)
+StarSystemViewer::__addIfVisible(core::control::Satellite* satellite)
 {
     assert(satellite);
     if (!__isObjectOnScreen(satellite)) {
@@ -411,7 +440,7 @@ StarSystem::__addIfVisible(core::control::Satellite* satellite)
     return true;
 }
 
-bool StarSystem::__addIfVisible(core::control::Container* container)
+bool StarSystemViewer::__addIfVisible(core::control::Container* container)
 {
     assert(container);
     if (!__isObjectOnScreen(container)) {
@@ -434,7 +463,7 @@ bool StarSystem::__addIfVisible(core::control::Container* container)
     return true;
 }
 
-bool StarSystem::__addIfVisible(core::control::Bullet* bullet)
+bool StarSystemViewer::__addIfVisible(core::control::Bullet* bullet)
 {
     assert(bullet);
     if (!__isObjectOnScreen(bullet)) {
@@ -456,7 +485,7 @@ bool StarSystem::__addIfVisible(core::control::Bullet* bullet)
     return true;
 }
 
-bool StarSystem::__addIfVisible(core::control::WormHole* wormhole)
+bool StarSystemViewer::__addIfVisible(core::control::WormHole* wormhole)
 {
     assert(wormhole);
     if (!__isObjectOnScreen(wormhole)) {
@@ -500,7 +529,7 @@ bool StarSystem::__addIfVisible(core::control::WormHole* wormhole)
 
 
 void
-StarSystem::__createBeam()
+StarSystemViewer::__createBeam()
 {
     if (m_beams.size()>=1) {
         return;
@@ -524,7 +553,7 @@ StarSystem::__createBeam()
 }
 
 void
-StarSystem::__createText()
+StarSystemViewer::__createText()
 {
     if (m_texts.size()>=10) {
         return;
@@ -545,7 +574,7 @@ StarSystem::__createText()
 }
 
 void
-StarSystem::__createExplosion()
+StarSystemViewer::__createExplosion()
 {
     if (m_particlesystems.size()>=0) {
         return;
@@ -561,10 +590,10 @@ StarSystem::__createExplosion()
 }
 
 bool
-StarSystem::__addIfVisible(std::shared_ptr<jeti::particlesystem::Base> ps)
+StarSystemViewer::__addIfVisible(std::shared_ptr<jeti::particlesystem::Base> ps)
 {
-    m_render.toScreenCoord(ps->center(), m_tmpScreenCoord);
-    if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render.size(), m_render.scaleBase())) {
+    m_render->toScreenCoord(ps->center(), m_tmpScreenCoord);
+    if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render->size(), m_render->scaleBase())) {
         return false;
     }
     if (!ceti::isPointInCircle(ps->center(), m_player->position(), m_player->radius())) {
@@ -576,7 +605,7 @@ StarSystem::__addIfVisible(std::shared_ptr<jeti::particlesystem::Base> ps)
 }
 
 bool
-StarSystem::__addIfVisible(::effect::Beam* effect)
+StarSystemViewer::__addIfVisible(::effect::Beam* effect)
 {
 //    m_render.toScreenCoord(ps->center(), m_tmpScreenCoord);
 //    if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render.size(), m_render.scaleBase())) {
@@ -591,7 +620,7 @@ StarSystem::__addIfVisible(::effect::Beam* effect)
 }
 
 bool
-StarSystem::__addIfVisible(::effect::Text* text)
+StarSystemViewer::__addIfVisible(::effect::Text* text)
 {
 //    if (isPointOnVisibleScreenArea(effect->center(), data.screen.worldcoord)) {
 //        m_texts.push_back(effect);
@@ -601,7 +630,7 @@ StarSystem::__addIfVisible(::effect::Text* text)
 }
 
 /// visible entities
-void StarSystem::__add(Base* view)
+void StarSystemViewer::__add(Base* view)
 {
     switch(view->type()) {
     case entity::Type::STAR: {
@@ -657,47 +686,47 @@ void StarSystem::__add(Base* view)
     }
 }
 
-void StarSystem::__add(Star* view)
+void StarSystemViewer::__add(Star* view)
 {
     m_stars.push_back(view);
 }
 
-void StarSystem::__add(Planet* view)
+void StarSystemViewer::__add(Planet* view)
 {
     m_planets.push_back(view);
 }
 
-void StarSystem::__add(Asteroid* view)
+void StarSystemViewer::__add(Asteroid* view)
 {
     m_asteroids.push_back(view);
 }
 
-void StarSystem::__add(Container* view)
+void StarSystemViewer::__add(Container* view)
 {
     m_containers.push_back(view);
 }
 
-void StarSystem::__add(Bullet* view)
+void StarSystemViewer::__add(Bullet* view)
 {
     m_bullets.push_back(view);
 }
 
-void StarSystem::__add(WormHole* view)
+void StarSystemViewer::__add(WormHole* view)
 {
     m_wormholes.push_back(view);
 }
 
-void StarSystem::__add(Ship* view)
+void StarSystemViewer::__add(Ship* view)
 {
     m_ships.push_back(view);
 }
 
-void StarSystem::__add(SpaceStation* view)
+void StarSystemViewer::__add(SpaceStation* view)
 {
     m_spacestations.push_back(view);
 }
 
-void StarSystem::__add(Satellite* view)
+void StarSystemViewer::__add(Satellite* view)
 {
     m_satellites.push_back(view);
 }
@@ -708,16 +737,16 @@ void StarSystem::__add(Satellite* view)
 //    m_shockwaves.push_back(view);
 //}
 
-void StarSystem::__renderBackground(jeti::Render& render) const {
-    if (!m_player->show().background()) {
+void StarSystemViewer::__renderBackground(jeti::Render& render) const {
+    if (!m_show.background()) {
         return;
     }
 
-    if (m_player->show().backgroundFbo()) {
+    if (m_show.backgroundFbo()) {
         render.fboBackGround().activate(render.size().x, render.size().y);
     }
 
-    if (m_player->show().nebulas()) {
+    if (m_show.nebulas()) {
         // projection
         render.applyOrthogonalProjection();
         //render.applyPerspectiveProjection();
@@ -725,19 +754,19 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
         m_distantNebulas->update();
         m_distantNebulas->draw(render);
     }
-    if (m_player->show().stars()) {
+    if (m_show.stars()) {
         // projection
         render.applyPerspectiveProjection();
 
         m_distantStars->draw(render);
     }
-    if (m_player->show().backgroundFbo()) {
+    if (m_show.backgroundFbo()) {
         render.fboBackGround().deactivate();
     }
 }
 
-void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
-    if (!m_player->show().star()) {
+void StarSystemViewer::__renderStarPostEffect(jeti::Render& render) const {
+    if (!m_show.star()) {
         return;
     }
 
@@ -747,8 +776,8 @@ void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
     render.drawStar(render.fboBackGround().colorBuffer());
 }
 
-void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
-    if (!m_player->show().spaceobjects()) {
+void StarSystemViewer::__renderSpaceObjects(jeti::Render& render) const {
+    if (!m_show.spaceobjects()) {
         return;
     }
 
@@ -808,28 +837,30 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
     //
 
-    m_player->cursor().renderFocusedObjectStuff(render);
+    if (m_player) {
+        m_player->cursor().renderFocusedObjectStuff(render);
+    }
 }
 
 
-void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
-    if (!m_player->show().spaceobjects_meta()) {
+void StarSystemViewer::__renderSpaceObjectsMeta(jeti::Render& render) const {
+    if (!m_show.spaceobjects_meta()) {
         return;
     }
 
     // projection
     render.applyOrthogonalProjection();
 
-    if (m_player->show().collisionRadius()) {
+    if (m_show.collisionRadius()) {
         __drawCollisionRadius(render);
     }
-    if (m_player->show().axis()) {
+    if (m_show.axis()) {
         __drawAxis(render);
     }
 }
 
-void StarSystem::__renderHUD(jeti::Render& render) const {
-    if (!m_player->show().hud()) {
+void StarSystemViewer::__renderHUD(jeti::Render& render) const {
+    if (!m_show.hud()) {
         return;
     }
 
@@ -839,7 +870,7 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
     }
 }
 
-void StarSystem::__renderTexts(jeti::Render& render) const {
+void StarSystemViewer::__renderTexts(jeti::Render& render) const {
     // texts
     for(::effect::Text* text: m_texts) {
         text->update();
@@ -848,14 +879,14 @@ void StarSystem::__renderTexts(jeti::Render& render) const {
 
     window.pushGLStates();
     for(::effect::Text* text: m_visible_texts) {
-        text->draw(window, m_camera.position());
+        text->draw(window, m_camera->position());
     }
     window.popGLStates();
     //
 }
 
-void StarSystem::__renderExperiment(jeti::Render& render) const {
-    if (!m_player->show().experimental()) {
+void StarSystemViewer::__renderExperiment(jeti::Render& render) const {
+    if (!m_show.experimental()) {
         return;
     }
 
@@ -863,7 +894,7 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
     render.applyOrthogonalProjection();
 }
 
-void StarSystem::__render(jeti::Render& render)
+void StarSystemViewer::__render(jeti::Render& render)
 {
     render.clearColorAndDepthBuffers();
 
@@ -877,7 +908,7 @@ void StarSystem::__render(jeti::Render& render)
 }
 
 Base*
-StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
+StarSystemViewer::mouseInterraction(const glm::vec3& mouse_pos) const
 {
     if (!m_allowInterraction) {
         return nullptr;
@@ -932,14 +963,16 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
     return nullptr;
 }
 
-void StarSystem::update(const glm::vec3& camera_accel)
+void StarSystemViewer::update(const glm::vec3& camera_accel)
 {
-    m_allowInterraction = !gui::Manager::get().vehicle()->isActive();
-    m_camera.addSpeed(camera_accel);
-    m_camera.update();
+    if (gui::Manager::get().vehicle()) {
+        m_allowInterraction = !gui::Manager::get().vehicle()->isActive();
+    }
+    m_camera->addSpeed(camera_accel);
+    m_camera->update();
 }
 
-void StarSystem::render(core::control::StarSystem* starsystem)
+void StarSystemViewer::draw(core::control::StarSystem* starsystem)
 {   
 //    const auto now_time = std::chrono::steady_clock::now();
 //    float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
@@ -952,10 +985,10 @@ void StarSystem::render(core::control::StarSystem* starsystem)
 
     assert(starsystem);
 
-    m_render.update();
+    m_render->update();
 
     __updateVisible(starsystem);
-    __render(m_render);
+    __render(*m_render);
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();
@@ -993,9 +1026,9 @@ void StarSystem::render(core::control::StarSystem* starsystem)
     //resizeGl(w, h);
 } 
 
-void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
+void StarSystemViewer::__drawCollisionRadius(const jeti::Render& render) const
 {
-    if (!m_player->show().collisionRadius()) {
+    if (!m_show.collisionRadius()) {
         return;
     }
 
@@ -1012,9 +1045,9 @@ void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
     for(const WormHole* wormHole: m_wormholes)      { wormHole->drawCollisionRadius(render); }
 }
 
-void StarSystem::__drawAxis(const jeti::Render& render) const
+void StarSystemViewer::__drawAxis(const jeti::Render& render) const
 {
-    if (!m_player->show().axis()) {
+    if (!m_show.axis()) {
         return;
     }
 
@@ -1040,7 +1073,7 @@ void StarSystem::__drawAxis(const jeti::Render& render) const
 
 
 
-void StarSystem::__render_DEPRECATED(jeti::Render& render)
+void StarSystemViewer::__render_DEPRECATED(jeti::Render& render)
 {
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -1245,16 +1278,16 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
 }
 
 bool
-StarSystem::__isObjectOnScreen(ceti::control::Orientation* orientation) const
+StarSystemViewer::__isObjectOnScreen(ceti::control::Orientation* orientation) const
 {
-    m_render.toScreenCoord(orientation->position(), m_tmpScreenCoord);
-    return isObjectOnScreen(m_tmpScreenCoord, orientation->size(), m_render.size(), m_render.scaleBase());
+    m_render->toScreenCoord(orientation->position(), m_tmpScreenCoord);
+    return isObjectOnScreen(m_tmpScreenCoord, orientation->size(), m_render->size(), m_render->scaleBase());
 }
 
-bool StarSystem::__isPointInsideObject(const glm::vec3& p, ceti::control::Orientation* orientation) const {
-    m_render.toScreenCoord(orientation->position(), m_tmpScreenCoord);
+bool StarSystemViewer::__isPointInsideObject(const glm::vec3& p, ceti::control::Orientation* orientation) const {
+    m_render->toScreenCoord(orientation->position(), m_tmpScreenCoord);
     glm::vec3 diff(m_tmpScreenCoord-p);
-    if (glm::length(diff) < orientation->collisionRadius()/m_render.scaleBase()) {
+    if (glm::length(diff) < orientation->collisionRadius()/m_render->scaleBase()) {
         return true;
     }
     return false;

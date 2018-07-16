@@ -66,10 +66,10 @@ void Descriptors::init()
        __save();
     }
 
-//#ifdef USE_FAILBACK_RESOURCES
-//    __resolveId(m_meshes->failback());
-//    __resolveId(m_materials->failback());
-//#endif // USE_FAILBACK_RESOURCES
+#ifdef USE_FAILBACK_RESOURCES
+    __resolveId(m_meshes->failback());
+    __resolveId(m_materials->failback());
+#endif // USE_FAILBACK_RESOURCES
 }
 
 void

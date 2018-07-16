@@ -19,6 +19,7 @@
 #pragma once
 
 #include <client/view/Cache.hpp>
+#include <client/pilot/Show.hpp>
 
 #include <ceti/type/IdType.hpp>
 #include <ceti/rect.hpp>
@@ -42,7 +43,8 @@ class Orientation;
 
 namespace gui {
 class Demo;
-} // naemspace gui
+class UserInputInSpace;
+} // namespace gui
 
 namespace jeti {
 class Render;
@@ -100,21 +102,30 @@ class VerticalFlowText;
 
 namespace view {
 
-class StarSystem
+class StarSystemViewer
 {
 public:
-    StarSystem(jeti::Render&, jeti::Screen&);
-    ~StarSystem();
+    StarSystemViewer();
+    ~StarSystemViewer();
+
+    bool isOpened() const { return true; }
 
     client::Player* player() const { return m_player; }
 
     void setPlayer(client::Player* player) { m_player = player; }
     Base* mouseInterraction(const glm::vec3&) const;
 
-    void update(const glm::vec3&);
-    void render(core::control::StarSystem*);
+    void update(const glm::vec3& = glm::vec3(0.0f));
+    void draw(core::control::StarSystem*);
 
     void add(std::shared_ptr<jeti::particlesystem::Base>, const glm::vec3&);
+
+    Show& show() { return m_show; }
+
+    jeti::Screen* screen() const { return m_screen; }
+    jeti::Render* renderer() const { return m_render; }
+    jeti::Camera* camera() const { return m_camera; }
+    gui::UserInputInSpace* inputs() const { return m_inputs; }
 
     // effects
 //    void add(jeti::BaseParticleSystem*);
@@ -131,9 +142,17 @@ public:
 
 private:
     bool m_allowInterraction = true;
+    Show m_show;
 
-    jeti::Render& m_render;
-    jeti::Camera& m_camera;
+//    std::unique_ptr<jeti::Screen> m_screen = nullptr;
+//    std::unique_ptr<jeti::Render> m_render = nullptr;
+//    std::unique_ptr<jeti::Camera> m_camera = nullptr;
+//    std::unique_ptr<gui::UserInputInSpace> m_inputs = nullptr;
+
+    jeti::Screen* m_screen = nullptr;
+    jeti::Camera* m_camera = nullptr;
+    jeti::Render* m_render = nullptr;
+    gui::UserInputInSpace* m_inputs = nullptr;
 
     gui::Demo* m_guiDemo = nullptr;
     ::effect::DistantStars* m_distantStars = nullptr;
@@ -221,13 +240,13 @@ private:
     bool __isObjectOnScreen(ceti::control::Orientation*) const;
     bool __isPointInsideObject(const glm::vec3&, ceti::control::Orientation*) const;
 
-    void __renderBackground(jeti::Render& render) const;
-    void __renderStarPostEffect(jeti::Render& render) const;
-    void __renderSpaceObjects(jeti::Render& render) const;
-    void __renderTexts(jeti::Render& render) const;
-    void __renderSpaceObjectsMeta(jeti::Render& render) const;
-    void __renderHUD(jeti::Render& render) const;
-    void __renderExperiment(jeti::Render& render) const;
+    void __renderBackground(jeti::Render& renderer) const;
+    void __renderStarPostEffect(jeti::Render& renderer) const;
+    void __renderSpaceObjects(jeti::Render& renderer) const;
+    void __renderTexts(jeti::Render& renderer) const;
+    void __renderSpaceObjectsMeta(jeti::Render& renderer) const;
+    void __renderHUD(jeti::Render& renderer) const;
+    void __renderExperiment(jeti::Render& renderer) const;
 
 
     void __render_DEPRECATED(jeti::Render&);
