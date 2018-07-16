@@ -21,19 +21,13 @@ int main()
     bool save = true;
     session->init(save);
 
-    core::control::StarSystem* starsystem = core::StarSystemBuilder::gen();
-    core::control::Ship* ship = core::ShipBuilder::gen();
-
-    starsystem->add(ship);
-
     view::StarSystemViewer* viewer = session->view();
-    //view::StarSystemViewer* view = new view::StarSystemViewer;
     assert(viewer);
 
     while(viewer->isOpened()) {
         viewer->update();
-        viewer->draw(starsystem);
-        usleep(20);
+        viewer->draw();
+        usleep(200);
     }
 
     return 0;

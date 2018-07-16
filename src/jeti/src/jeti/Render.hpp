@@ -111,12 +111,18 @@ public:
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
+
+    void drawFlatMeshLight(const control::Material& material,
+                           const glm::mat4& modelMatrix,
+                           const glm::vec4& color = glm::vec4(1.0f)) const;
+
     void drawMeshWithPerlin(const Mesh&,
                             const control::Material&,
                             const glm::mat4&,
                             const glm::vec3& position,
                             const glm::vec3& size,
                             const glm::vec4& color = glm::vec4(1.0f)) const;
+
     void drawMeshWithOnlyPerlin(const Mesh&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMesh_HUD(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshWithLight(const Mesh&, const control::Material&, const glm::mat4&) const;
@@ -161,13 +167,18 @@ public:
     control::Material* materialCollisionRadius() const { return m_materialCollisionRadius; }
     Mesh* quadMesh() const { return m_meshQuad; }
 
+    void drawTestFlatLight(const glm::vec3& center,
+                                   float radius) const;
+
     void drawDebugCircle(const glm::vec3& center,
-                    float radius,
-                    const glm::vec4& color = glm::vec4(1.0f)) const;
+                         float radius,
+                         const glm::vec4& color = glm::vec4(1.0f)) const;
+
     void drawCircle(const control::Material& material,
                     const glm::vec3& center,
                     float radius,
                     const glm::vec4& color = glm::vec4(1.0f)) const;
+
     void drawCircleWithPerlin(const control::Material& material,
                               const glm::vec3& center,
                               float radius,
@@ -208,7 +219,7 @@ private:
 
     // buffer rendering
     mutable glm::mat4 m_translateMatrix;
-//    mutable glm::mat4 m_rotateMatrix;
+    //    mutable glm::mat4 m_rotateMatrix;
     mutable glm::mat4 m_scaleMatrix;
     mutable glm::mat4 m_modelMatrix;
     //

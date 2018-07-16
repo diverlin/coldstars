@@ -263,7 +263,7 @@ void Render::init(int w, int h)
 
     m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
     m_shaders.texturewithperlin = compile_program(SHADERS_PATH+"texturewithperlin.vert", SHADERS_PATH+"texturewithperlin.frag");
-    m_shaders.perlin          = compile_program(SHADERS_PATH+"perlin.vert",         SHADERS_PATH+"perlin.frag");
+    m_shaders.perlin          = compile_program(SHADERS_PATH+"perlin.vert",            SHADERS_PATH+"perlin.frag");
     m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
     m_shaders.black2alpha     = compile_program(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
     m_shaders.shockwave       = compile_program(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
@@ -282,6 +282,7 @@ void Render::init(int w, int h)
     m_shaders.particle_blink  = compile_program(SHADERS_PATH+"particle_blink.vert",    SHADERS_PATH+"particle_blink.frag");
     m_shaders.star            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"star.frag");
     m_shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
+    m_shaders.flatlight       = compile_program(SHADERS_PATH+"flatlight.vert",         SHADERS_PATH+"flatlight.frag");
 
     checkProgramErrors(m_shaders.basetexture);
     checkProgramErrors(m_shaders.texturewithperlin);
@@ -303,6 +304,7 @@ void Render::init(int w, int h)
     checkProgramErrors(m_shaders.particle_blink);
     checkProgramErrors(m_shaders.star);
     checkProgramErrors(m_shaders.starfield);
+    checkProgramErrors(m_shaders.flatlight);
 
     __initPostEffects();
     __makeShortCuts();
@@ -568,6 +570,22 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
     }
 }
 
+void Render::drawFlatMeshLight(const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+{
+    __useProgram(m_shaders.flatlight);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+
+        glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_color"), 1, glm::value_ptr(color));
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.flatlight, "u_texture"), 0);
+
+        __drawMesh(*m_meshQuad);
+    }
+}
 
 void Render::drawMeshWithPerlin(const Mesh& mesh,
                                 const control::Material& material,
@@ -1282,7 +1300,7 @@ void Render::__updateFps()
 {
     const auto now_time = std::chrono::steady_clock::now();
     float milliseconds_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
-    if (milliseconds_diff > 1000.0) {
+    if (milliseconds_diff > 1000.0f) {
         m_fps = m_framesCounter;
         m_framesCounter = 0;
         m_lastTime = now_time;
@@ -1291,9 +1309,18 @@ void Render::__updateFps()
     }
 }
 
+void Render::drawTestFlatLight(const glm::vec3& center, float radius) const
+{
+    m_translateMatrix = glm::translate(center);
+    m_scaleMatrix = glm::scale(glm::vec3(radius, radius, 1.0f));
+    m_modelMatrix = m_translateMatrix * m_scaleMatrix;
+
+    drawFlatMeshLight(*m_materialCollisionRadius, m_modelMatrix);
+}
+
 void Render::drawDebugCircle(const glm::vec3& center,
-                                 float radius,
-                                 const glm::vec4& color) const
+                             float radius,
+                             const glm::vec4& color) const
 {
     drawCircle(*m_materialCollisionRadius, center, radius, color);
 }

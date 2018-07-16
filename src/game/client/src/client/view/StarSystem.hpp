@@ -116,6 +116,7 @@ public:
     Base* mouseInterraction(const glm::vec3&) const;
 
     void update(const glm::vec3& = glm::vec3(0.0f));
+    void draw();
     void draw(core::control::StarSystem*);
 
     void add(std::shared_ptr<jeti::particlesystem::Base>, const glm::vec3&);

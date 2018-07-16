@@ -972,6 +972,25 @@ void StarSystemViewer::update(const glm::vec3& camera_accel)
     m_camera->update();
 }
 
+void StarSystemViewer::draw()
+{
+//    const auto now_time = std::chrono::steady_clock::now();
+//    float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
+//    if (msec_diff < 30) {
+//        return;
+//    }
+
+
+//    m_lastTime = now_time;
+
+    m_render->update();
+    __render();
+
+    m_render->drawTestFlatLight(glm::vec3(0.0f), 500);
+
+    m_screen->draw();
+}
+
 void StarSystemViewer::draw(core::control::StarSystem* starsystem)
 {   
 //    const auto now_time = std::chrono::steady_clock::now();
