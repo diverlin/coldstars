@@ -327,6 +327,7 @@ void Render::init(int w, int h)
 
     {
         auto model = new MaterialModel("data/ship/race1_warrior_10.png");
+        //auto model = new MaterialModel("data/ship/race6_warrior_00.png");
         m_materialDemo = new control::Material(model);
     }
 

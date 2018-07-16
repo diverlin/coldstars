@@ -26,7 +26,7 @@ void main (void)
 
 	float lx = 1.0;
 	float ly = 0.0;
-	float lz = 1.0;
+	float lz = 0.0;
 	//lx = dist*sin(speed*u_time); // [-dist, dist]
 	//ly = dist*cos(speed*u_time); // [-dist, dist]
 	
@@ -45,8 +45,10 @@ void main (void)
 	// Calculate the lighting diffuse value  
 	float diffuse = max(dot(normal, light_pos), 0.0);  
 
-	float avr = (texel.r+texel.g+texel.b)/3;
-	diffuse *= (6*avr);
+	float avr = (texel.r+texel.g+texel.b)/3.0;
+	avr += 0.5;
+	float shiniess_factor = 4.0;
+	diffuse *= (shiniess_factor*avr*avr*avr);
 
 	// apply ambient component
 	color = texel*u_ambientColor;
