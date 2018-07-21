@@ -23,8 +23,10 @@
 
 #include <ceti/type/IdType.hpp>
 #include <ceti/rect.hpp>
+#include <ceti/Pack.hpp>
 
 #include <jeti/Screen.hpp>
+#include <jeti/Material.hpp>
 
 #include <vector>
 #include <map>
@@ -186,6 +188,8 @@ private:
     std::vector<::effect::Beam*> m_visible_beams;
     std::vector<::effect::Text*> m_texts;
     std::vector<::effect::Text*> m_visible_texts;
+
+    ceti::pack<jeti::control::Material*> m_demoMaterials;
 
     void __applyConstantRotationAnimation(const glm::vec3&, Base*);
 

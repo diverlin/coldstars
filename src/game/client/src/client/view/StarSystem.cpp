@@ -990,9 +990,44 @@ void StarSystemViewer::draw()
     m_render->update();
     __render();
 
-    float angle = m_render->time();
-    m_render->drawTestFlatLight(glm::vec3(0.0f), angle, 500);
-    //m_render->drawTestFlatLight(glm::vec3(-250.0f, 0.0f, 0.0f), 500);
+    if (m_demoMaterials.empty()) {
+        m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/race4_trader_01.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/race6_warrior_00.png"));
+
+        m_demoMaterials.add(new jeti::control::Material("data/ship/race0_ranger_00.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/race4_warrior_00.png"));
+
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/1.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/2.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/3.png"));
+
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_10.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_11.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_12.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_13.png"));
+
+        m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid1_sm.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid2_sm.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid3_sm.png"));
+        m_demoMaterials.add(new jeti::control::Material("data/asteroid/Starship.svg.png"));
+    }
+
+    //float angle = m_render->time();
+    float angle = 0;
+
+    glm::vec3 pos(-800, 600, 0);
+    for (auto material: m_demoMaterials) {
+        int scale = 1.0f;
+        int offset = 2*std::max(material->model()->w, material->model()->h);
+        m_render->drawFlatWithLight(*material, pos, angle, scale);
+        pos.x += offset;
+        if (pos.x >= 800) {
+            pos.y -= offset;
+            pos.x = -800;
+        }
+    }
 
     m_screen->draw();
 }

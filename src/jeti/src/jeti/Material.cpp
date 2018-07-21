@@ -21,6 +21,7 @@
 
 #include <meti/RandUtils.hpp>
 #include <ceti/descriptor/Texture.hpp>
+#include <ceti/FsUtils.hpp>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -49,6 +50,10 @@ void loadToVRAM(GLuint& texture, const sf::Uint8* data, int& w, int& h)
 
 void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 {
+    if (path.empty()) {
+        return;
+    }
+
     sf::Image image;
     if (!image.loadFromFile(path)) {
         throw std::runtime_error("FAULT: Not abe to open file:" + path);
@@ -56,8 +61,8 @@ void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 
     image.flipVertically();
 
-    w = image.getSize().x;
-    h = image.getSize().y;
+    w = int(image.getSize().x);
+    h = int(image.getSize().y);
 
     loadToVRAM(texture, image.getPixelsPtr(), w, h);
 }
@@ -74,14 +79,14 @@ void resizeAndLoadToVRAM(const std::string& path, GLuint& texture, int w, int h)
     loadToVRAM(texture, image.getPixelsPtr(), w, h);
 }
 
-void loadToVRAM(GLuint& texture, int& w, int& h)
+void genNewTextureAndLoadToVRAM(GLuint& texture, int& w, int& h)
 {
     std::cout<<"gen new loadToVRAM"<<std::endl;
     sf::Image image;
-    const sf::Color& color = sf::Color(meti::rand::gen_int(50, 256),
-                                       meti::rand::gen_int(50, 256),
-                                       meti::rand::gen_int(50, 256));
-    image.create(w, h, color);
+    const sf::Color& color = sf::Color(sf::Uint8(meti::rand::gen_int(50, 256)),
+                                       sf::Uint8(meti::rand::gen_int(50, 256)),
+                                       sf::Uint8(meti::rand::gen_int(50, 256)));
+    image.create(unsigned(w), unsigned(h), color);
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -97,15 +102,20 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 namespace jeti {
 
 MaterialModel::MaterialModel(const std::string& path)
-    :
-      texture_path(path)
-{}
+{
+    location.diffuse = path;
+    tryFindNormalMap(path);
+}
 
 MaterialModel::MaterialModel(ceti::MaterialDescr* descriptor)
 {
     m_descriptor = descriptor->id();
-    texture_path = descriptor->texturePath();
-    normalmap_path = descriptor->normalmapPath();
+
+    location.diffuse = descriptor->texturePath();
+    location.normalmap = descriptor->normalmapPath();
+    if (location.normalmap.empty()) {
+        tryFindNormalMap(location.diffuse);
+    }
     use_alpha = descriptor->useAlpha();
 
     col_num = descriptor->col();
@@ -115,19 +125,29 @@ MaterialModel::MaterialModel(ceti::MaterialDescr* descriptor)
     brightThreshold = descriptor->brightThreshold();
 }
 
+void MaterialModel::tryFindNormalMap(const std::string& path)
+{
+    std::string normalmap_candidate = ceti::filesystem::add_suffix(path, "_n");
+    if (ceti::filesystem::is_file_exists(normalmap_candidate)) {
+        location.normalmap = normalmap_candidate;
+    } else {
+        std::cout<<"WARNING: normal map missing: "<<normalmap_candidate<<std::endl;
+    }
+}
+
 void MaterialModel::load()
 {
     if (is_loaded) {
         return;
     }
 
-    if (texture_path != "") {
-        loadToVRAM(texture_path, texture, w, h);
+    if (!location.diffuse.empty()) {
+        loadToVRAM(location.diffuse, texture, w, h);
     } else {
-        loadToVRAM(texture, w, h);
+        genNewTextureAndLoadToVRAM(texture, w, h);
     }
-    if (normalmap_path != "") {
-        resizeAndLoadToVRAM(normalmap_path, normalmap, w, h);
+    if (!location.normalmap.empty()) {
+        resizeAndLoadToVRAM(location.normalmap, normalmap, w, h);
     }
 
     is_loaded = true;
@@ -140,13 +160,11 @@ void MaterialModel::unloadFromVRAM()
 
 namespace control {
 
-Material::Material()
+Material::Material(const std::string& path)
     :
-      m_model(new MaterialModel)
+      m_model(new MaterialModel(path))
 {
-    m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
-
-    if ( ((m_model->col_num == 1) and (m_model->row_num == 1)) or (m_model->fps == 0) ) {
+    if ( ((m_model->col_num == 1) && (m_model->row_num == 1)) || (int(m_model->fps) == 0) ) {
         m_model->is_animated = false;
     } else {
         m_model->is_animated = true;
@@ -154,7 +172,7 @@ Material::Material()
 
     load();
 
-    __createTextureCoords(m_model->col_num, m_model->row_num, m_model->fps);
+    __createTextureCoords(m_model->col_num, m_model->row_num, int(m_model->fps));
 
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }
@@ -166,7 +184,7 @@ Material::Material(MaterialModel* model)
     assert(model);
     m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
     
-    if ( ((m_model->col_num == 1) && (m_model->row_num == 1)) || (m_model->fps == 0) ) {
+    if ( ((m_model->col_num == 1) && (m_model->row_num == 1)) || (int(m_model->fps) == 0) ) {
         m_model->is_animated = false;
     } else {
         m_model->is_animated = true;
@@ -174,7 +192,7 @@ Material::Material(MaterialModel* model)
 
     load();
     
-    __createTextureCoords(m_model->col_num, m_model->row_num, m_model->fps);
+    __createTextureCoords(m_model->col_num, m_model->row_num, int(m_model->fps));
     
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }  

@@ -112,7 +112,12 @@ public:
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
 
-    void drawFlatMeshLight(const control::Material& material,
+    void drawFlatWithLight(const control::Material& material,
+                           const glm::vec3& center,
+                           float angle,
+                           float radius) const;
+
+    void drawFlatWithLight(const control::Material& material,
                            const glm::mat4& modelMatrix,
                            float angle,
                            const glm::vec4& color = glm::vec4(1.0f)) const;
@@ -168,10 +173,6 @@ public:
     control::Material* materialCollisionRadius() const { return m_materialCollisionRadius; }
     Mesh* quadMesh() const { return m_meshQuad; }
 
-    void drawTestFlatLight(const glm::vec3& center,
-                           float angle,
-                           float radius) const;
-
     void drawDebugCircle(const glm::vec3& center,
                          float radius,
                          const glm::vec4& color = glm::vec4(1.0f)) const;
@@ -212,8 +213,8 @@ private:
     Mesh* m_meshCircle = nullptr;
     control::Material* m_materialCollisionRadius = nullptr;
     control::Material* m_materialPerlin = nullptr;
-    control::Material* m_materialNormalMap = nullptr;
-    control::Material* m_materialDemo = nullptr;
+//    control::Material* m_materialNormalMap = nullptr;
+//    control::Material* m_materialDemo = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;

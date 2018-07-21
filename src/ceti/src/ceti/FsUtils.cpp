@@ -17,6 +17,7 @@
 */
 
 #include "FsUtils.hpp"
+#include "StringUtils.hpp"
 
 #include <boost/filesystem.hpp>
 
@@ -68,6 +69,25 @@ void touch_file(const std::string& fname)
         create_file(fname);
     }
 }
+
+std::string add_suffix(const std::string& path, const std::string& suffix)
+{
+    std::string result(path);
+    std::string extension(get_extension(result));
+    result = ceti::replace(result, extension, "");
+    result += suffix;
+    result += extension;
+    return result;
+}
+
+std::string get_extension(const std::string& path)
+{
+    unsigned long begin = path.find_last_of('.');
+    unsigned long end = path.length();
+    unsigned long size = end - begin;
+    return path.substr(begin, size);
+}
+
 
 } // namespace filesystem
 } // namespace ceti

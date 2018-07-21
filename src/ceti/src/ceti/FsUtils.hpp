@@ -25,10 +25,12 @@
 namespace ceti {
 namespace filesystem {
 
-std::vector<std::string> getFilesList(const std::string& root, const std::string& ext = ".*");
-bool is_file_exists(const std::string& fname);
-bool create_file(const std::string& fname);
-void touch_file(const std::string& fname);
+std::vector<std::string> getFilesList(const std::string&, const std::string& ext = ".*");
+bool is_file_exists(const std::string&);
+bool create_file(const std::string&);
+void touch_file(const std::string&);
+std::string add_suffix(const std::string&, const std::string&);
+std::string get_extension(const std::string&);
 
 } // namespace filesystem
 } // namespace ceti

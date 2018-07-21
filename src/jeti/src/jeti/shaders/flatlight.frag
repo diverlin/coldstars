@@ -19,43 +19,50 @@ uniform float u_time;
 in vec2 v_texCoord;
 in mat2 v_rotateMat2;
 
+float diffuse_factor(vec3 light_pos, vec3 normal) 
+{
+	light_pos = normalize(light_pos);
+	float diffuse = max(dot(normal, light_pos), 0.0);  
+	return diffuse;
+}
+	
 void main (void)
 {
-	float dist = 0.5;
-	float speed = 10.5;
-
+	float dist = 1.0;
+	float speed = 2.0;
+	
 	float lx = 1.0;
 	float ly = 0.0;
 	float lz = 0.0;
-	//lx = dist*sin(speed*u_time); // [-dist, dist]
-	//ly = dist*cos(speed*u_time); // [-dist, dist]
+	vec3 light_pos = vec3(lx, ly, lz);
+	vec3 light_pos2 = vec3(lx, ly, lz);
 	
+	light_pos.x = dist*sin(speed*u_time); // [-dist, dist]
+	light_pos.y = dist*cos(speed*u_time); // [-dist, dist]
+
+	light_pos2.x = -dist*sin(2*speed*u_time); // [-dist, dist]
+	light_pos2.y = -dist*cos(2*speed*u_time); // [-dist, dist]
+		
 	// Extract color from color map  	  
 	vec4 texel = texture2D(u_texture, v_texCoord.st); 
 	
 	// Extract the normal from the normal map 
-	//vec3 normal = vec3(0.0, 0.0, 1.0);
 	vec3 normal = normalize(texture2D(u_normalmap, v_texCoord.st).rgb * 2.0 - 1.0);
 	vec2 normal2 = v_rotateMat2 * normal.xy;
 	normal = vec3(normal2, normal.z);	  
-
-	// Determine where the light is positioned (this can be set however you like)  
-	vec3 light_pos = normalize(vec3(lx, ly, lz));
 	
-	// Calculate the lighting diffuse value  
-	float diffuse = max(dot(normal, light_pos), 0.0);  
-
-	float avr = (texel.r+texel.g+texel.b)/3.0;
-	avr += 0.5;
-	float shiniess_factor = 4.0;
-	diffuse *= (shiniess_factor*avr*avr*avr);
-
 	// apply ambient component
 	color = texel*u_ambientColor;
 
 	// apply diffuse
-	color += diffuse*texel*u_diffuseColor;
+	float diffuse = diffuse_factor(light_pos, normal);
+	vec4 diffuseColor = vec4(0.0, 0.0, 1.0, 1.0);
+	color += diffuse*texel*diffuseColor;
 
+	float diffuse2 = diffuse_factor(light_pos2, normal);
+	vec4 diffuseColor2 = vec4(1.0, 0.0, 0.0, 1.0);
+	color += diffuse2*texel*diffuseColor2;
+	
 	// Set the output color of our current pixel  	
 	color.a = texel.a;
 }	

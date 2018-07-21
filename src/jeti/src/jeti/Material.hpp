@@ -22,7 +22,6 @@
 #include <jeti/MyGl.hpp>
 
 #include <ceti/type/IdType.hpp>
-//#include <Material.hpp>
 
 #include <glm/glm.hpp>
 
@@ -37,6 +36,11 @@ namespace jeti {
 
 class MaterialModel
 {
+    struct Location {
+        std::string diffuse;
+        std::string normalmap;
+    };
+
 public:
     MaterialModel(const std::string&);
     MaterialModel(ceti::MaterialDescr*);
@@ -74,8 +78,7 @@ public:
     std::vector<glm::vec2> texCoord_topLeft_vec;
     std::vector<glm::vec2> texCoord_topRight_vec;
 
-    std::string texture_path;
-    std::string normalmap_path;
+    Location location;
 
     float brightThreshold = 1.0f;
     int color_id = 0;
@@ -83,6 +86,9 @@ public:
 
     void load();
     void unloadFromVRAM();
+
+private:
+    void tryFindNormalMap(const std::string&);
 };
 
 namespace control {
@@ -90,7 +96,7 @@ namespace control {
 class Material
 {
 public:
-    Material();
+    Material(const std::string&);
     Material(MaterialModel* material);
     ~Material();
 
