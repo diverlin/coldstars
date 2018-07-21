@@ -32,16 +32,16 @@ void main (void)
 	float speed = 2.0;
 	
 	float lx = 1.0;
-	float ly = 0.0;
+	float ly = 1.0;
 	float lz = 0.0;
 	vec3 light_pos = vec3(lx, ly, lz);
 	vec3 light_pos2 = vec3(lx, ly, lz);
 	
-	light_pos.x = dist*sin(speed*u_time); // [-dist, dist]
+	//light_pos.x = dist*sin(speed*u_time); // [-dist, dist]
 	light_pos.y = dist*cos(speed*u_time); // [-dist, dist]
 
 	light_pos2.x = -dist*sin(2*speed*u_time); // [-dist, dist]
-	light_pos2.y = -dist*cos(2*speed*u_time); // [-dist, dist]
+	//light_pos2.y = -dist*cos(2*speed*u_time); // [-dist, dist]
 		
 	// Extract color from color map  	  
 	vec4 texel = texture2D(u_texture, v_texCoord.st); 
@@ -56,11 +56,11 @@ void main (void)
 
 	// apply diffuse
 	float diffuse = diffuse_factor(light_pos, normal);
-	vec4 diffuseColor = vec4(0.0, 0.0, 1.0, 1.0);
+	vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);
 	color += diffuse*texel*diffuseColor;
 
 	float diffuse2 = diffuse_factor(light_pos2, normal);
-	vec4 diffuseColor2 = vec4(1.0, 0.0, 0.0, 1.0);
+	vec4 diffuseColor2 = vec4(1.0, 0.4, 0.4, 1.0);
 	color += diffuse2*texel*diffuseColor2;
 	
 	// Set the output color of our current pixel  	
