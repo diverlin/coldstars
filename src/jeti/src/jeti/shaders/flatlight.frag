@@ -2,11 +2,7 @@
 
 #define FRAG_OUTPUT0 0
 
-layout(location = FRAG_OUTPUT0) out vec4 color;
-	
-uniform mat4 u_modelMatrix;
-uniform mat4 u_projectionViewMatrix;
-uniform mat3 u_normalMatrix;
+layout(location = FRAG_OUTPUT0) out vec4 fragcolor;
 	
 uniform sampler2D u_texture;
 uniform sampler2D u_normalmap;
@@ -52,7 +48,7 @@ void main (void)
 	normal = vec3(normal2, normal.z);	  
 	
 	// apply ambient component
-	color = texel*u_ambientColor;
+	vec4 color = texel*u_ambientColor;
 
 	// apply diffuse
 	float diffuse = diffuse_factor(light_pos, normal);
@@ -65,4 +61,6 @@ void main (void)
 	
 	// Set the output color of our current pixel  	
 	color.a = texel.a;
+	
+	fragcolor = color;
 }	
