@@ -991,11 +991,18 @@ void StarSystemViewer::draw()
     __render();
 
     if (m_demoMaterials.empty()) {
-        jeti::Light& l = m_render->light(jeti::LIGHT0);
-        l.moveCircular(500, 2.0f);
+        jeti::Light& l0 = m_render->addLight(jeti::COLOR_YELLOW);
+        l0.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+        l0.moveCircular(1100, 1.0f);
+
+        jeti::Light& l1 = m_render->addLight(jeti::COLOR_RED);
+        l1.setPosition(glm::vec3(200.0f, -200.0f, 0.0f));
+        l1.moveCircular(500, -1.0f);
+        l1.setRadius(200);
 
         jeti::Light& l2 = m_render->addLight(jeti::COLOR_BLUE);
-        l2.moveCircular(500, -1.0f);
+        l2.setPosition(glm::vec3(1000.0f, 0.0f, 0.0f));
+        l2.useVariadicRadius(100, 1000, 50.0f);
 
         m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
         m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));

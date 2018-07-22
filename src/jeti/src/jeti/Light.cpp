@@ -19,11 +19,14 @@
 
 #include "Light.hpp"
 
-namespace jeti {
+#include <iostream>
 
+namespace jeti {
 
 Light::Light(const glm::vec4& color, float ambient_factor)
 {
+    setRadius(999999.0f);
+
     m_ambient = glm::vec4(ambient_factor*color.r, ambient_factor*color.b, ambient_factor*color.g, 1.0f);
     m_diffuse = color;
 //    m_specular    = glm::vec4(1.5f); // visual artefact
@@ -31,27 +34,42 @@ Light::Light(const glm::vec4& color, float ambient_factor)
     m_attenuation = glm::vec3(0.1f);
 }
 
+float Light::attenuationFactor(float distance) const
+{
+    float attenuation = 1.0f-float(std::pow(distance/radius(), 2));
+    attenuation = std::max(attenuation, 0.0f);
+    return attenuation;
+}
+
 void Light::setPosition(const glm::vec3& position)
 {
-    m_center = position;
+    m_positionOrig = position;
     m_position = position;
     m_type = Type::STATIC;
+}
+
+void Light::useVariadicRadius(float min, float max, float speed)
+{
+    m_radius = min;
+    m_radiusMin = min;
+    m_radiusMax = max;
+    m_radiusSpeed = speed;
+    m_useVariadicRadius = true;
 }
 
 void Light::moveLinear(float radius, float speed, const glm::vec3& dir)
 {
     m_type = Type::MOVE_LINEAR;
-    m_radius = radius;
+    m_amplitude = radius;
     m_speed = speed;
     m_moveDir = dir;
 }
 
-void Light::moveCircular(float radius, float speed)
+void Light::moveCircular(float amplitude, float speed)
 {
     m_type = Type::MOVE_CIRCULAR;
-    m_radius = radius;
+    m_amplitude = amplitude;
     m_speed = speed;
-    m_moveDir = m_moveDir;
 }
 
 void Light::update(float time)
@@ -59,17 +77,25 @@ void Light::update(float time)
     switch(m_type) {
     case Type::MOVE_LINEAR:
         m_position += m_speed*m_moveDir;
-        if (glm::length(m_position - m_center) > m_radius) {
+        if (glm::length(m_position - m_positionOrig) > m_amplitude) {
             m_moveDir *= -1;
         }
         break;
     case Type::MOVE_CIRCULAR:
-        m_position.x = m_radius*glm::sin(m_speed*time);
-        m_position.y = m_radius*glm::cos(m_speed*time);
+        m_position.x = m_positionOrig.x + m_amplitude*glm::sin(m_speed*time);
+        m_position.y = m_positionOrig.y + m_amplitude*glm::cos(m_speed*time);
         break;
     case Type::STATIC:
         break;
     }
+
+    if (m_useVariadicRadius) {
+
+        float factor = (1.0f + glm::cos(time*m_radiusSpeed)); //[0.0, 2.0]
+        factor /= 2.0f; //[0.0, 1.0]
+        m_radius = m_radiusMin+factor*m_radiusMax;
+    }
+    //std::cout<<m_radius<<std::endl;
 }
 
 } // namespace jeti
