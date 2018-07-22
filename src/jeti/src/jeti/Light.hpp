@@ -23,13 +23,44 @@
 
 namespace jeti {
 
-struct Light
+class Light
 {      
-    glm::vec3 position;
-    glm::vec4 ambient;
-    glm::vec4 diffuse;
-    glm::vec4 specular;
-    glm::vec3 attenuation;
+public:
+    Light(const glm::vec4& color, float ambient_factor=0.4f);
+    ~Light() = default;
+
+    bool isActive() const { return m_isActive; }
+
+    void setPosition(const glm::vec3& position);
+    void moveLinear(float radius, float speed, const glm::vec3& dir = glm::vec3(1.0f, 0.0f, 0.0f));
+    void moveCircular(float radius, float speed);
+    void update(float time);
+
+    const glm::vec4 ambient() const { return m_ambient; }
+    const glm::vec4 diffuse() const { return m_diffuse; }
+    const glm::vec4 specular() const { return m_specular; }
+    const glm::vec3 attenuation() const { return m_attenuation; }
+    const glm::vec3 position() const { return m_position; }
+
+    bool operator==(const Light&) const { return false; } // to be able to use with ceti::pack
+
+private:
+    enum class Type : int { STATIC, MOVE_LINEAR, MOVE_CIRCULAR };
+
+    bool m_isActive = false;
+
+    glm::vec4 m_ambient;
+    glm::vec4 m_diffuse;
+    glm::vec4 m_specular;
+    glm::vec3 m_attenuation;
+
+    glm::vec3 m_center;
+    glm::vec3 m_position;
+
+    Type m_type = Type::STATIC;
+    float m_speed = 0.0f;
+    float m_radius = 0.0f;
+    glm::vec3 m_moveDir = glm::vec3(1.0, 0.0, 0.0);
 };
 
 } // namespace jeti

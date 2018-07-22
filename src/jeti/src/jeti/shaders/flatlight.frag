@@ -2,13 +2,20 @@
 
 #define FRAG_OUTPUT0 0
 
-layout(location = FRAG_OUTPUT0) out vec4 fragcolor;
+layout(location = FRAG_OUTPUT0) out vec4 fragColor;
 	
 uniform sampler2D u_texture;
 uniform sampler2D u_normalmap;
 
-uniform vec4 u_ambientColor;
-uniform vec4 u_diffuseColor;
+uniform vec4 u_light0_ambient;
+
+uniform vec4 u_light0_diffuse;
+uniform vec4 u_light1_diffuse;
+uniform vec4 u_light2_diffuse;
+
+uniform vec3 u_light0_pos;
+uniform vec3 u_light1_pos;
+uniform vec3 u_light2_pos;
 
 uniform float u_time;
 
@@ -24,21 +31,6 @@ float diffuse_factor(vec3 light_pos, vec3 normal)
 	
 void main (void)
 {
-	float dist = 1.0;
-	float speed = 2.0;
-	
-	float lx = 1.0;
-	float ly = 1.0;
-	float lz = 0.0;
-	vec3 light_pos = vec3(lx, ly, lz);
-	vec3 light_pos2 = vec3(lx, ly, lz);
-	
-	//light_pos.x = dist*sin(speed*u_time); // [-dist, dist]
-	light_pos.y = dist*cos(speed*u_time); // [-dist, dist]
-
-	light_pos2.x = -dist*sin(2*speed*u_time); // [-dist, dist]
-	//light_pos2.y = -dist*cos(2*speed*u_time); // [-dist, dist]
-		
 	// Extract color from color map  	  
 	vec4 texel = texture2D(u_texture, v_texCoord.st); 
 	
@@ -48,19 +40,20 @@ void main (void)
 	normal = vec3(normal2, normal.z);	  
 	
 	// apply ambient component
-	vec4 color = texel*u_ambientColor;
+	vec4 color = texel*u_light0_ambient;
 
-	// apply diffuse
-	float diffuse = diffuse_factor(light_pos, normal);
-	vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);
-	color += diffuse*texel*diffuseColor;
+	// apply diffuse components
+	float factor0 = diffuse_factor(u_light0_pos, normal);
+	color += factor0*texel*u_light0_diffuse;
 
-	float diffuse2 = diffuse_factor(light_pos2, normal);
-	vec4 diffuseColor2 = vec4(1.0, 0.4, 0.4, 1.0);
-	color += diffuse2*texel*diffuseColor2;
-	
+	float factor1 = diffuse_factor(u_light1_pos, normal);
+	color += factor1*texel*u_light1_diffuse;
+
+	float factor2 = diffuse_factor(u_light2_pos, normal);
+	color += factor2*texel*u_light2_diffuse;
+		
 	// Set the output color of our current pixel  	
 	color.a = texel.a;
 	
-	fragcolor = color;
+	fragColor = color;
 }	

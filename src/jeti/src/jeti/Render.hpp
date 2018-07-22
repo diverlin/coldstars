@@ -27,6 +27,7 @@
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
 
+#include <ceti/Pack.hpp>
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Box2D.hpp>           // depr
 
@@ -48,6 +49,12 @@ const float ZDEFAULT = 0.0f;
 const float ZNEAR = 1.0f;
 const float ZFAR = 3000.0f;
 
+const glm::vec4 COLOR_YELLOW = glm::vec4(1.0f, 1.0f, 0.6f, 1.0f);
+const glm::vec4 COLOR_RED = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
+const glm::vec4 COLOR_BLUE = glm::vec4(0.6f, 0.6f, 1.0f, 1.0f);
+
+enum { LIGHT0=0, LIGHT1=1, LIGHT2=2 };
+
 class Render : public NonCopyable
 {
     const float SCALE_INIT = 2.5f;
@@ -62,6 +69,12 @@ class Render : public NonCopyable
 public:
     Render(Camera*);
     ~Render();
+
+    Light& light(unsigned long index) { assert(index<m_lights.size()); return m_lights[index]; }
+    const Light& light(unsigned long index) const { assert(index<m_lights.size()); return m_lights[index]; }
+
+    void drawLightsPosition() const;
+    Light& addLight(const glm::vec4& color, float ambient_factor = 0.6f);
 
     void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }
     void setZNear(float zNear) { m_zNear = zNear; }
@@ -84,9 +97,9 @@ public:
     void setSize(int w, int h) { m_size = glm::vec2(w, h); glViewport(0, 0, w, h); }
     void setScaleBase(float scaleBase) { m_scaleBase = scaleBase;}
 
-    void increaseLightPos();
-    void decreaseLightPos();
-    void setLightPosition(const glm::vec3&);
+//    void increaseLightPos(int);
+//    void decreaseLightPos(int);
+//    void setLightPosition(const glm::vec3&, int);
 
     void activateFbo(int, int, int);
     void deactivateFbo(int);
@@ -229,7 +242,7 @@ private:
     mutable glm::mat4 m_modelMatrix;
     //
 
-    Light m_light;
+    ceti::pack<Light> m_lights;
 
     Shaders m_shaders;
 
@@ -255,6 +268,8 @@ private:
 
     BloomEffect m_bloom;
     Camera* m_camera = nullptr;
+
+    bool __isLightActive(unsigned long) const;
 
     void __initAxisMesh();
     void __initPostEffects();

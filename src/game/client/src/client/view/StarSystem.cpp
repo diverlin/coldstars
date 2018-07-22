@@ -991,6 +991,12 @@ void StarSystemViewer::draw()
     __render();
 
     if (m_demoMaterials.empty()) {
+        jeti::Light& l = m_render->light(jeti::LIGHT0);
+        l.moveCircular(500, 2.0f);
+
+        jeti::Light& l2 = m_render->addLight(jeti::COLOR_BLUE);
+        l2.moveCircular(500, -1.0f);
+
         m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
         m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
         m_demoMaterials.add(new jeti::control::Material("data/ship/race4_trader_01.png"));
@@ -1028,6 +1034,8 @@ void StarSystemViewer::draw()
             pos.x = -800;
         }
     }
+
+    m_render->drawLightsPosition();
 
     m_screen->draw();
 }
