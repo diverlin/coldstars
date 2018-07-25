@@ -1030,20 +1030,66 @@ void StarSystemViewer::draw()
     //float angle = m_render->time();
     float angle = 0;
 
-    glm::vec3 pos(-800, 600, 0);
-    for (auto material: m_demoMaterials) {
-        float scale = 1.0f;
-        int offset = 2*std::max(material->model()->w, material->model()->h);
-        //m_render->drawFlatDiffuseMap(*material, pos, angle, scale);
-        m_render->drawFlatNormalMap(*material, pos, angle, scale);
+    int w = m_screen->width();
+    int h = m_screen->height();
 
-        //        m_render->drawFlatWithLight(*material, pos, angle, scale);
-        pos.x += offset;
-        if (pos.x >= 800) {
-            pos.y -= offset;
-            pos.x = -800;
+    m_render->fboFlatNormalMap().activate(w, h);
+    {
+        glm::vec3 pos(-800, 600, 0);
+        for (auto material: m_demoMaterials) {
+            float scale = 1.0f;
+            int offset = 2*std::max(material->model()->w, material->model()->h);
+            m_render->drawFlatNormalMap(*material, pos, angle, scale);
+            pos.x += offset;
+            if (pos.x >= 800) {
+                pos.y -= offset;
+                pos.x = -800;
+            }
         }
     }
+    m_render->fboFlatNormalMap().deactivate();
+
+    m_render->fboFlatDiffuseMap().activate(w, h);
+    {
+        glm::vec3 pos(-800, 600, 0);
+        for (auto material: m_demoMaterials) {
+            float scale = 1.0f;
+            int offset = 2*std::max(material->model()->w, material->model()->h);
+            m_render->drawFlatDiffuseMap(*material, pos, angle, scale);
+            //m_render->drawFlatWithLight(*material, pos, angle, scale);
+            pos.x += offset;
+            if (pos.x >= 800) {
+                pos.y -= offset;
+                pos.x = -800;
+            }
+        }
+    }
+    m_render->fboFlatDiffuseMap().deactivate();
+
+
+    //m_render->drawScreenQuadTextured(m_render->fboFlatNormalMap().colorBuffer());
+    //m_render->drawScreenQuadTextured(m_render->fboFlatDiffuseMap().colorBuffer());
+    //m_render->drawScreenQuadTextured(m_demoMaterials.at(0)->model()->diffusemap);
+
+
+    GLuint resultMap = m_render->drawDefferedFlatLight(m_render->fboFlatDiffuseMap().colorBuffer(),
+                                                       m_render->fboFlatNormalMap().colorBuffer());
+    m_render->drawScreenQuadTextured(resultMap);
+
+
+//    {
+//        glm::vec3 pos(-800, 600, 0);
+//        for (auto material: m_demoMaterials) {
+//            float scale = 1.0f;
+//            int offset = 2*std::max(material->model()->w, material->model()->h);
+//            m_render->drawFlatWithLight(*material, pos, angle, scale);
+//            pos.x += offset;
+//            if (pos.x >= 800) {
+//                pos.y -= offset;
+//                pos.x = -800;
+//            }
+//        }
+//    }
 
     m_render->drawLightsPosition();
 
@@ -1225,7 +1271,7 @@ void StarSystemViewer::__render_DEPRECATED(jeti::Render& render)
             // render space entites to FBO2
             render.activateFbo(3, w, h);
             {
-                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
+                render.drawScreenQuadTextured(render.lastFbo().colorBuffer());
 
                 // resizeGl(w*scale, h*scale);
                 {
@@ -1319,7 +1365,7 @@ void StarSystemViewer::__render_DEPRECATED(jeti::Render& render)
             render.activateFbo(5, w, h);
             {
                 //resizeGl(w, h);
-                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
+                render.drawScreenQuadTextured(render.lastFbo().colorBuffer());
 
                 //resizeGl(w*scale, h*scale);
                 //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
@@ -1340,7 +1386,7 @@ void StarSystemViewer::__render_DEPRECATED(jeti::Render& render)
         }
 
         render.clearColorAndDepthBuffers();
-        render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
+        render.drawScreenQuadTextured(render.lastFbo().colorBuffer());
 
         // FOGWAR and STARSPARK to final scene
         //resizeGl(w, h);

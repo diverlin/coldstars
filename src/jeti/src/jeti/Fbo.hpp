@@ -31,12 +31,16 @@ public:
     void init();
     GLuint colorBuffer() const { return m_color_buffer; }
 
+    void activate();
     void activate(int, int);
     void deactivate();
 
     void resize(int, int);
 
 private:
+    bool m_isInitialized = false;
+    int m_w = 0;
+    int m_h = 0;
     GLuint m_color_buffer;
     GLuint m_depth_buffer;
     GLuint m_fbo;

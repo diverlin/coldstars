@@ -271,6 +271,7 @@ void Render::init(int w, int h)
 
     applyOrthogonalProjection();
 
+    m_shaders.screentexture   = compile_program(SHADERS_PATH+"screentexture.vert",     SHADERS_PATH+"screentexture.frag");
     m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
     m_shaders.texturewithperlin = compile_program(SHADERS_PATH+"texturewithperlin.vert", SHADERS_PATH+"texturewithperlin.frag");
     m_shaders.perlin          = compile_program(SHADERS_PATH+"perlin.vert",            SHADERS_PATH+"perlin.frag");
@@ -293,6 +294,7 @@ void Render::init(int w, int h)
     m_shaders.star            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"star.frag");
     m_shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
     m_shaders.flatlight       = compile_program(SHADERS_PATH+"flatlight.vert",         SHADERS_PATH+"flatlight.frag");
+    m_shaders.defferedflatlight = compile_program(SHADERS_PATH+"defferedflatlight.vert", SHADERS_PATH+"defferedflatlight.frag");
 
     checkProgramErrors(m_shaders.basetexture);
     checkProgramErrors(m_shaders.texturewithperlin);
@@ -315,6 +317,7 @@ void Render::init(int w, int h)
     checkProgramErrors(m_shaders.star);
     checkProgramErrors(m_shaders.starfield);
     checkProgramErrors(m_shaders.flatlight);
+    checkProgramErrors(m_shaders.defferedflatlight);
 
     __initPostEffects();
     __makeShortCuts();
@@ -388,6 +391,9 @@ void Render::deactivateFbo(int index)
 void Render::__initPostEffects()
 {
     m_fboBackGround.init();
+    m_fboFlatNormalMap.init();
+    m_fboFlatDiffuseMap.init();
+    m_fboDifferedFlatLight.init();
 
     for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].init();
@@ -407,6 +413,9 @@ void Render::__resizePostEffects(int w, int h)
     m_bloom.Resize(w, h);
 
     m_fboBackGround.resize(w, h);
+    m_fboFlatNormalMap.resize(w, h);
+    m_fboFlatDiffuseMap.resize(w, h);
+    m_fboDifferedFlatLight.resize(w, h);
 } 
 
 void Render::__makeShortCuts()
@@ -693,6 +702,62 @@ void Render::drawFlatWithLight(const control::Material& material,
 
         __drawMesh(*m_meshQuad);
     }
+}
+
+GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScreenMap)
+{
+    m_fboDifferedFlatLight.activate();
+
+    GLuint program = m_shaders.defferedflatlight;
+
+    __useProgram(program);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
+
+        glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
+
+        if (__isLightActive(LIGHT0)) {
+            const Light& light0 = m_lights.at(LIGHT0);
+            glm::vec3 light0_dir(light0.position()/*-center*/);
+            float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
+
+            glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
+            glUniform1f(glGetUniformLocation(program, "u_light0_attenuation"), light0_attenuation);
+        }
+        if (__isLightActive(LIGHT1)) {
+            const Light& light1 = m_lights.at(LIGHT1);
+            glm::vec3 light1_dir(light1.position()/*-center*/);
+            float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
+
+            glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
+            glUniform1f(glGetUniformLocation(program, "u_light1_attenuation"), light1_attenuation);
+        }
+        if (__isLightActive(LIGHT2)) {
+            const Light& light2 = m_lights.at(LIGHT2);
+            glm::vec3 light2_dir(light2.position()/*-center*/);
+            float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
+
+            glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
+            glUniform1f(glGetUniformLocation(program, "u_light2_attenuation"), light2_attenuation);
+        }
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, diffuseScreenMap);
+        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, normalScreenMap);
+        glUniform1i(glGetUniformLocation(program, "u_normalmap"), 1);
+
+        __drawMesh(*m_meshQuad);
+    }
+
+    m_fboDifferedFlatLight.deactivate();
+
+    return m_fboDifferedFlatLight.colorBuffer();
 }
 
 bool Render::__isLightActive(unsigned long index) const
@@ -1152,22 +1217,16 @@ void Render::drawPostEffectBlur(GLuint texture, int w, int h) const
     }
 }
 
-void Render::drawScreenQuadTextured(GLuint texture, int w, int h) const
+void Render::drawScreenQuadTextured(GLuint texture) const
 {
-    // ugly 
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
-    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
-    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
-    // ugly
-
-    __useProgram(m_shaders.basetexture);
+    GLuint program = m_shaders.screentexture;
+    __useProgram(program);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture); 
-        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
+        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
                     
         __drawMesh(*m_meshQuad);
     }

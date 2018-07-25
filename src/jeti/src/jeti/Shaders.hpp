@@ -23,6 +23,7 @@
 
 struct Shaders
 {      
+    GLuint screentexture = 0;
     GLuint basetexture = 0;
     GLuint texturewithperlin = 0;
     GLuint perlin = 0;
@@ -45,6 +46,7 @@ struct Shaders
     GLuint star = 0;
     GLuint starfield = 0;
     GLuint flatlight = 0;
+    GLuint defferedflatlight = 0;
 };
 
 

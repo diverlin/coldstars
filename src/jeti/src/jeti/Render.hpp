@@ -114,6 +114,8 @@ public:
     BloomEffect& bloom() { return m_bloom; }
     const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; }
     Fbo& fboBackGround() { return m_fboBackGround; }
+    Fbo& fboFlatNormalMap() { return m_fboFlatNormalMap; }
+    Fbo& fboFlatDiffuseMap() { return m_fboFlatDiffuseMap; }
     Fbo& fboScene() { return m_fboScene; }
     const Shaders& shaders() const { return m_shaders; }
 
@@ -124,6 +126,8 @@ public:
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
+
+    GLuint drawDefferedFlatLight(GLuint, GLuint);
 
     void drawFlatNormalMap(const control::Material& material,
                            const glm::vec3& center,
@@ -170,7 +174,7 @@ public:
     void drawPostEffectCombinedDebug(const std::vector<GLuint>&, int, int) const;
     void drawPostEffectVolumetricLight(const glm::vec2&, int, int);
     void drawPostEffectBlur(GLuint, int, int) const;
-    void drawScreenQuadTextured(GLuint, int, int) const;
+    void drawScreenQuadTextured(GLuint) const;
 
     void drawParticles(const Mesh& mesh, const control::Material& material) const;
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
@@ -270,7 +274,11 @@ private:
 
     int m_fboNum = FBO_NUM;
     Fbo m_fbos[FBO_NUM];
+
     Fbo m_fboBackGround;
+    Fbo m_fboFlatNormalMap;
+    Fbo m_fboFlatDiffuseMap;
+    Fbo m_fboDifferedFlatLight;
     Fbo m_fboScene;
 
     int m_indexFboLastActivated = -1;

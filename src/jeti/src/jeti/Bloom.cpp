@@ -97,7 +97,8 @@ void BloomEffect::Pass0(const Render& render, int width, int height, GLuint scen
     int div = 2;
     for(int fbo_num = 1; fbo_num < fbo_max_per_pass; fbo_num++) {
         (vec_vec_fbo[0])[fbo_num]->activate(width, height);
-        render.drawScreenQuadTextured((vec_vec_fbo[0])[0]->colorBuffer(), width/div, height/div);
+        assert(false && "TODO: fix this");
+        //render.drawScreenQuadTextured((vec_vec_fbo[0])[0]->colorBuffer(), width/div, height/div);
         (vec_vec_fbo[0])[fbo_num]->deactivate();
 
         div *= 2;

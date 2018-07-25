@@ -18,13 +18,19 @@
 
 #include "Fbo.hpp"
 
+#include <cassert>
+
 namespace jeti {
 
 void Fbo::init()
 {
+    assert(m_isInitialized==false);
+
     glGenTextures(1, &m_color_buffer);          // create a color texture
     glGenRenderbuffers(1, &m_depth_buffer);     // create depth renderbuffer
     glGenFramebuffers(1, &m_fbo);               // create Fbo
+
+    m_isInitialized = true;
 }
 
 void Fbo::resize(int w, int h)
@@ -48,10 +54,22 @@ void Fbo::resize(int w, int h)
     
     // Go back to regular frame buffer rendering
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+    m_w = w;
+    m_h = h;
 }              
+
+void Fbo::activate()
+{
+    activate(m_w, m_h);
+}
+
 
 void Fbo::activate(int width, int height)
 {
+    assert(m_isInitialized);
+    assert(m_w !=0 && m_h != 0);
+
     glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
     glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);   // bind fbo
     
@@ -64,6 +82,9 @@ void Fbo::activate(int width, int height)
 
 void Fbo::deactivate()
 {
+    assert(m_isInitialized);
+    assert(m_w !=0 && m_h != 0);
+
     glActiveTexture(GL_TEXTURE0);                // debug     ???
     glPopAttrib();                               // restore viewport
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
