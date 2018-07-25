@@ -976,6 +976,49 @@ void StarSystemViewer::update(const glm::vec3& camera_accel)
     m_camera->update();
 }
 
+
+void StarSystemViewer::__initDemoResources()
+{
+    if (!m_demoMaterials.empty())
+        return;
+
+    jeti::Light& l0 = m_render->addLight(jeti::COLOR_YELLOW);
+    l0.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    l0.moveCircular(300, 1.0f);
+    //l0.setRadius(300);
+
+    jeti::Light& l1 = m_render->addLight(jeti::COLOR_RED);
+    l1.setPosition(glm::vec3(200.0f, -200.0f, 0.0f));
+    l1.moveCircular(500, -1.0f);
+    l1.setRadius(200);
+
+    jeti::Light& l2 = m_render->addLight(jeti::COLOR_BLUE);
+    l2.setPosition(glm::vec3(1000.0f, 0.0f, 0.0f));
+    l2.useVariadicRadius(100, 1000, 50.0f);
+
+    m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/race4_trader_01.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/race6_warrior_00.png"));
+
+    m_demoMaterials.add(new jeti::control::Material("data/ship/race0_ranger_00.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/race4_warrior_00.png"));
+
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/1.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/2.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/3.png"));
+
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_10.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_11.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_12.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_13.png"));
+
+    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid1_sm.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid2_sm.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid3_sm.png"));
+    m_demoMaterials.add(new jeti::control::Material("data/asteroid/Starship.svg.png"));
+}
+
 void StarSystemViewer::draw()
 {
 //    const auto now_time = std::chrono::steady_clock::now();
@@ -990,42 +1033,45 @@ void StarSystemViewer::draw()
     m_render->update();
     __render();
 
-    if (m_demoMaterials.empty()) {
-        jeti::Light& l0 = m_render->addLight(jeti::COLOR_YELLOW);
-        l0.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-        l0.moveCircular(1100, 1.0f);
+    __initDemoResources();
 
-        jeti::Light& l1 = m_render->addLight(jeti::COLOR_RED);
-        l1.setPosition(glm::vec3(200.0f, -200.0f, 0.0f));
-        l1.moveCircular(500, -1.0f);
-        l1.setRadius(200);
+    //float angle = m_render->time();
+    float angle = 0;
 
-        jeti::Light& l2 = m_render->addLight(jeti::COLOR_BLUE);
-        l2.setPosition(glm::vec3(1000.0f, 0.0f, 0.0f));
-        l2.useVariadicRadius(100, 1000, 50.0f);
-
-        m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/race4_trader_01.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/race6_warrior_00.png"));
-
-        m_demoMaterials.add(new jeti::control::Material("data/ship/race0_ranger_00.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/race4_warrior_00.png"));
-
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/1.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/2.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/3.png"));
-
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_10.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_11.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_12.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_13.png"));
-
-        m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid1_sm.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid2_sm.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid3_sm.png"));
-        m_demoMaterials.add(new jeti::control::Material("data/asteroid/Starship.svg.png"));
+    {
+        glm::vec3 pos(-800, 600, 0);
+        for (auto material: m_demoMaterials) {
+            float scale = 1.0f;
+            int offset = 2*std::max(material->model()->w, material->model()->h);
+            m_render->drawFlatWithLight(*material, pos, angle, scale);
+            pos.x += offset;
+            if (pos.x >= 800) {
+                pos.y -= offset;
+                pos.x = -800;
+            }
+        }
     }
+
+    m_render->drawLightsPosition();
+
+    m_screen->draw();
+}
+
+void StarSystemViewer::drawDeffered()
+{
+//    const auto now_time = std::chrono::steady_clock::now();
+//    float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
+//    if (msec_diff < 30) {
+//        return;
+//    }
+
+
+//    m_lastTime = now_time;
+
+    m_render->update();
+    __render();
+
+    __initDemoResources();
 
     //float angle = m_render->time();
     float angle = 0;
@@ -1075,21 +1121,6 @@ void StarSystemViewer::draw()
     GLuint resultMap = m_render->drawDefferedFlatLight(m_render->fboFlatDiffuseMap().colorBuffer(),
                                                        m_render->fboFlatNormalMap().colorBuffer());
     m_render->drawScreenQuadTextured(resultMap);
-
-
-//    {
-//        glm::vec3 pos(-800, 600, 0);
-//        for (auto material: m_demoMaterials) {
-//            float scale = 1.0f;
-//            int offset = 2*std::max(material->model()->w, material->model()->h);
-//            m_render->drawFlatWithLight(*material, pos, angle, scale);
-//            pos.x += offset;
-//            if (pos.x >= 800) {
-//                pos.y -= offset;
-//                pos.x = -800;
-//            }
-//        }
-//    }
 
     m_render->drawLightsPosition();
 

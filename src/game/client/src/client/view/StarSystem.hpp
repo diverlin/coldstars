@@ -119,6 +119,7 @@ public:
 
     void update(const glm::vec3& = glm::vec3(0.0f));
     void draw();
+    void drawDeffered();
     void draw(core::control::StarSystem*);
 
     void add(std::shared_ptr<jeti::particlesystem::Base>, const glm::vec3&);
@@ -255,6 +256,7 @@ private:
 
 
     void __render_DEPRECATED(jeti::Render&);
+    void __initDemoResources();
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);

@@ -101,6 +101,8 @@ public:
 //    void decreaseLightPos(int);
 //    void setLightPosition(const glm::vec3&, int);
 
+    glm::vec3 lightDirectionFromWorldPosition(const glm::vec3&) const;
+
     void activateFbo(int, int, int);
     void deactivateFbo(int);
 

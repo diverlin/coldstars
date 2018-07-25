@@ -25,6 +25,7 @@ in vec2 v_texCoord;
 
 float diffuse_factor(vec3 light_dir, float attenuation, vec3 normal) 
 {
+	light_dir += vec3(0.5, 0.5, 0.0);
 	float diffuse = dot(normal, normalize(light_dir));
 	diffuse = max(diffuse, 0.0);
 	diffuse *= attenuation;

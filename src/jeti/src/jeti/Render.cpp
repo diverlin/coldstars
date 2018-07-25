@@ -704,6 +704,15 @@ void Render::drawFlatWithLight(const control::Material& material,
     }
 }
 
+glm::vec3 Render::lightDirectionFromWorldPosition(const glm::vec3& worldPosition) const
+{
+    glm::vec3 cameraPos(m_camera->position());
+    std::cout<<cameraPos.x<<" "<<cameraPos.y<<std::endl;
+    glm::vec3 diff(worldPosition-cameraPos);
+    diff.z = worldPosition.z;
+    return glm::normalize(diff);
+}
+
 GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScreenMap)
 {
     m_fboDifferedFlatLight.activate();
@@ -718,7 +727,7 @@ GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScree
 
         if (__isLightActive(LIGHT0)) {
             const Light& light0 = m_lights.at(LIGHT0);
-            glm::vec3 light0_dir(light0.position()/*-center*/);
+            glm::vec3 light0_dir(lightDirectionFromWorldPosition(light0.position()));
             float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
 
             glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
@@ -727,7 +736,7 @@ GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScree
         }
         if (__isLightActive(LIGHT1)) {
             const Light& light1 = m_lights.at(LIGHT1);
-            glm::vec3 light1_dir(light1.position()/*-center*/);
+            glm::vec3 light1_dir(lightDirectionFromWorldPosition(light1.position()));
             float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
 
             glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
@@ -736,7 +745,7 @@ GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScree
         }
         if (__isLightActive(LIGHT2)) {
             const Light& light2 = m_lights.at(LIGHT2);
-            glm::vec3 light2_dir(light2.position()/*-center*/);
+            glm::vec3 light2_dir(lightDirectionFromWorldPosition(light2.position()));
             float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
 
             glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
