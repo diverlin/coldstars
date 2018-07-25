@@ -53,6 +53,8 @@ const float ZFAR = 3000.0f;
 const glm::vec4 COLOR_YELLOW = glm::vec4(1.0f, 1.0f, 0.6f, 1.0f);
 const glm::vec4 COLOR_RED = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
 const glm::vec4 COLOR_BLUE = glm::vec4(0.6f, 0.6f, 1.0f, 1.0f);
+const glm::vec4 COLOR_WHITE = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+const glm::vec4 COLOR_PURPLE = glm::vec4(1.0f, 0.5f, 1.0f, 1.0f);
 
 enum { LIGHT0=0, LIGHT1=1, LIGHT2=2 };
 
