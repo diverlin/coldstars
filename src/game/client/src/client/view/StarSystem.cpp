@@ -1032,7 +1032,7 @@ void StarSystemViewer::draw()
 
     glm::vec3 pos(-800, 600, 0);
     for (auto material: m_demoMaterials) {
-        int scale = 1.0f;
+        float scale = 1.0f;
         int offset = 2*std::max(material->model()->w, material->model()->h);
         m_render->drawFlatWithLight(*material, pos, angle, scale);
         pos.x += offset;

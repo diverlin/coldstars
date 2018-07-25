@@ -600,7 +600,7 @@ void Render::drawFlatWithLight(const control::Material& material,
 
         if (__isLightActive(LIGHT0)) {
             const Light& light0 = m_lights.at(LIGHT0);
-            glm::vec3 light0_dir = light0.position()-center;
+            glm::vec3 light0_dir(light0.position()-center);
             float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
 
             glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
@@ -610,7 +610,7 @@ void Render::drawFlatWithLight(const control::Material& material,
 
         if (__isLightActive(LIGHT1)) {
             const Light& light1 = m_lights.at(LIGHT1);
-            glm::vec3 light1_dir = light1.position()-center;
+            glm::vec3 light1_dir(light1.position()-center);
             float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
 
             glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
@@ -619,7 +619,7 @@ void Render::drawFlatWithLight(const control::Material& material,
         }
         if (__isLightActive(LIGHT2)) {
             const Light& light2 = m_lights.at(LIGHT2);
-            glm::vec3 light2_dir = light2.position()-center;
+            glm::vec3 light2_dir(light2.position()-center);
             float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
 
             glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
