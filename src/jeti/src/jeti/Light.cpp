@@ -36,7 +36,11 @@ Light::Light(const glm::vec4& color, float ambient_factor)
 
 void Light::setRadius(float radius)
 {
-    radius = std::min(radius, GLOBAL_LIGHT_RADIUS);
+    radius = std::min(radius, GLOBAL_LIGHT_RADIUS); // limit
+    if ((std::fabs(GLOBAL_LIGHT_RADIUS - radius) < 1.0f)) {
+        m_isGlobal = true;
+    }
+
     m_radiusOrigin = radius;
     m_radius = radius;
 }

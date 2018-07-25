@@ -31,7 +31,7 @@ public:
     Light(const glm::vec4& color, float ambient_factor=0.4f);
     ~Light() = default;
 
-    bool isGlobal() const { return ((GLOBAL_LIGHT_RADIUS - m_radius) < 1.0f); }
+    bool isGlobal() const { return m_isGlobal; }
     void setRadius(float radius);
     void setPosition(const glm::vec3& position);
     void moveLinear(float radius, float speed, const glm::vec3& dir = glm::vec3(1.0f, 0.0f, 0.0f));
@@ -55,6 +55,7 @@ public:
 private:
     enum class Type : int { STATIC, MOVE_LINEAR, MOVE_CIRCULAR };
 
+    bool m_isGlobal = false;
     glm::vec4 m_ambient;
     glm::vec4 m_diffuse;
     glm::vec4 m_specular;

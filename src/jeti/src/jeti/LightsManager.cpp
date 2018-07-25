@@ -24,20 +24,13 @@ namespace jeti {
 
 void LightsManager::add(Light* light)
 {
-    if (light->isGlobal()) {
-        m_globalLights.add(light);
-    } else {
-        m_localLights.add(light);
-    }
+    m_lights.add(light);
 }
 
 void LightsManager::update(float time)
 {
-    __removeDead();
-    for (Light* light: m_globalLights) {
-        light->update(time);
-    }
-    for (Light* light: m_localLights) {
+    //__removeDead();
+    for (Light* light: m_lights) {
         light->update(time);
     }
 }
@@ -47,20 +40,18 @@ LightsManager::visibleTo(const glm::vec3& position, int num)
 {
     ceti::pack<Light*> result;
     int counter = 0;
-    for (Light* light: m_globalLights) {
-        result.add(light);
-        counter++;
-
-        if (counter == num) {
-            break;
-        }
-    }
-
-    for (Light* light: m_localLights) {
-        if (glm::length(position-light->position()) < light->radius()) {
-            result.add(light);
+    for (Light* light: m_lights) {
+        bool proper = false;
+        if (light->isGlobal()) {
+            proper = true;
+        } else if (glm::length(position-light->position()) < light->radius()) {
+            proper = true;
         }
 
+        if (proper) {
+            m_lights.add(light);
+            counter++;
+        }
         if (counter == num) {
             break;
         }

@@ -35,8 +35,7 @@ public:
     ceti::pack<Light*> visibleTo(const glm::vec3& pos, int num=3);
 
 private:
-    ceti::pack<Light*> m_globalLights;
-    ceti::pack<Light*> m_localLights;
+    ceti::pack<Light*> m_lights;
 
     void __removeDead();
 };
