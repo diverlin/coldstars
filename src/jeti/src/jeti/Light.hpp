@@ -23,13 +23,16 @@
 
 namespace jeti {
 
+const float GLOBAL_LIGHT_RADIUS = 999999.0f;
+
 class Light
 {      
 public:
     Light(const glm::vec4& color, float ambient_factor=0.4f);
     ~Light() = default;
 
-    void setRadius(float radius) { m_radiusOrigin = radius; m_radius = radius; }
+    bool isGlobal() const { return ((GLOBAL_LIGHT_RADIUS - m_radius) < 1.0f); }
+    void setRadius(float radius);
     void setPosition(const glm::vec3& position);
     void moveLinear(float radius, float speed, const glm::vec3& dir = glm::vec3(1.0f, 0.0f, 0.0f));
     void moveCircular(float radius, float speed);

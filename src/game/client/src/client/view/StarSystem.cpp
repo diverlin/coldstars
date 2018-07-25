@@ -984,12 +984,12 @@ void StarSystemViewer::__initDemoResources()
 
     jeti::Light& l0 = m_render->addLight(jeti::COLOR_YELLOW);
     l0.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    l0.moveCircular(300, 1.0f);
+    //l0.moveCircular(300, 1.0f);
     //l0.setRadius(300);
 
     jeti::Light& l1 = m_render->addLight(jeti::COLOR_RED);
     l1.setPosition(glm::vec3(200.0f, -200.0f, 0.0f));
-    l1.moveCircular(500, -1.0f);
+    //l1.moveCircular(500, -1.0f);
     l1.setRadius(200);
 
     jeti::Light& l2 = m_render->addLight(jeti::COLOR_BLUE);
@@ -1035,8 +1035,8 @@ void StarSystemViewer::draw()
 
     __initDemoResources();
 
-    //float angle = m_render->time();
-    float angle = 0;
+    float angle = m_render->time();
+    //float angle = 0;
 
     {
         glm::vec3 pos(-800, 600, 0);

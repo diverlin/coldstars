@@ -707,7 +707,6 @@ void Render::drawFlatWithLight(const control::Material& material,
 glm::vec3 Render::lightDirectionFromWorldPosition(const glm::vec3& worldPosition) const
 {
     glm::vec3 cameraPos(m_camera->position());
-    std::cout<<cameraPos.x<<" "<<cameraPos.y<<std::endl;
     glm::vec3 diff(worldPosition-cameraPos);
     diff.z = worldPosition.z;
     return glm::normalize(diff);
