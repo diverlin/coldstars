@@ -25,6 +25,9 @@ namespace jeti {
 void LightsManager::add(Light* light)
 {
     m_lights.add(light);
+    if (!m_globalLight && light->isGlobal()) {
+        m_globalLight = light;
+    }
 }
 
 void LightsManager::update(float time)
@@ -36,7 +39,7 @@ void LightsManager::update(float time)
 }
 
 ceti::pack<Light*>
-LightsManager::visibleTo(const glm::vec3& position, int num)
+LightsManager::shiningTo(const glm::vec3& position, int num) const
 {
     ceti::pack<Light*> result;
     int counter = 0;
@@ -49,7 +52,7 @@ LightsManager::visibleTo(const glm::vec3& position, int num)
         }
 
         if (proper) {
-            m_lights.add(light);
+            result.add(light);
             counter++;
         }
         if (counter == num) {

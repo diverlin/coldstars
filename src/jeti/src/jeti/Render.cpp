@@ -64,16 +64,17 @@ Render::~Render()
 
 void Render::drawLightsPosition() const
 {
-    for(const Light& light: m_lights) {
-        drawDebugCircle(light.position(), 20, light.diffuse());
+    for(Light* light: m_lightsManager.lights()) {
+        drawDebugCircle(light->position(), 20, light->diffuse());
     }
 }
 
-Light& Render::addLight(const glm::vec4& color,
+Light* Render::addLight(const glm::vec4& color,
                       float ambient_factor)
 {
-    m_lights.add(Light(color, ambient_factor));
-    return m_lights.back();
+    Light* light = new Light(color, ambient_factor);
+    m_lightsManager.add(light);
+    return light;
 }
 
 void Render::__enable_CULLFACE() const
@@ -182,9 +183,7 @@ void Render::update() {
     __updateFps();
     m_time += 0.01f;
 
-    for (Light& light: m_lights) {
-        light.update(m_time);
-    }
+    m_lightsManager.update(m_time);
 }
 
 glm::vec2
@@ -653,52 +652,55 @@ void Render::drawFlatWithLight(const control::Material& material,
 
     m_modelMatrix = m_translateMatrix * m_rotateMatrix * m_scaleMatrix;
 
+    ceti::pack<Light*> lights = m_lightsManager.shiningTo(center);
+
+    GLuint program = m_shaders.flatlight;
     // TODO: color must be taken from material model
-    __useProgram(m_shaders.flatlight);
+    __useProgram(program);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.flatlight, "u_modelMatrix")         , 1, GL_FALSE, &m_modelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix")         , 1, GL_FALSE, &m_modelMatrix[0][0]);
 
-        glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
+        glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
 
-        if (__isLightActive(LIGHT0)) {
-            const Light& light0 = m_lights.at(LIGHT0);
+        if (lights.size()>=1) {
+            const Light& light0 = *lights.at(LIGHT0);
             glm::vec3 light0_dir(light0.position()-center);
             float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
 
-            glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
-            glUniform3fv(glGetUniformLocation(m_shaders.flatlight, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
-            glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_light0_attenuation"), light0_attenuation);
+            glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
+            glUniform1f(glGetUniformLocation(program, "u_light0_attenuation"), light0_attenuation);
         }
 
-        if (__isLightActive(LIGHT1)) {
-            const Light& light1 = m_lights.at(LIGHT1);
+        if (lights.size()>=2) {
+            const Light& light1 = *lights.at(LIGHT1);
             glm::vec3 light1_dir(light1.position()-center);
             float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
 
-            glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
-            glUniform3fv(glGetUniformLocation(m_shaders.flatlight, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
-            glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_light1_attenuation"), light1_attenuation);
+            glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
+            glUniform1f(glGetUniformLocation(program, "u_light1_attenuation"), light1_attenuation);
         }
-        if (__isLightActive(LIGHT2)) {
-            const Light& light2 = m_lights.at(LIGHT2);
+        if (lights.size()>=3) {
+            const Light& light2 = *lights.at(LIGHT2);
             glm::vec3 light2_dir(light2.position()-center);
             float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
 
-            glUniform4fv(glGetUniformLocation(m_shaders.flatlight, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
-            glUniform3fv(glGetUniformLocation(m_shaders.flatlight, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
-            glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_light2_attenuation"), light2_attenuation);
+            glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
+            glUniform1f(glGetUniformLocation(program, "u_light2_attenuation"), light2_attenuation);
         }
 
-        glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_angle"), -angle);
+        glUniform1f(glGetUniformLocation(program, "u_angle"), -angle);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
-        glUniform1i(glGetUniformLocation(m_shaders.flatlight, "u_texture"), 0);
+        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
 
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, material.model()->normalmap);
-        glUniform1i(glGetUniformLocation(m_shaders.flatlight, "u_normalmap"), 1);
+        glUniform1i(glGetUniformLocation(program, "u_normalmap"), 1);
 
         __drawMesh(*m_meshQuad);
     }
@@ -716,61 +718,58 @@ GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScree
 {
     m_fboDifferedFlatLight.activate();
 
-    GLuint program = m_shaders.defferedflatlight;
+    assert(false && "BROKEN, because of m_lightsManager.shiningTo()");
+//    ceti::pack<Light*> lights = m_lightsManager.shiningTo();
 
-    __useProgram(program);
-    {
-        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
+//    GLuint program = m_shaders.defferedflatlight;
+//    __useProgram(program);
+//    {
+//        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
 
-        glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
+//        glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
 
-        if (__isLightActive(LIGHT0)) {
-            const Light& light0 = m_lights.at(LIGHT0);
-            glm::vec3 light0_dir(lightDirectionFromWorldPosition(light0.position()));
-            float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
+//        if (__isLightActive(LIGHT0)) {
+//            const Light& light0 = m_lights.at(LIGHT0);
+//            glm::vec3 light0_dir(lightDirectionFromWorldPosition(light0.position()));
+//            float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
 
-            glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
-            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
-            glUniform1f(glGetUniformLocation(program, "u_light0_attenuation"), light0_attenuation);
-        }
-        if (__isLightActive(LIGHT1)) {
-            const Light& light1 = m_lights.at(LIGHT1);
-            glm::vec3 light1_dir(lightDirectionFromWorldPosition(light1.position()));
-            float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
+//            glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
+//            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
+//            glUniform1f(glGetUniformLocation(program, "u_light0_attenuation"), light0_attenuation);
+//        }
+//        if (__isLightActive(LIGHT1)) {
+//            const Light& light1 = m_lights.at(LIGHT1);
+//            glm::vec3 light1_dir(lightDirectionFromWorldPosition(light1.position()));
+//            float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
 
-            glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
-            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
-            glUniform1f(glGetUniformLocation(program, "u_light1_attenuation"), light1_attenuation);
-        }
-        if (__isLightActive(LIGHT2)) {
-            const Light& light2 = m_lights.at(LIGHT2);
-            glm::vec3 light2_dir(lightDirectionFromWorldPosition(light2.position()));
-            float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
+//            glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
+//            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
+//            glUniform1f(glGetUniformLocation(program, "u_light1_attenuation"), light1_attenuation);
+//        }
+//        if (__isLightActive(LIGHT2)) {
+//            const Light& light2 = m_lights.at(LIGHT2);
+//            glm::vec3 light2_dir(lightDirectionFromWorldPosition(light2.position()));
+//            float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
 
-            glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
-            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
-            glUniform1f(glGetUniformLocation(program, "u_light2_attenuation"), light2_attenuation);
-        }
+//            glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
+//            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
+//            glUniform1f(glGetUniformLocation(program, "u_light2_attenuation"), light2_attenuation);
+//        }
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, diffuseScreenMap);
-        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
+//        glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D, diffuseScreenMap);
+//        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
 
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, normalScreenMap);
-        glUniform1i(glGetUniformLocation(program, "u_normalmap"), 1);
+//        glActiveTexture(GL_TEXTURE1);
+//        glBindTexture(GL_TEXTURE_2D, normalScreenMap);
+//        glUniform1i(glGetUniformLocation(program, "u_normalmap"), 1);
 
-        __drawMesh(*m_meshQuad);
-    }
+//        __drawMesh(*m_meshQuad);
+//    }
 
-    m_fboDifferedFlatLight.deactivate();
+//    m_fboDifferedFlatLight.deactivate();
 
-    return m_fboDifferedFlatLight.colorBuffer();
-}
-
-bool Render::__isLightActive(unsigned long index) const
-{
-    return (m_lights.size()>index);
+//    return m_fboDifferedFlatLight.colorBuffer();
 }
 
 void Render::drawMeshWithPerlin(const Mesh& mesh,
@@ -878,7 +877,7 @@ void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materi
 	            
         glUniform3fv(m_programLightLocation_uEyePos, 1, glm::value_ptr(eye_pos));
 
-        const Light& light0 = m_lights.at(LIGHT0);
+        const Light& light0 = *m_lightsManager.globalLight();
         glUniform3fv(glGetUniformLocation(m_programLight, "u_Light.position"), 1, glm::value_ptr(light0.position()));
         glUniform4fv(glGetUniformLocation(m_programLight, "u_Light.ambient"),  1, glm::value_ptr(light0.ambient()));
         glUniform4fv(glGetUniformLocation(m_programLight, "u_Light.diffuse"),  1, glm::value_ptr(light0.diffuse()));
@@ -914,7 +913,7 @@ void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& t
       
         glUniform3fv(glGetUniformLocation(m_shaders.light_normalmap, "u_EyePos"), 1, glm::value_ptr(eye_pos));
 
-        const Light& light0 = m_lights.at(LIGHT0);
+        const Light& light0 = *m_lightsManager.globalLight();
         glUniform3fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.position"), 1, glm::value_ptr(light0.position()));
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.ambient"),  1, glm::value_ptr(light0.ambient()));
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.diffuse"),  1, glm::value_ptr(light0.diffuse()));

@@ -32,9 +32,13 @@ public:
     void add(Light*);
     void update(float);
 
-    ceti::pack<Light*> visibleTo(const glm::vec3& pos, int num=3);
+    Light* globalLight() const { assert(m_globalLight); return m_globalLight; }
+
+    ceti::pack<Light*> shiningTo(const glm::vec3& pos, int num=3) const;
+    const ceti::pack<Light*>& lights() const { return m_lights; }
 
 private:
+    Light* m_globalLight = nullptr;
     ceti::pack<Light*> m_lights;
 
     void __removeDead();

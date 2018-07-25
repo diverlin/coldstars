@@ -26,6 +26,7 @@
 #include <jeti/Light.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
+#include <jeti/LightsManager.hpp>
 
 #include <ceti/Pack.hpp>
 #include <ceti/NonCopyable.hpp>
@@ -70,11 +71,8 @@ public:
     Render(Camera*);
     ~Render();
 
-    Light& light(unsigned long index) { assert(index<m_lights.size()); return m_lights[index]; }
-    const Light& light(unsigned long index) const { assert(index<m_lights.size()); return m_lights[index]; }
-
     void drawLightsPosition() const;
-    Light& addLight(const glm::vec4& color, float ambient_factor = 0.6f);
+    Light* addLight(const glm::vec4& color, float ambient_factor = 0.6f);
 
     void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }
     void setZNear(float zNear) { m_zNear = zNear; }
@@ -258,7 +256,7 @@ private:
     mutable glm::mat4 m_modelMatrix;
     //
 
-    ceti::pack<Light> m_lights;
+    LightsManager m_lightsManager;
 
     Shaders m_shaders;
 
@@ -288,8 +286,6 @@ private:
 
     BloomEffect m_bloom;
     Camera* m_camera = nullptr;
-
-    bool __isLightActive(unsigned long) const;
 
     void __initAxisMesh();
     void __initPostEffects();
