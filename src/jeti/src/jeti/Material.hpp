@@ -63,7 +63,7 @@ public:
     glm::vec4 emission = glm::vec4(0.1f);
     float shininess = 100.0f;
 
-    GLuint texture = 0;
+    GLuint diffusemap = 0;
     GLuint normalmap = 0;
 
     glm::vec2 texture_offset;
@@ -84,6 +84,7 @@ public:
     int color_id = 0;
     bool is_rotated = false;
 
+    bool hasNormalMap() const { return normalmap!=0; }
     void load();
     void unloadFromVRAM();
 

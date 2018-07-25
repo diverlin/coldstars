@@ -142,9 +142,9 @@ void MaterialModel::load()
     }
 
     if (!location.diffuse.empty()) {
-        loadToVRAM(location.diffuse, texture, w, h);
+        loadToVRAM(location.diffuse, diffusemap, w, h);
     } else {
-        genNewTextureAndLoadToVRAM(texture, w, h);
+        genNewTextureAndLoadToVRAM(diffusemap, w, h);
     }
     if (!location.normalmap.empty()) {
         resizeAndLoadToVRAM(location.normalmap, normalmap, w, h);

@@ -1034,7 +1034,10 @@ void StarSystemViewer::draw()
     for (auto material: m_demoMaterials) {
         float scale = 1.0f;
         int offset = 2*std::max(material->model()->w, material->model()->h);
-        m_render->drawFlatWithLight(*material, pos, angle, scale);
+        //m_render->drawFlatDiffuseMap(*material, pos, angle, scale);
+        m_render->drawFlatNormalMap(*material, pos, angle, scale);
+
+        //        m_render->drawFlatWithLight(*material, pos, angle, scale);
         pos.x += offset;
         if (pos.x >= 800) {
             pos.y -= offset;

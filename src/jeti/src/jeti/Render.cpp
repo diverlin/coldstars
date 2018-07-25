@@ -572,10 +572,64 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
 
         __drawMesh(mesh);
+    }
+}
+
+void Render::drawFlatNormalMap(const control::Material& material,
+                               const glm::vec3& center,
+                               float angle,
+                               float scale) const
+{
+    if (!material.model()->hasNormalMap()) {
+        return;
+    }
+
+    m_translateMatrix = glm::translate(center);
+    m_scaleMatrix = glm::scale(glm::vec3(scale*material.model()->w, scale*material.model()->h, 1.0f));
+    m_rotateMatrix = glm::rotate(angle, meti::OZ);
+
+    m_modelMatrix = m_translateMatrix * m_rotateMatrix * m_scaleMatrix;
+
+    GLuint program = m_shaders.basetexture;
+    __useProgram(program);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix")         , 1, GL_FALSE, &m_modelMatrix[0][0]);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.model()->normalmap);
+        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
+
+        __drawMesh(*m_meshQuad);
+    }
+}
+
+void Render::drawFlatDiffuseMap(const control::Material& material,
+                               const glm::vec3& center,
+                               float angle,
+                               float scale) const
+{
+    m_translateMatrix = glm::translate(center);
+    m_scaleMatrix = glm::scale(glm::vec3(scale*material.model()->w, scale*material.model()->h, 1.0f));
+    m_rotateMatrix = glm::rotate(angle, meti::OZ);
+
+    m_modelMatrix = m_translateMatrix * m_rotateMatrix * m_scaleMatrix;
+
+    GLuint program = m_shaders.basetexture;
+    __useProgram(program);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix")         , 1, GL_FALSE, &m_modelMatrix[0][0]);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
+        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
+
+        __drawMesh(*m_meshQuad);
     }
 }
 
@@ -630,7 +684,7 @@ void Render::drawFlatWithLight(const control::Material& material,
         glUniform1f(glGetUniformLocation(m_shaders.flatlight, "u_angle"), -angle);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.flatlight, "u_texture"), 0);
 
         glActiveTexture(GL_TEXTURE1);
@@ -669,11 +723,11 @@ void Render::drawMeshWithPerlin(const Mesh& mesh,
         //        glUniform2fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_size"), 1, glm::value_ptr(glm::vec2(size)));
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.texturewithperlin, "u_texture"), 0);
 
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->texture);
+        glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.texturewithperlin, "u_texturePerlin"), 1);
 
         __drawMesh(mesh);
@@ -697,7 +751,7 @@ void Render::drawMeshWithOnlyPerlin(const Mesh& mesh, const glm::mat4& modelMatr
         glUniform2fv(glGetUniformLocation(m_shaders.perlin, "u_cameraPos"), 1, glm::value_ptr(camera_pos));
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->texture);
+        glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.perlin, "u_texturePerlin"), 0);
 
         __drawMesh(mesh, /*use_alpha*/true);
@@ -715,7 +769,7 @@ void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, c
         glUniform1f(glGetUniformLocation(m_programLight,  "u_time"), m_time);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
 
         __drawMesh(mesh);
@@ -765,7 +819,7 @@ void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materi
         glUniform1f(glGetUniformLocation(m_programLight,  "u_Material.shininess"), material.shininess);
 
 	    glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, materialc.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, materialc.model()->diffusemap);
         glUniform1i(m_programLightLocation_uTexture, 0);
 	                        
         __drawMesh(mesh, material.use_alpha);
@@ -802,7 +856,7 @@ void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& t
         glUniform1f(glGetUniformLocation(m_shaders.light_normalmap,  "u_Material.shininess"), material.shininess);
 
 		glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.light_normalmap, "u_Texture"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);
@@ -821,11 +875,11 @@ void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& te
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 	
 		glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.multitexturing, "Texture_0"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.multitexturing, "Texture_1"), 1);
 		
         glUniform2f(glGetUniformLocation(m_shaders.multitexturing, "displ"), textureOb.model()->texture_offset.x, textureOb.model()->texture_offset.y);
@@ -1129,7 +1183,7 @@ void Render::drawParticles(const Mesh& mesh, const control::Material& material, 
     __useProgram(m_shaders.particle);
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
@@ -1151,7 +1205,7 @@ void Render::drawParticlesForHUD(const Mesh& mesh, const control::Material& mate
     __useProgram(m_shaders.particle);
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
@@ -1168,7 +1222,7 @@ void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& ma
     __useProgram(m_shaders.particle_blink);
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.particle_blink, "uTexture_0"), 0);
         glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_time"), m_time);
 
