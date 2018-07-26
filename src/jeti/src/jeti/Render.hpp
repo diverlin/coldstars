@@ -74,7 +74,7 @@ public:
     ~Render();
 
     void drawLightsPosition() const;
-    Light* addLight(const glm::vec4& color, float ambient_factor = 0.6f);
+    LightPtr addLight(const glm::vec4& color, float ambient_factor = 0.6f);
 
     void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }
     void setZNear(float zNear) { m_zNear = zNear; }

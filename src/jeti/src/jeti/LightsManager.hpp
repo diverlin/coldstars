@@ -19,24 +19,23 @@
 
 #pragma once
 
+#include <jeti/Light.hpp>
+
 #include <ceti/Pack.hpp>
 
 #include <glm/glm.hpp>
 
-#include <memory>
 
 namespace jeti {
 
-class Light;
-
 struct LightData {
-    LightData(const std::shared_ptr<Light>& light, float distance, const glm::vec3 dir)
+    LightData(const LightPtr& light, float distance, const glm::vec3 dir)
         :
           light(light)
         , distance(distance)
         , dir(dir)
     {}
-    std::shared_ptr<Light> light;
+    LightPtr light;
     float distance = 0.0f;
     glm::vec3 dir;
     bool operator<(const LightData& rhs) const {
@@ -47,20 +46,23 @@ struct LightData {
     }
 };
 
+const int MAX_ACTIVE_LIGHTS = 10;
+
 class LightsManager {
 public:
-    void add(Light*);
+    void add(const LightPtr&);
     void update(float);
 
-    const std::shared_ptr<Light>& globalLight() const { assert(m_globalLight.get()); return m_globalLight; }
+    const LightPtr& globalLight() const { assert(m_globalLight.get()); return m_globalLight; }
 
     ceti::pack<LightData> shiningTo(const glm::vec3& pos, int num=3) const;
-    const ceti::pack<std::shared_ptr<Light>>& lights() const { return m_lights; }
+    const ceti::pack<LightPtr>& lights() const { return m_lights; }
 
 private:
-    std::shared_ptr<Light> m_globalLight;
-    ceti::pack<std::shared_ptr<Light>> m_lights;
+    LightPtr m_globalLight;
+    ceti::pack<LightPtr> m_lights;
 
+    bool __removeOutSider();
     void __removeDead();
 };
 

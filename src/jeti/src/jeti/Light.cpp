@@ -34,7 +34,7 @@ Light::Light(const glm::vec4& color, float ambient_factor)
 
 void Light::makeGlobal()
 {
-    m_isGlobal = true;
+    m_role = Role::GLOBAL;
     setRadius(GLOBAL_LIGHT_RADIUS);
 }
 
@@ -56,7 +56,7 @@ void Light::setPosition(const glm::vec3& position)
 {
     m_positionOrig = position;
     m_position = position;
-    m_type = Type::STATIC;
+    m_moveType = Move::STATIC;
 }
 
 void Light::useVariadicRadius(float min, float max, float speed)
@@ -70,7 +70,7 @@ void Light::useVariadicRadius(float min, float max, float speed)
 
 void Light::moveLinear(float radius, float speed, const glm::vec3& dir)
 {
-    m_type = Type::MOVE_LINEAR;
+    m_moveType = Move::LINEAR;
     m_amplitude = radius;
     m_speed = speed;
     m_moveDir = dir;
@@ -78,34 +78,55 @@ void Light::moveLinear(float radius, float speed, const glm::vec3& dir)
 
 void Light::moveCircular(float amplitude, float speed)
 {
-    m_type = Type::MOVE_CIRCULAR;
+    m_moveType = Move::CIRCULAR;
     m_amplitude = amplitude;
     m_speed = speed;
 }
 
-void Light::update(float time)
+void Light::__updateMovement(float time)
 {
-    switch(m_type) {
-    case Type::MOVE_LINEAR:
+    switch(m_moveType) {
+    case Move::LINEAR:
         m_position += m_speed*m_moveDir;
         if (glm::length(m_position - m_positionOrig) > m_amplitude) {
             m_moveDir *= -1;
         }
         break;
-    case Type::MOVE_CIRCULAR:
+    case Move::CIRCULAR:
         m_position.x = m_positionOrig.x + m_amplitude*glm::sin(m_speed*time);
         m_position.y = m_positionOrig.y + m_amplitude*glm::cos(m_speed*time);
         break;
-    case Type::STATIC:
+    case Move::STATIC:
         break;
     }
+}
 
+void Light::__updateRadius(float time)
+{
     if (m_useVariadicRadius) {
         float factor = (1.0f + glm::cos(time*m_radiusSpeed)); //[0.0, 2.0]
         factor /= 2.0f; //[0.0, 1.0]
         m_radius = m_radiusMin+factor*m_radiusMax;
+        //std::cout<<m_radius<<std::endl;
     }
-    //std::cout<<m_radius<<std::endl;
+}
+
+void Light::__init(float time)
+{
+    if (m_isInitialized) {
+        return;
+    }
+
+    m_bornTime = time;
+
+    m_isInitialized = true;
+}
+
+void Light::update(float time)
+{
+    __init(time);
+    __updateMovement(time);
+    __updateRadius(time);
 }
 
 } // namespace jeti

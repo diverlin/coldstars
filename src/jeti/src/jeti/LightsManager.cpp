@@ -22,18 +22,23 @@
 
 namespace jeti {
 
-void LightsManager::add(Light* light)
+void LightsManager::add(const LightPtr& light)
 {
-    m_lights.add(std::shared_ptr<Light>(light));
+    if (m_lights.size() > MAX_ACTIVE_LIGHTS) {
+        if (!__removeOutSider()) {
+            return;
+        }
+    }
+    m_lights.add(light);
     if (!m_globalLight && light->isGlobal()) {
-        m_globalLight = std::shared_ptr<Light>(light);
+        m_globalLight = light;
     }
 }
 
 void LightsManager::update(float time)
 {
     //__removeDead();
-    for (const std::shared_ptr<Light>& light: m_lights) {
+    for (const LightPtr& light: m_lights) {
         light->update(time);
     }
 }
@@ -46,7 +51,7 @@ LightsManager::shiningTo(const glm::vec3& position, int num) const
     int counter = 0;
 
     //pass1
-    for (const std::shared_ptr<Light>& light: m_lights) {
+    for (const LightPtr& light: m_lights) {
         if (light->isGlobal()) {
             glm::vec3 dir(light->position() - position);
             float distance = glm::length(dir);
@@ -75,9 +80,27 @@ LightsManager::shiningTo(const glm::vec3& position, int num) const
     return result;
 }
 
+bool LightsManager::__removeOutSider()
+{
+    float biggest = 0.0f;
+    int oldest_index = -1;
+    for (unsigned int i=0; i<m_lights.size(); ++i) {
+        if (m_lights[i]->role() == Light::Role::EXPLOSION) {
+
+        }
+    }
+
+    for (const LightPtr& light: m_lights) {
+
+    }
+    return false;
+}
+
 void LightsManager::__removeDead()
 {
-    assert(false && "TODO");
+    ceti::pack<LightPtr> remove_queue;
+    //for (const std::shared_ptr<>)
+    //assert(false && "TODO");
 }
 
 } // namespace jeti

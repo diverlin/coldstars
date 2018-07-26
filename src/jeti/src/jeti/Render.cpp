@@ -69,10 +69,10 @@ void Render::drawLightsPosition() const
     }
 }
 
-Light* Render::addLight(const glm::vec4& color,
-                      float ambient_factor)
+LightPtr Render::addLight(const glm::vec4& color,
+                                        float ambient_factor)
 {
-    Light* light = new Light(color, ambient_factor);
+    const LightPtr& light = LightPtr(new Light(color, ambient_factor));
     m_lightsManager.add(light);
     return light;
 }

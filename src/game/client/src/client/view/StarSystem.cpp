@@ -983,27 +983,27 @@ void StarSystemViewer::__initDemoResources()
         return;
 
     float zpos = 0.0f;
-    jeti::Light* l0 = m_render->addLight(jeti::COLOR_YELLOW);
+    jeti::LightPtr l0 = m_render->addLight(jeti::COLOR_YELLOW);
     l0->makeGlobal();
     l0->setPosition(glm::vec3(0.0f, 0.0f, zpos));
     l0->moveCircular(300, 1.0f);
 
-    jeti::Light* l1 = m_render->addLight(jeti::COLOR_RED);
+    jeti::LightPtr l1 = m_render->addLight(jeti::COLOR_RED);
     l1->setPosition(glm::vec3(200.0f, -200.0f, zpos));
     l1->moveCircular(500, -1.0f);
     l1->setRadius(300);
 
-    jeti::Light* l11 = m_render->addLight(jeti::COLOR_WHITE);
+    jeti::LightPtr l11 = m_render->addLight(jeti::COLOR_WHITE);
     l11->setPosition(glm::vec3(-200.0f, 200.0f, zpos));
     l11->moveCircular(200, -1.0f);
     l11->setRadius(300);
 
-    jeti::Light* l12 = m_render->addLight(jeti::COLOR_PURPLE);
+    jeti::LightPtr l12 = m_render->addLight(jeti::COLOR_PURPLE);
     l12->setPosition(glm::vec3(-200.0f, 200.0f, zpos));
     l12->moveCircular(200, 1.0f);
     l12->setRadius(300);
 
-    jeti::Light* l2 = m_render->addLight(jeti::COLOR_BLUE);
+    jeti::LightPtr l2 = m_render->addLight(jeti::COLOR_BLUE);
     l2->setPosition(glm::vec3(1000.0f, 0.0f, zpos));
     l2->useVariadicRadius(300, 1000, 50.0f);
 

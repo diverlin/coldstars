@@ -21,6 +21,8 @@
 
 #include <glm/glm.hpp>
 
+#include <memory>
+
 namespace jeti {
 
 const float GLOBAL_LIGHT_RADIUS = 999999.0f;
@@ -31,8 +33,12 @@ public:
     Light(const glm::vec4& color, float ambient_factor=0.4f);
     ~Light() = default;
 
+    enum class Role : int { GLOBAL, LOCAL, EFFECT };
+
     void makeGlobal();
-    bool isGlobal() const { return m_isGlobal; }
+    Role role() const { return m_role; }
+
+    bool isGlobal() const { return (m_role == Role::GLOBAL); }
     void setRadius(float radius);
     void setPosition(const glm::vec3& position);
     void moveLinear(float radius, float speed, const glm::vec3& dir = glm::vec3(1.0f, 0.0f, 0.0f));
@@ -50,13 +56,16 @@ public:
     float radius() const { return m_radius; }
 
     float attenuationFactor(float) const;
+    float lifeTime(float time) const { return (time - m_bornTime); }
 
     bool operator==(const Light&) const { return false; } // to be able to use with ceti::pack
 
 private:
-    enum class Type : int { STATIC, MOVE_LINEAR, MOVE_CIRCULAR };
+    enum class Move : int { STATIC, LINEAR, CIRCULAR };
 
-    bool m_isGlobal = false;
+    bool m_isInitialized = false;
+    float m_bornTime = 0.0f;
+
     glm::vec4 m_ambient;
     glm::vec4 m_diffuse;
     glm::vec4 m_specular;
@@ -65,7 +74,9 @@ private:
     glm::vec3 m_positionOrig;
     glm::vec3 m_position;
 
-    Type m_type = Type::STATIC;
+    Move m_moveType = Move::STATIC;
+    Role m_role = Role::LOCAL;
+
     float m_speed = 0.0f;
     float m_radiusOrigin = 0;
     float m_radius = 0;
@@ -76,7 +87,13 @@ private:
     float m_radiusMax = 0.0f;
     float m_radiusSpeed = 0.0f;
     bool m_useVariadicRadius = false;
+
+    void __init(float);
+    void __updateMovement(float);
+    void __updateRadius(float);
 };
+
+using LightPtr = std::shared_ptr<Light>;
 
 } // namespace jeti
 
