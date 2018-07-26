@@ -39,8 +39,8 @@ bool gen_bool();
 
 float gen_angle();
 
-glm::vec2 gen_vec2(int radius_min, int radius_max);
-glm::vec3 gen_vec3xy(int radius_min, int radius_max);
+glm::vec2 gen_vec2(float radius_min, float radius_max);
+glm::vec3 gen_vec3xy(float radius_min, float radius_max);
 glm::vec3 gen_vec3xy(float);
 glm::vec3 gen_vec3xy_unit();
 glm::vec3 gen_vec3_unit();

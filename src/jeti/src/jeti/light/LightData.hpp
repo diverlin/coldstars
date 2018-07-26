@@ -19,9 +19,7 @@
 
 #pragma once
 
-#include <jeti/Light.hpp>
-
-#include <ceti/Pack.hpp>
+#include <jeti/light/Light.hpp>
 
 #include <glm/glm.hpp>
 
@@ -35,35 +33,17 @@ struct LightData {
         , distance(distance)
         , dir(dir)
     {}
+
     LightPtr light;
     float distance = 0.0f;
     glm::vec3 dir;
+
     bool operator<(const LightData& rhs) const {
         return (distance < rhs.distance);
     }
     bool operator==(const LightData&) const { // to use in ceti::pack
         return false;
     }
-};
-
-const int MAX_ACTIVE_LIGHTS = 10;
-
-class LightsManager {
-public:
-    void add(const LightPtr&);
-    void update(float);
-
-    const LightPtr& globalLight() const { assert(m_globalLight.get()); return m_globalLight; }
-
-    ceti::pack<LightData> shiningTo(const glm::vec3& pos, int num=3) const;
-    const ceti::pack<LightPtr>& lights() const { return m_lights; }
-
-private:
-    LightPtr m_globalLight;
-    ceti::pack<LightPtr> m_lights;
-
-    bool __removeOutSider();
-    void __removeDead();
 };
 
 } // namespace jeti

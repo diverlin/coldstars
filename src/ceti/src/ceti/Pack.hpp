@@ -41,7 +41,7 @@ public:
         this->push_back(element);
     }
 
-    void remove(const T& element) {
+    bool remove(const T& element) {
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
             // swap the one to be removed with the last element
@@ -49,7 +49,9 @@ public:
             // to prevent moving all items after '5' by one
             std::swap(*it, this->back());
             this->pop_back();
+            return true;
         }
+        return false;
     }
 
     T take(const T& element) {

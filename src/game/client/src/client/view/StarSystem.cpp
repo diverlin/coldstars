@@ -62,6 +62,7 @@
 #include <jeti/particlesystem/Jet.hpp>
 #include <jeti/particlesystem/Explosion.hpp>
 #include <jeti/particlesystem/Damage.hpp>
+#include <jeti/light/LightBuilder.hpp>
 
 #include <ceti/Collision.hpp>
 
@@ -983,29 +984,20 @@ void StarSystemViewer::__initDemoResources()
         return;
 
     float zpos = 0.0f;
-    jeti::LightPtr l0 = m_render->addLight(jeti::COLOR_YELLOW);
-    l0->makeGlobal();
-    l0->setPosition(glm::vec3(0.0f, 0.0f, zpos));
-    l0->moveCircular(300, 1.0f);
 
-    jeti::LightPtr l1 = m_render->addLight(jeti::COLOR_RED);
-    l1->setPosition(glm::vec3(200.0f, -200.0f, zpos));
-    l1->moveCircular(500, -1.0f);
-    l1->setRadius(300);
+    jeti::LightBuilder builder(m_screen->width(), m_screen->height());
 
-    jeti::LightPtr l11 = m_render->addLight(jeti::COLOR_WHITE);
-    l11->setPosition(glm::vec3(-200.0f, 200.0f, zpos));
-    l11->moveCircular(200, -1.0f);
-    l11->setRadius(300);
+    jeti::Light* l0 = builder.genGlobal().color(jeti::COLOR_YELLOW).position(glm::vec3(0.0f, 0.0f, zpos)).moveCircular(300.f, 1.0f).take();
+    jeti::Light* l1 = builder.genLocal().color(jeti::COLOR_RED).radius(300.f).position(glm::vec3(200.0f, -200.0f, zpos)).moveCircular(500.f, -1.0f).take();
+    jeti::Light* l2 = builder.genLocal().color(jeti::COLOR_WHITE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, -1.0f).take();
+    jeti::Light* l3 = builder.genLocal().color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take();
+    jeti::Light* l4 = builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take();
 
-    jeti::LightPtr l12 = m_render->addLight(jeti::COLOR_PURPLE);
-    l12->setPosition(glm::vec3(-200.0f, 200.0f, zpos));
-    l12->moveCircular(200, 1.0f);
-    l12->setRadius(300);
-
-    jeti::LightPtr l2 = m_render->addLight(jeti::COLOR_BLUE);
-    l2->setPosition(glm::vec3(1000.0f, 0.0f, zpos));
-    l2->useVariadicRadius(300, 1000, 50.0f);
+    m_render->addLight(l0);
+    m_render->addLight(l1);
+    m_render->addLight(l2);
+    m_render->addLight(l3);
+    m_render->addLight(l4);
 
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));

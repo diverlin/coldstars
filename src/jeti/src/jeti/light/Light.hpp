@@ -25,46 +25,58 @@
 
 namespace jeti {
 
+class LightBuilder;
+
 const float GLOBAL_LIGHT_RADIUS = 999999.0f;
 
 class Light
 {      
 public:
-    Light(const glm::vec4& color, float ambient_factor=0.4f);
     ~Light() = default;
 
-    enum class Role : int { GLOBAL, LOCAL, EFFECT };
-
-    void makeGlobal();
-    Role role() const { return m_role; }
-
+    void dieSlow() { m_isDying = true; }
+    bool isAlive() const { return m_isAlive; }
     bool isGlobal() const { return (m_role == Role::GLOBAL); }
-    void setRadius(float radius);
-    void setPosition(const glm::vec3& position);
-    void moveLinear(float radius, float speed, const glm::vec3& dir = glm::vec3(1.0f, 0.0f, 0.0f));
-    void moveCircular(float radius, float speed);
+    bool isEffect() const { return (m_role == Role::EFFECT); }
+
     void update(float time);
 
-    void useVariadicRadius(float min, float max, float step);
+    const glm::vec4& ambient() const { return m_ambient; }
+    const glm::vec4& diffuse() const { return m_diffuse; }
+    const glm::vec4& specular() const { return m_specular; }
+    const glm::vec3& attenuation() const { return m_attenuation; }
 
-    const glm::vec4 ambient() const { return m_ambient; }
-    const glm::vec4 diffuse() const { return m_diffuse; }
-    const glm::vec4 specular() const { return m_specular; }
-    const glm::vec3 attenuation() const { return m_attenuation; }
-
-    const glm::vec3 position() const { return m_position; }
+    const glm::vec3& position() const { return m_position; }
     float radius() const { return m_radius; }
 
     float attenuationFactor(float) const;
-    float lifeTime(float time) const { return (time - m_bornTime); }
+    float lifeTime() const { return m_lifeTime; }
 
     bool operator==(const Light&) const { return false; } // to be able to use with ceti::pack
 
 private:
-    enum class Move : int { STATIC, LINEAR, CIRCULAR };
+    enum class Move : int { STATIC, LINEAR, LINEARCYCLIC, CIRCULAR };
+    enum class Role : int { GLOBAL, LOCAL, EFFECT };
+
+    Light(const glm::vec4& color = glm::vec4(1.0f), float ambient_factor=0.4f);
+
+    void __makeGlobal();
+    void __makeLocal();
+    void __makeEffect();
+
+    void __setColor(const glm::vec4&, float ambient_factor=0.4f);
+    void __setRadius(float radius);
+    void __setPosition(const glm::vec3& position);
+    void __moveLinear(const glm::vec3& dir, float speed);
+    void __moveLinearCyclic(float distance, const glm::vec3& dir, float speed);
+    void __moveCircular(float radius, float speed);
+    void __useVariadicRadius(float min, float max, float step);
 
     bool m_isInitialized = false;
+    bool m_isAlive = true;
+    bool m_isDying = false;
     float m_bornTime = 0.0f;
+    float m_lifeTime = 0.0f;
 
     glm::vec4 m_ambient;
     glm::vec4 m_diffuse;
@@ -80,7 +92,7 @@ private:
     float m_speed = 0.0f;
     float m_radiusOrigin = 0;
     float m_radius = 0;
-    float m_amplitude = 0.0f;
+    float m_distance = 0.0f;
     glm::vec3 m_moveDir = glm::vec3(1.0, 0.0, 0.0);
 
     float m_radiusMin = 0.0f;
@@ -91,6 +103,9 @@ private:
     void __init(float);
     void __updateMovement(float);
     void __updateRadius(float);
+    void __updateLifeTime(float);
+
+    friend LightBuilder;
 };
 
 using LightPtr = std::shared_ptr<Light>;

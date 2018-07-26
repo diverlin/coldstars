@@ -69,12 +69,9 @@ void Render::drawLightsPosition() const
     }
 }
 
-LightPtr Render::addLight(const glm::vec4& color,
-                                        float ambient_factor)
+void Render::addLight(Light* light)
 {
-    const LightPtr& light = LightPtr(new Light(color, ambient_factor));
-    m_lightsManager.add(light);
-    return light;
+    m_lightsManager.add(LightPtr(light));
 }
 
 void Render::__enable_CULLFACE() const

@@ -16,8 +16,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Light.hpp"
-
 #include "LightsManager.hpp"
 
 namespace jeti {
@@ -25,7 +23,7 @@ namespace jeti {
 void LightsManager::add(const LightPtr& light)
 {
     if (m_lights.size() > MAX_ACTIVE_LIGHTS) {
-        if (!__removeOutSider()) {
+        if (!__killUseLess()) {
             return;
         }
     }
@@ -37,7 +35,7 @@ void LightsManager::add(const LightPtr& light)
 
 void LightsManager::update(float time)
 {
-    //__removeDead();
+    __removeDead();
     for (const LightPtr& light: m_lights) {
         light->update(time);
     }
@@ -80,27 +78,40 @@ LightsManager::shiningTo(const glm::vec3& position, int num) const
     return result;
 }
 
-bool LightsManager::__removeOutSider()
+bool LightsManager::__killUseLess()
 {
     float biggest = 0.0f;
-    int oldest_index = -1;
+    int index = -1;
     for (unsigned int i=0; i<m_lights.size(); ++i) {
-        if (m_lights[i]->role() == Light::Role::EXPLOSION) {
-
+        if (m_lights.at(i)->isEffect()) {
+            float lifeTime = m_lights[i]->lifeTime();
+            if (lifeTime > biggest) {
+                biggest = lifeTime;
+                index = int(i);
+            }
         }
     }
-
-    for (const LightPtr& light: m_lights) {
-
+    if (index != -1) {
+        m_lights.at(unsigned(index))->dieSlow();
+        return true;
     }
+
     return false;
 }
 
 void LightsManager::__removeDead()
 {
+    // TODO:: don't call it to often
     ceti::pack<LightPtr> remove_queue;
-    //for (const std::shared_ptr<>)
-    //assert(false && "TODO");
+    for (const LightPtr& light: m_lights) {
+        if (!light->isAlive()) {
+            remove_queue.add(light);
+        }
+    }
+
+    for (const LightPtr& light: remove_queue) {
+        m_lights.remove(light);
+    }
 }
 
 } // namespace jeti

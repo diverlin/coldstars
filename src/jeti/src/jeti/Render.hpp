@@ -23,10 +23,10 @@
 #include <jeti/Fbo.hpp>
 #include <jeti/Bloom.hpp>
 #include <jeti/Shaders.hpp>
-#include <jeti/Light.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
-#include <jeti/LightsManager.hpp>
+#include <jeti/light/Light.hpp>
+#include <jeti/light/LightsManager.hpp>
 
 #include <ceti/Pack.hpp>
 #include <ceti/NonCopyable.hpp>
@@ -74,7 +74,7 @@ public:
     ~Render();
 
     void drawLightsPosition() const;
-    LightPtr addLight(const glm::vec4& color, float ambient_factor = 0.6f);
+    void addLight(Light*);
 
     void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }
     void setZNear(float zNear) { m_zNear = zNear; }

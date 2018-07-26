@@ -77,16 +77,16 @@ float gen_angle()
     return gen_float(2*float(M_PI));
 }
 
-glm::vec2 gen_vec2(int radius_min, int radius_max)
+glm::vec2 gen_vec2(float radius_min, float radius_max)
 {
     float alpha = gen_angle();
-    int radius = gen_int(radius_min, radius_max);
+    float radius = gen_float(radius_min, radius_max);
     return glm::vec2(radius*std::sin(alpha), radius*std::cos(alpha));
 }
 
-glm::vec3 gen_vec3xy(int radius_min, int radius_max)
+glm::vec3 gen_vec3xy(float radius_min, float radius_max)
 {
-    float radius = gen_int(radius_min, radius_max);
+    float radius = gen_float(radius_min, radius_max);
     glm::vec3 result;
     fill_vec3xy_unit(result);
     result *= radius;

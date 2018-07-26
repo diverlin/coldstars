@@ -25,6 +25,11 @@ namespace jeti {
 
 Light::Light(const glm::vec4& color, float ambient_factor)
 {
+    __setColor(color, ambient_factor);
+}
+
+void Light::__setColor(const glm::vec4& color, float ambient_factor)
+{
     m_ambient = glm::vec4(ambient_factor*color.r, ambient_factor*color.b, ambient_factor*color.g, 1.0f);
     m_diffuse = color;
 //    m_specular    = glm::vec4(1.5f); // visual artefact
@@ -32,13 +37,23 @@ Light::Light(const glm::vec4& color, float ambient_factor)
     m_attenuation = glm::vec3(0.1f);
 }
 
-void Light::makeGlobal()
+void Light::__makeGlobal()
 {
     m_role = Role::GLOBAL;
-    setRadius(GLOBAL_LIGHT_RADIUS);
+    __setRadius(GLOBAL_LIGHT_RADIUS);
 }
 
-void Light::setRadius(float radius)
+void Light::__makeLocal()
+{
+    m_role = Role::LOCAL;
+}
+
+void Light::__makeEffect()
+{
+    m_role = Role::EFFECT;
+}
+
+void Light::__setRadius(float radius)
 {
     assert(radius>=0);
     m_radiusOrigin = radius;
@@ -52,14 +67,14 @@ float Light::attenuationFactor(float distance) const
     return attenuation;
 }
 
-void Light::setPosition(const glm::vec3& position)
+void Light::__setPosition(const glm::vec3& position)
 {
     m_positionOrig = position;
     m_position = position;
     m_moveType = Move::STATIC;
 }
 
-void Light::useVariadicRadius(float min, float max, float speed)
+void Light::__useVariadicRadius(float min, float max, float speed)
 {
     m_radius = min;
     m_radiusMin = min;
@@ -68,19 +83,37 @@ void Light::useVariadicRadius(float min, float max, float speed)
     m_useVariadicRadius = true;
 }
 
-void Light::moveLinear(float radius, float speed, const glm::vec3& dir)
+void Light::__moveLinear(const glm::vec3& dir, float speed)
 {
     m_moveType = Move::LINEAR;
-    m_amplitude = radius;
     m_speed = speed;
     m_moveDir = dir;
 }
 
-void Light::moveCircular(float amplitude, float speed)
+void Light::__moveLinearCyclic(float distance, const glm::vec3& dir, float speed)
+{
+    m_moveType = Move::LINEARCYCLIC;
+    m_distance = distance;
+    m_speed = speed;
+    m_moveDir = dir;
+}
+
+void Light::__moveCircular(float amplitude, float speed)
 {
     m_moveType = Move::CIRCULAR;
-    m_amplitude = amplitude;
+    m_distance = amplitude;
     m_speed = speed;
+}
+
+void Light::__init(float time)
+{
+    if (m_isInitialized) {
+        return;
+    }
+
+    m_bornTime = time;
+
+    m_isInitialized = true;
 }
 
 void Light::__updateMovement(float time)
@@ -88,13 +121,16 @@ void Light::__updateMovement(float time)
     switch(m_moveType) {
     case Move::LINEAR:
         m_position += m_speed*m_moveDir;
-        if (glm::length(m_position - m_positionOrig) > m_amplitude) {
+        break;
+    case Move::LINEARCYCLIC:
+        m_position += m_speed*m_moveDir;
+        if (glm::length(m_position - m_positionOrig) > m_distance) {
             m_moveDir *= -1;
         }
         break;
     case Move::CIRCULAR:
-        m_position.x = m_positionOrig.x + m_amplitude*glm::sin(m_speed*time);
-        m_position.y = m_positionOrig.y + m_amplitude*glm::cos(m_speed*time);
+        m_position.x = m_positionOrig.x + m_distance*glm::sin(m_speed*time);
+        m_position.y = m_positionOrig.y + m_distance*glm::cos(m_speed*time);
         break;
     case Move::STATIC:
         break;
@@ -111,15 +147,16 @@ void Light::__updateRadius(float time)
     }
 }
 
-void Light::__init(float time)
+void Light::__updateLifeTime(float time)
 {
-    if (m_isInitialized) {
-        return;
+    m_lifeTime = time - m_bornTime;
+
+    if (m_isDying) {
+        m_radius *= 0.95f;
+        if (m_radius < 10) {
+            m_isAlive = false;
+        }
     }
-
-    m_bornTime = time;
-
-    m_isInitialized = true;
 }
 
 void Light::update(float time)
@@ -127,6 +164,7 @@ void Light::update(float time)
     __init(time);
     __updateMovement(time);
     __updateRadius(time);
+    __updateLifeTime(time);
 }
 
 } // namespace jeti
