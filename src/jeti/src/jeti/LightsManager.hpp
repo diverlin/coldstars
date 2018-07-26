@@ -23,23 +23,43 @@
 
 #include <glm/glm.hpp>
 
+#include <memory>
+
 namespace jeti {
 
 class Light;
+
+struct LightData {
+    LightData(const std::shared_ptr<Light>& light, float distance, const glm::vec3 dir)
+        :
+          light(light)
+        , distance(distance)
+        , dir(dir)
+    {}
+    std::shared_ptr<Light> light;
+    float distance = 0.0f;
+    glm::vec3 dir;
+    bool operator<(const LightData& rhs) const {
+        return (distance < rhs.distance);
+    }
+    bool operator==(const LightData&) const { // to use in ceti::pack
+        return false;
+    }
+};
 
 class LightsManager {
 public:
     void add(Light*);
     void update(float);
 
-    Light* globalLight() const { assert(m_globalLight); return m_globalLight; }
+    const std::shared_ptr<Light>& globalLight() const { assert(m_globalLight.get()); return m_globalLight; }
 
-    ceti::pack<Light*> shiningTo(const glm::vec3& pos, int num=3) const;
-    const ceti::pack<Light*>& lights() const { return m_lights; }
+    ceti::pack<LightData> shiningTo(const glm::vec3& pos, int num=3) const;
+    const ceti::pack<std::shared_ptr<Light>>& lights() const { return m_lights; }
 
 private:
-    Light* m_globalLight = nullptr;
-    ceti::pack<Light*> m_lights;
+    std::shared_ptr<Light> m_globalLight;
+    ceti::pack<std::shared_ptr<Light>> m_lights;
 
     void __removeDead();
 };

@@ -25,8 +25,6 @@ namespace jeti {
 
 Light::Light(const glm::vec4& color, float ambient_factor)
 {
-    setRadius(GLOBAL_LIGHT_RADIUS);
-
     m_ambient = glm::vec4(ambient_factor*color.r, ambient_factor*color.b, ambient_factor*color.g, 1.0f);
     m_diffuse = color;
 //    m_specular    = glm::vec4(1.5f); // visual artefact
@@ -34,13 +32,15 @@ Light::Light(const glm::vec4& color, float ambient_factor)
     m_attenuation = glm::vec3(0.1f);
 }
 
+void Light::makeGlobal()
+{
+    m_isGlobal = true;
+    setRadius(GLOBAL_LIGHT_RADIUS);
+}
+
 void Light::setRadius(float radius)
 {
-    radius = std::min(radius, GLOBAL_LIGHT_RADIUS); // limit
-    if ((std::fabs(GLOBAL_LIGHT_RADIUS - radius) < 1.0f)) {
-        m_isGlobal = true;
-    }
-
+    assert(radius>=0);
     m_radiusOrigin = radius;
     m_radius = radius;
 }

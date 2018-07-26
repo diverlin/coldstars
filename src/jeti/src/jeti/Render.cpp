@@ -64,7 +64,7 @@ Render::~Render()
 
 void Render::drawLightsPosition() const
 {
-    for(Light* light: m_lightsManager.lights()) {
+    for(const std::shared_ptr<Light>& light: m_lightsManager.lights()) {
         drawDebugCircle(light->position(), 20, light->diffuse());
     }
 }
@@ -652,7 +652,7 @@ void Render::drawFlatWithLight(const control::Material& material,
 
     m_modelMatrix = m_translateMatrix * m_rotateMatrix * m_scaleMatrix;
 
-    ceti::pack<Light*> lights = m_lightsManager.shiningTo(center);
+    ceti::pack<LightData> lightsdata = m_lightsManager.shiningTo(center);
 
     GLuint program = m_shaders.flatlight;
     // TODO: color must be taken from material model
@@ -663,32 +663,32 @@ void Render::drawFlatWithLight(const control::Material& material,
 
         glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
 
-        if (lights.size()>=1) {
-            const Light& light0 = *lights.at(LIGHT0);
-            glm::vec3 light0_dir(light0.position()-center);
-            float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
+        if (lightsdata.size()>=1) {
+            const LightData& ldata = lightsdata.at(LIGHT0);
+            const Light& light0 = *ldata.light;
+            float light0_attenuation = light0.attenuationFactor(ldata.distance);
 
             glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
-            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
+            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(ldata.dir));
             glUniform1f(glGetUniformLocation(program, "u_light0_attenuation"), light0_attenuation);
         }
 
-        if (lights.size()>=2) {
-            const Light& light1 = *lights.at(LIGHT1);
-            glm::vec3 light1_dir(light1.position()-center);
-            float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
+        if (lightsdata.size()>=2) {
+            const LightData& ldata = lightsdata.at(LIGHT1);
+            const Light& light1 = *ldata.light;
+            float light1_attenuation = light1.attenuationFactor(ldata.distance);
 
             glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
-            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
+            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(ldata.dir));
             glUniform1f(glGetUniformLocation(program, "u_light1_attenuation"), light1_attenuation);
         }
-        if (lights.size()>=3) {
-            const Light& light2 = *lights.at(LIGHT2);
-            glm::vec3 light2_dir(light2.position()-center);
-            float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
+        if (lightsdata.size()>=3) {
+            const LightData& ldata = lightsdata.at(LIGHT2);
+            const Light& light2 = *ldata.light;
+            float light2_attenuation = light2.attenuationFactor(ldata.distance);
 
             glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
-            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
+            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(ldata.dir));
             glUniform1f(glGetUniformLocation(program, "u_light2_attenuation"), light2_attenuation);
         }
 

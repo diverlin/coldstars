@@ -982,29 +982,30 @@ void StarSystemViewer::__initDemoResources()
     if (!m_demoMaterials.empty())
         return;
 
+    float zpos = 0.0f;
     jeti::Light* l0 = m_render->addLight(jeti::COLOR_YELLOW);
-    l0->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    l0->makeGlobal();
+    l0->setPosition(glm::vec3(0.0f, 0.0f, zpos));
     l0->moveCircular(300, 1.0f);
-    //l0->setRadius(300);
 
-//    jeti::Light* l1 = m_render->addLight(jeti::COLOR_RED);
-//    l1->setPosition(glm::vec3(200.0f, -200.0f, 0.0f));
-//    l1->moveCircular(500, -1.0f);
-//    l1->setRadius(200);
+    jeti::Light* l1 = m_render->addLight(jeti::COLOR_RED);
+    l1->setPosition(glm::vec3(200.0f, -200.0f, zpos));
+    l1->moveCircular(500, -1.0f);
+    l1->setRadius(300);
 
-//    jeti::Light* l11 = m_render->addLight(jeti::COLOR_WHITE);
-//    l11->setPosition(glm::vec3(-200.0f, 200.0f, 0.0f));
-//    l11->moveCircular(200, -1.0f);
-//    l11->setRadius(200);
+    jeti::Light* l11 = m_render->addLight(jeti::COLOR_WHITE);
+    l11->setPosition(glm::vec3(-200.0f, 200.0f, zpos));
+    l11->moveCircular(200, -1.0f);
+    l11->setRadius(300);
 
     jeti::Light* l12 = m_render->addLight(jeti::COLOR_PURPLE);
-    l12->setPosition(glm::vec3(-200.0f, 200.0f, 0.0f));
+    l12->setPosition(glm::vec3(-200.0f, 200.0f, zpos));
     l12->moveCircular(200, 1.0f);
-    l12->setRadius(200);
+    l12->setRadius(300);
 
     jeti::Light* l2 = m_render->addLight(jeti::COLOR_BLUE);
-    l2->setPosition(glm::vec3(1000.0f, 0.0f, 0.0f));
-    l2->useVariadicRadius(100, 1000, 50.0f);
+    l2->setPosition(glm::vec3(1000.0f, 0.0f, zpos));
+    l2->useVariadicRadius(300, 1000, 50.0f);
 
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));

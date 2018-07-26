@@ -31,6 +31,7 @@ public:
     Light(const glm::vec4& color, float ambient_factor=0.4f);
     ~Light() = default;
 
+    void makeGlobal();
     bool isGlobal() const { return m_isGlobal; }
     void setRadius(float radius);
     void setPosition(const glm::vec3& position);

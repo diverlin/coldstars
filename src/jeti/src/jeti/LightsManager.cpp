@@ -24,44 +24,55 @@ namespace jeti {
 
 void LightsManager::add(Light* light)
 {
-    m_lights.add(light);
+    m_lights.add(std::shared_ptr<Light>(light));
     if (!m_globalLight && light->isGlobal()) {
-        m_globalLight = light;
+        m_globalLight = std::shared_ptr<Light>(light);
     }
 }
 
 void LightsManager::update(float time)
 {
     //__removeDead();
-    for (Light* light: m_lights) {
+    for (const std::shared_ptr<Light>& light: m_lights) {
         light->update(time);
     }
 }
 
-ceti::pack<Light*>
+ceti::pack<LightData>
 LightsManager::shiningTo(const glm::vec3& position, int num) const
 {
-    ceti::pack<Light*> result;
+    ceti::pack<LightData> result;
+    std::set<LightData> lighdataset;
     int counter = 0;
-    for (Light* light: m_lights) {
-        bool proper = false;
-        if (light->isGlobal()) {
-            proper = true;
-        } else if (glm::length(position-light->position()) < light->radius()) {
-            proper = true;
-        }
 
-        if (proper) {
-            result.add(light);
+    //pass1
+    for (const std::shared_ptr<Light>& light: m_lights) {
+        if (light->isGlobal()) {
+            glm::vec3 dir(light->position() - position);
+            float distance = glm::length(dir);
+            result.add(LightData{light,distance,dir});
             counter++;
-        }
-        if (counter == num) {
-            break;
+            if (counter>=num) {
+                break;
+            }
+        } else {
+            glm::vec3 dir(light->position() - position);
+            float distance = glm::length(dir);
+            //std::cout<<"distance="<<distance<<std::endl;
+            lighdataset.emplace(LightData{light,distance,dir});
         }
     }
 
+    //pass2
+    //std::cout<<lighdataset.size()<<std::endl;
+    for (const LightData& lightdata: lighdataset) {
+        result.add(lightdata);
+        counter++;
+        if (counter>=num) {
+            break;
+        }
+    }
     return result;
-
 }
 
 void LightsManager::__removeDead()
