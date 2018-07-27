@@ -43,11 +43,12 @@ LightBuilder& LightBuilder::genGlobal()
     return *this;
 }
 
-LightBuilder& LightBuilder::genLocal()
+LightBuilder& LightBuilder::genLocal(float radius)
 {
     assert(m_light==nullptr);
     m_light = new Light;
     m_light->__makeLocal();
+    m_light->__setRadius(radius);
     return *this;
 }
 
@@ -86,6 +87,7 @@ LightBuilder& LightBuilder::radius(float radius)
 {
     assert(m_light);
     assert(!m_light->isGlobal()); // we don't want change the radius for global light
+    assert(radius >= 1.08f && "radius less is not visible");
     m_light->__setRadius(radius);
     return *this;
 }

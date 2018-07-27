@@ -34,7 +34,7 @@ public:
     void setSize(int w, int h) { m_width = w; m_height = h; }
 
     LightBuilder& genGlobal();
-    LightBuilder& genLocal();
+    LightBuilder& genLocal(float radius = 0.2f);
     LightBuilder& genEffect();
 
     LightBuilder& position();

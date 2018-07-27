@@ -26,7 +26,7 @@ int main()
 
     while(viewer->isOpened()) {
         viewer->update();
-        viewer->draw();
+        viewer->drawDeffered();
         usleep(200);
     }
 

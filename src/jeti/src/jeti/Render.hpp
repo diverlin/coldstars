@@ -317,6 +317,10 @@ private:
 
     void __setOrthogonalProjection();
 
+    float screenScale() const;
+    float toScreenNorm(float val) const;
+    glm::vec3 toScreenCoordNorm(const glm::vec3& v) const;
+
     // states
     void __enable_POINTSPRITE() const;
     void __disable_POINTSPRITE() const;

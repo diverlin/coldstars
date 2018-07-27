@@ -983,19 +983,25 @@ void StarSystemViewer::__initDemoResources()
     if (!m_demoMaterials.empty())
         return;
 
-    m_render->enableLightEmitter(true);
+    m_render->enableLightEmitter(false);
 
     float zpos = 0.0f;
 
-    //jeti::LightBuilder builder(m_screen->width(), m_screen->height());
+    jeti::LightBuilder builder(m_screen->width(), m_screen->height());
 
     //jeti::Light* l0 = builder.genGlobal().color(jeti::COLOR_YELLOW).position(glm::vec3(0.0f, 0.0f, zpos)).moveCircular(300.f, 1.0f).take();
     //jeti::Light* l1 = builder.genLocal().color(jeti::COLOR_RED).radius(300.f).position(glm::vec3(200.0f, -200.0f, zpos)).moveCircular(500.f, -1.0f).take();
     //jeti::Light* l2 = builder.genLocal().color(jeti::COLOR_WHITE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, -1.0f).take();
+
+    //jeti::Light* l0 = builder.genGlobal().color(jeti::COLOR_YELLOW).position(glm::vec3(0.001f, 0.001f, zpos)).take();
+    jeti::Light* l0 = builder.genLocal(1200.0f).color(jeti::COLOR_YELLOW).position(glm::vec3(0.001f, 0.001f, zpos)).moveCircular(200.0f, 2.0f).take();
+
+    //jeti::Light* l1 = builder.genLocal().color(jeti::COLOR_RED).position(glm::vec3(-0.25f, 0.f, zpos)).radius(0.5f).moveCircular(0.2f, 10.0f).take();
+    //jeti::Light* l2 = builder.genLocal().color(jeti::COLOR_WHITE).radius(1.f).position(glm::vec3(1.0f, 0.0f, zpos)).take();
     //jeti::Light* l3 = builder.genLocal().color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take();
     //jeti::Light* l4 = builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take();
 
-//    m_render->addLight(l0);
+    m_render->addLight(l0);
 //    m_render->addLight(l1);
 //    m_render->addLight(l2);
 //    m_render->addLight(l3);
@@ -1080,8 +1086,8 @@ void StarSystemViewer::drawDeffered()
 
     __initDemoResources();
 
-    //float angle = m_render->time();
-    float angle = 0;
+    float angle = m_render->time();
+    //float angle = 0;
 
     int w = m_screen->width();
     int h = m_screen->height();

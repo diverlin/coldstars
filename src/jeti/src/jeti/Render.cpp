@@ -761,62 +761,75 @@ glm::vec3 Render::lightDirectionFromWorldPosition(const glm::vec3& worldPosition
     return glm::normalize(diff);
 }
 
+float Render::screenScale() const
+{
+    return (std::max(m_size.x, m_size.y)/2.0f);
+}
+
+float Render::toScreenNorm(float val) const
+{
+    return val/screenScale();
+}
+
+glm::vec3 Render::toScreenCoordNorm(const glm::vec3& v) const
+{
+    float factor = screenScale();
+    float backupz = v.z;
+    glm::vec3 result(v);
+    result -= m_camera->position();
+    result *= factor;
+    result.z = backupz;
+    return result;
+}
+
 GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScreenMap)
 {
     m_fboDifferedFlatLight.activate();
 
-    assert(false && "BROKEN, because of m_lightsManager.shiningTo()");
-//    ceti::pack<Light*> lights = m_lightsManager.shiningTo();
+    const std::vector<LightPtr>& lights = m_lightsManager.lights();
 
-//    GLuint program = m_shaders.defferedflatlight;
-//    __useProgram(program);
-//    {
-//        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
+    int lights_num = lights.size();
 
-//        glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
+    GLuint program = m_shaders.defferedflatlight;
+    __useProgram(program);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
 
-//        if (__isLightActive(LIGHT0)) {
-//            const Light& light0 = m_lights.at(LIGHT0);
-//            glm::vec3 light0_dir(lightDirectionFromWorldPosition(light0.position()));
-//            float light0_attenuation = light0.attenuationFactor(glm::length(light0_dir));
+        glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
 
-//            glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
-//            glUniform3fv(glGetUniformLocation(program, "u_light0_dir"), 1, glm::value_ptr(light0_dir));
-//            glUniform1f(glGetUniformLocation(program, "u_light0_attenuation"), light0_attenuation);
-//        }
-//        if (__isLightActive(LIGHT1)) {
-//            const Light& light1 = m_lights.at(LIGHT1);
-//            glm::vec3 light1_dir(lightDirectionFromWorldPosition(light1.position()));
-//            float light1_attenuation = light1.attenuationFactor(glm::length(light1_dir));
+        if (lights_num >= 1) {
+            const Light& light0 = *lights.at(LIGHT0);
+            glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light0_position"), 1, glm::value_ptr(toScreenCoordNorm(light0.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light0_radius"), toScreenNorm(light0.radius()));
+        }
+        if (lights_num >= 2) {
+            const Light& light1 = *lights.at(LIGHT1);
+            glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light1_position"), 1, glm::value_ptr(toScreenCoordNorm(light1.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light1_radius"), toScreenNorm(light1.radius()));
+        }
+        if (lights_num >= 3) {
+            const Light& light2 = *lights.at(LIGHT2);
+            glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light2_position"), 1, glm::value_ptr(toScreenCoordNorm(light2.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light2_radius"), toScreenNorm(light2.radius()));
+        }
 
-//            glUniform4fv(glGetUniformLocation(program, "u_light1_diffuse"), 1, glm::value_ptr(light1.diffuse()));
-//            glUniform3fv(glGetUniformLocation(program, "u_light1_dir"), 1, glm::value_ptr(light1_dir));
-//            glUniform1f(glGetUniformLocation(program, "u_light1_attenuation"), light1_attenuation);
-//        }
-//        if (__isLightActive(LIGHT2)) {
-//            const Light& light2 = m_lights.at(LIGHT2);
-//            glm::vec3 light2_dir(lightDirectionFromWorldPosition(light2.position()));
-//            float light2_attenuation = light2.attenuationFactor(glm::length(light2_dir));
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, diffuseScreenMap);
+        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
 
-//            glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
-//            glUniform3fv(glGetUniformLocation(program, "u_light2_dir"), 1, glm::value_ptr(light2_dir));
-//            glUniform1f(glGetUniformLocation(program, "u_light2_attenuation"), light2_attenuation);
-//        }
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, normalScreenMap);
+        glUniform1i(glGetUniformLocation(program, "u_normalmap"), 1);
 
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, diffuseScreenMap);
-//        glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
+        __drawMesh(*m_meshQuad);
+    }
 
-//        glActiveTexture(GL_TEXTURE1);
-//        glBindTexture(GL_TEXTURE_2D, normalScreenMap);
-//        glUniform1i(glGetUniformLocation(program, "u_normalmap"), 1);
+    m_fboDifferedFlatLight.deactivate();
 
-//        __drawMesh(*m_meshQuad);
-//    }
-
-//    m_fboDifferedFlatLight.deactivate();
-
-//    return m_fboDifferedFlatLight.colorBuffer();
+    return m_fboDifferedFlatLight.colorBuffer();
 }
 
 void Render::drawMeshWithPerlin(const Mesh& mesh,
