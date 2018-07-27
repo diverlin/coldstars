@@ -17,10 +17,26 @@
 */
 
 #include "LightEmitter.hpp"
+#include <jeti/Render.hpp>
 
 namespace jeti {
 
+LightEmitter::LightEmitter(Render* render)
+    :
+      m_render(render)
+    , m_builder(render->width(), render->height())
+{}
 
+void LightEmitter::update(float time)
+{
+    float elapsedTime = time - m_lastCreationTime;
+    if (elapsedTime > 2.0f) {
+
+        Light* light = m_builder.genEffect().color().moveLinear().take();
+        m_render->addLight(light);
+        m_lastCreationTime = time;
+    }
+}
 
 } // namespace jeti
 

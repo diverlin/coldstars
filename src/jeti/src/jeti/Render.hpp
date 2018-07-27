@@ -27,6 +27,7 @@
 #include <jeti/Material.hpp>
 #include <jeti/light/Light.hpp>
 #include <jeti/light/LightsManager.hpp>
+#include <jeti/light/LightEmitter.hpp>
 
 #include <ceti/Pack.hpp>
 #include <ceti/NonCopyable.hpp>
@@ -259,6 +260,7 @@ private:
     //
 
     LightsManager m_lightsManager;
+    LightEmitter m_lightEmitter;
 
     Shaders m_shaders;
 

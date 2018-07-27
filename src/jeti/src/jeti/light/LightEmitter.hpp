@@ -19,25 +19,25 @@
 
 #pragma once
 
-//#include <jeti/light/Light.hpp>
-
-//#include <ceti/Pack.hpp>
-
-//#include <glm/glm.hpp>
-
+#include "LightBuilder.hpp"
 
 namespace jeti {
 
-class Light;
+class Render;
 
 class LightEmitter {
 public:
-    LightEmitter();
-    ~LightEmitter();
+    LightEmitter(Render*);
+    ~LightEmitter() = default;
 
-    static Light* genGlobal();
-    static Light* genLocal();
-    static Light* genEffect();
+    void update(float time);
+
+private:
+    float m_lastCreationTime = 0.0f;
+
+    Render* m_render = nullptr;
+    LightBuilder m_builder;
+
 };
 
 } // namespace jeti

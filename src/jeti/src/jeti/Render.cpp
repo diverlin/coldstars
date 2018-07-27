@@ -46,7 +46,8 @@ namespace jeti {
 
 Render::Render(Camera* camera)
     :
-      m_camera(camera)
+      m_lightEmitter(this)
+    , m_camera(camera)
 {
     //addLight(jeti::COLOR_YELLOW);
 
