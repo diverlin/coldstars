@@ -31,7 +31,7 @@ void LightEmitter::update(float time)
     __init();
 
     float elapsedTime = time - m_lastCreationTime;
-    if (elapsedTime > 0.1f) {
+    if (elapsedTime > 0.5f) {
         Light* light = m_builder.genEffect().color().radius().moveLinear().take();
         m_render->addLight(light);
         m_lastCreationTime = time;

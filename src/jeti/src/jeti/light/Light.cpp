@@ -152,10 +152,10 @@ void Light::__updateLifeTime(float time)
     m_lifeTime = time - m_bornTime;
 
     if (m_isDying) {
-        m_radius *= 0.95f;
+        m_radius *= 0.8f;
         if (m_radius < 10) {
             m_isAlive = false;
-        }
+       }
     }
 }
 

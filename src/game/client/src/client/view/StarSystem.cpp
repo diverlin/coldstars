@@ -983,21 +983,23 @@ void StarSystemViewer::__initDemoResources()
     if (!m_demoMaterials.empty())
         return;
 
+    m_render->enableLightEmitter(true);
+
     float zpos = 0.0f;
 
-    jeti::LightBuilder builder(m_screen->width(), m_screen->height());
+    //jeti::LightBuilder builder(m_screen->width(), m_screen->height());
 
-    jeti::Light* l0 = builder.genGlobal().color(jeti::COLOR_YELLOW).position(glm::vec3(0.0f, 0.0f, zpos)).moveCircular(300.f, 1.0f).take();
-    jeti::Light* l1 = builder.genLocal().color(jeti::COLOR_RED).radius(300.f).position(glm::vec3(200.0f, -200.0f, zpos)).moveCircular(500.f, -1.0f).take();
-    jeti::Light* l2 = builder.genLocal().color(jeti::COLOR_WHITE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, -1.0f).take();
-    jeti::Light* l3 = builder.genLocal().color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take();
-    jeti::Light* l4 = builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take();
+    //jeti::Light* l0 = builder.genGlobal().color(jeti::COLOR_YELLOW).position(glm::vec3(0.0f, 0.0f, zpos)).moveCircular(300.f, 1.0f).take();
+    //jeti::Light* l1 = builder.genLocal().color(jeti::COLOR_RED).radius(300.f).position(glm::vec3(200.0f, -200.0f, zpos)).moveCircular(500.f, -1.0f).take();
+    //jeti::Light* l2 = builder.genLocal().color(jeti::COLOR_WHITE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, -1.0f).take();
+    //jeti::Light* l3 = builder.genLocal().color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take();
+    //jeti::Light* l4 = builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take();
 
-    m_render->addLight(l0);
-    m_render->addLight(l1);
-    m_render->addLight(l2);
-    m_render->addLight(l3);
-    m_render->addLight(l4);
+//    m_render->addLight(l0);
+//    m_render->addLight(l1);
+//    m_render->addLight(l2);
+//    m_render->addLight(l3);
+//    m_render->addLight(l4);
 
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
@@ -1041,6 +1043,7 @@ void StarSystemViewer::draw()
     float angle = m_render->time();
     //float angle = 0;
 
+    for (int i=0; i<1; ++i) {
     {
         glm::vec3 pos(-800, 600, 0);
         for (auto material: m_demoMaterials) {
@@ -1053,6 +1056,7 @@ void StarSystemViewer::draw()
                 pos.x = -800;
             }
         }
+    }
     }
 
     m_render->drawLightsPosition();

@@ -21,6 +21,28 @@ uniform vec4 u_light2_diffuse;
 uniform vec3 u_light2_dir;
 uniform float u_light2_attenuation;
 
+/*
+uniform vec4 u_light3_diffuse;
+uniform vec3 u_light3_dir;
+uniform float u_light3_attenuation;
+
+uniform vec4 u_light4_diffuse;
+uniform vec3 u_light4_dir;
+uniform float u_light4_attenuation;
+
+uniform vec4 u_light5_diffuse;
+uniform vec3 u_light5_dir;
+uniform float u_light5_attenuation;
+
+uniform vec4 u_light6_diffuse;
+uniform vec3 u_light6_dir;
+uniform float u_light6_attenuation;
+
+uniform vec4 u_light7_diffuse;
+uniform vec3 u_light7_dir;
+uniform float u_light7_attenuation;
+*/
+
 in vec2 v_texCoord;
 in mat2 v_rotateMat2;
 
@@ -54,7 +76,23 @@ void main (void)
 
 	float factor2 = diffuse_factor(u_light2_dir, u_light2_attenuation, normal);
 	color += factor2*texel*u_light2_diffuse;
-		
+/*
+	float factor3 = diffuse_factor(u_light3_dir, u_light3_attenuation, normal);
+	color += factor3*texel*u_light3_diffuse;
+
+	float factor4 = diffuse_factor(u_light4_dir, u_light4_attenuation, normal);
+	color += factor4*texel*u_light4_diffuse;
+
+	float factor5 = diffuse_factor(u_light5_dir, u_light5_attenuation, normal);
+	color += factor5*texel*u_light5_diffuse;
+			
+	float factor6 = diffuse_factor(u_light6_dir, u_light6_attenuation, normal);
+	color += factor6*texel*u_light6_diffuse;
+
+	float factor7 = diffuse_factor(u_light7_dir, u_light7_attenuation, normal);
+	color += factor7*texel*u_light7_diffuse;
+*/
+	
 	// Set the output color of our current pixel  	
 	color.a = texel.a;
 	

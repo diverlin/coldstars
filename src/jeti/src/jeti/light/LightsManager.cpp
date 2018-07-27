@@ -35,6 +35,7 @@ void LightsManager::add(const LightPtr& light)
 
 void LightsManager::update(float time)
 {
+    //std::cout<<"lights_num="<<m_lights.size()<<std::endl;
     __removeDead();
     for (const LightPtr& light: m_lights) {
         light->update(time);
