@@ -33,10 +33,13 @@ public:
     void update(float time);
 
 private:
+    bool m_isInitialized = false;
     float m_lastCreationTime = 0.0f;
 
     Render* m_render = nullptr;
     LightBuilder m_builder;
+
+    void __init();
 
 };
 

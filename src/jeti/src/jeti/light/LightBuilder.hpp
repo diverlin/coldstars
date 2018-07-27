@@ -28,8 +28,10 @@ class Light;
 class LightBuilder {
     const float LIGHT_DEFAULT_ZPOZ = 0.0f;
 public:
-    LightBuilder(int, int);
+    LightBuilder(int w=0, int h=0);
     ~LightBuilder();
+
+    void setSize(int w, int h) { m_width = w; m_height = h; }
 
     LightBuilder& genGlobal();
     LightBuilder& genLocal();

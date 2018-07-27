@@ -24,18 +24,29 @@ namespace jeti {
 LightEmitter::LightEmitter(Render* render)
     :
       m_render(render)
-    , m_builder(render->width(), render->height())
 {}
 
 void LightEmitter::update(float time)
 {
-    float elapsedTime = time - m_lastCreationTime;
-    if (elapsedTime > 2.0f) {
+    __init();
 
-        Light* light = m_builder.genEffect().color().moveLinear().take();
+    float elapsedTime = time - m_lastCreationTime;
+    if (elapsedTime > 0.1f) {
+        Light* light = m_builder.genEffect().color().radius().moveLinear().take();
         m_render->addLight(light);
         m_lastCreationTime = time;
     }
+}
+
+void LightEmitter::__init()
+{
+    if (m_isInitialized) {
+        return;
+    }
+
+    m_builder.setSize(m_render->width(), m_render->height());
+
+    m_isInitialized= true;
 }
 
 } // namespace jeti

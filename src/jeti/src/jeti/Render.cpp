@@ -47,11 +47,10 @@ namespace jeti {
 Render::Render(Camera* camera)
     :
       m_lightEmitter(this)
+    , m_screenModelMatrix(glm::scale(glm::vec3(1.0, 1.0, 1.0f)))
     , m_camera(camera)
 {
-    //addLight(jeti::COLOR_YELLOW);
 
-    m_screenModelMatrix = glm::scale(glm::vec3(1.0, 1.0, 1.0f));
 }
 
 Render::~Render() 
@@ -181,6 +180,9 @@ void Render::update() {
     __updateFps();
     m_time += 0.01f;
 
+    if (m_lightEmitterOn) {
+        m_lightEmitter.update(m_time);
+    }
     m_lightsManager.update(m_time);
 }
 

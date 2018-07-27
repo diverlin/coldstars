@@ -28,7 +28,6 @@ LightBuilder::LightBuilder(int w, int h)
     : m_width(w)
     , m_height(h)
 {
-
 }
 
 LightBuilder::~LightBuilder()
@@ -79,7 +78,7 @@ LightBuilder& LightBuilder::position(const glm::vec3& position)
 LightBuilder& LightBuilder::radius()
 {
     float max = __getScreenWorldSize();
-    float r = max * meti::rand::gen_float(0.1f, 0.5f);
+    float r = max * meti::rand::gen_float(0.3f, 0.6f);
     return radius(r);
 }
 
@@ -145,7 +144,7 @@ LightBuilder& LightBuilder::moveCircular(float radius, float speed)
 LightBuilder& LightBuilder::moveLinear()
 {
     float max = __getScreenWorldSize();
-    float speed = max * meti::rand::gen_float(0.001f, 0.005f);
+    float speed = max * meti::rand::gen_float(0.003f, 0.01f);
     glm::vec3 dir = meti::rand::gen_vec3xy_unit();
 
     return moveLinear(dir, speed);
@@ -185,6 +184,8 @@ Light* LightBuilder::take()
 
 float LightBuilder::__getScreenWorldSize() const
 {
+    assert(m_width);
+    assert(m_height);
     return std::max(m_width, m_height);
 }
 

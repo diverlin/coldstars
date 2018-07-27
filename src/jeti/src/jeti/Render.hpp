@@ -76,6 +76,7 @@ public:
 
     void drawLightsPosition() const;
     void addLight(Light*);
+    void enableLightEmitter(bool flag) { m_lightEmitterOn = flag; }
 
     void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }
     void setZNear(float zNear) { m_zNear = zNear; }
@@ -260,6 +261,7 @@ private:
     //
 
     LightsManager m_lightsManager;
+    bool m_lightEmitterOn = false;
     LightEmitter m_lightEmitter;
 
     Shaders m_shaders;
