@@ -65,7 +65,8 @@ enum {
     LIGHT4,
     LIGHT5,
     LIGHT6,
-    LIGHT7
+    LIGHT7,
+    LIGHT8
 };
 
 class Render : public NonCopyable
@@ -112,7 +113,7 @@ public:
 //    void decreaseLightPos(int);
 //    void setLightPosition(const glm::vec3&, int);
 
-    glm::vec3 lightDirectionFromWorldPosition(const glm::vec3&) const;
+//    glm::vec3 lightDirectionFromWorldPosition(const glm::vec3&) const;
 
     void activateFbo(int, int, int);
     void deactivateFbo(int);
@@ -317,6 +318,7 @@ private:
 
     void __setOrthogonalProjection();
 
+    float screenRatio() const;
     float screenScale() const;
     float toScreenNorm(float val) const;
     glm::vec3 toScreenCoordNorm(const glm::vec3& v) const;

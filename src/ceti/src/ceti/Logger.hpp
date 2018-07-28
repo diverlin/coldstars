@@ -43,6 +43,8 @@
 //    #define LOG_ERROR( ... )
 #endif
 
+#define PRINT( ... ) std::cout  << __VA_ARGS__ << std::endl;
+
 #define USE_LOG_COMMON 0
 #define USE_LOG_DATA 0
 #define USE_LOG_COMM 1

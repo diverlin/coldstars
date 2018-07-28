@@ -42,12 +42,15 @@
 
 #include <iostream>
 
+#include <ceti/Logger.hpp>
+#include <ceti/StringUtils.hpp>
+
 namespace jeti {
 
 Render::Render(Camera* camera)
     :
-      m_lightEmitter(this)
-    , m_screenModelMatrix(glm::scale(glm::vec3(1.0, 1.0, 1.0f)))
+      m_screenModelMatrix(glm::scale(glm::vec3(1.0, 1.0, 1.0f)))
+    , m_lightEmitter(this)
     , m_camera(camera)
 {
 
@@ -240,7 +243,7 @@ void Render::init(int w, int h)
     glewInit();
     CHECK_OPENGL_ERRORS
 
-    m_meshQuad = new Mesh;
+            m_meshQuad = new Mesh;
     m_meshQuad->setStates(Mesh::State::QUAD);
     m_meshQuadAdditive = new Mesh;
     m_meshQuadAdditive->setStates(Mesh::State::QUAD_ADDITIVE);
@@ -397,18 +400,18 @@ void Render::__initPostEffects()
     for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].init();
     }
-        
+
     m_bloom.Create(m_shaders.blur, m_shaders.extractbright, m_shaders.combine);
     __resizePostEffects(m_size.x, m_size.y);
 }
- 
-  
+
+
 void Render::__resizePostEffects(int w, int h)
 {
     for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].resize(w, h);
     }
-        
+
     m_bloom.Resize(w, h);
 
     m_fboBackGround.resize(w, h);
@@ -420,15 +423,15 @@ void Render::__resizePostEffects(int w, int h)
 void Render::__makeShortCuts()
 {
     {
-    m_programLight = m_shaders.light;
-    m_programLightLocation_uProjectionViewMatrix = glGetUniformLocation(m_programLight, "u_Matrices.projectionView");
-    m_programLightLocation_uModelMatrix          = glGetUniformLocation(m_programLight, "u_Matrices.model");
-    m_programLightLocation_uNormalMatrix         = glGetUniformLocation(m_programLight, "u_Matrices.normal");
-            
-    m_programLightLocation_uEyePos   = glGetUniformLocation(m_programLight, "u_EyePos");
+        m_programLight = m_shaders.light;
+        m_programLightLocation_uProjectionViewMatrix = glGetUniformLocation(m_programLight, "u_Matrices.projectionView");
+        m_programLightLocation_uModelMatrix          = glGetUniformLocation(m_programLight, "u_Matrices.model");
+        m_programLightLocation_uNormalMatrix         = glGetUniformLocation(m_programLight, "u_Matrices.normal");
+
+        m_programLightLocation_uEyePos   = glGetUniformLocation(m_programLight, "u_EyePos");
         
-    m_programLightLocation_uTexture  = glGetUniformLocation(m_programLight, "u_Texture");
-    }            
+        m_programLightLocation_uTexture  = glGetUniformLocation(m_programLight, "u_Texture");
+    }
     
     m_programBlur  = m_shaders.blur;
 }
@@ -469,7 +472,7 @@ void Render::__setOrthogonalProjection() {
 //    m_viewMatrix = Vm;
 //    __updateProjectionViewMatrix();
 //}
-                                
+
 void Render::__updateProjectionViewMatrix()
 { 
     m_viewMatrix = glm::lookAt(m_camera->position(), m_camera->target(), m_camera->up());
@@ -492,18 +495,18 @@ void Render::drawQuad_HUD(const ceti::Box2D& box, const control::Material& mater
     // ugly start
     glm::vec2 pos = box.center();
     glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, 0.0f));
-     
-//    glm::quat Qx, Qy, Qz;
+
+    //    glm::quat Qx, Qy, Qz;
     
     //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
-    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
-       
-//    glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
+    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
+    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
+
+    //    glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
     
     glm::vec2 size = box.size()*box.scale();
     glm::mat4 ScaleMatrix = glm::scale(glm::vec3(size.x, size.y, 1.0f));
-      
+
     glm::mat4 ModelMatrix = TranslationMatrix /* * RotationMatrix */ * ScaleMatrix;
     // ugly end
 
@@ -513,47 +516,47 @@ void Render::drawQuad_HUD(const ceti::Box2D& box, const control::Material& mater
 void Render::__drawMesh(const Mesh& mesh, bool use_alpha) const {
     // bug with transparent normal mesh (move states to material)
     //if (mesh.states() != m_activeStates) {
-        switch(mesh.states()) {
-        case Mesh::State::QUAD:
-            __disable_POINTSPRITE();
-            __enable_BLEND();
-            __disable_DEPTH_TEST();
-            __disable_CULLFACE();
-            break;
-        case Mesh::State::QUAD_ADDITIVE:
-            __disable_POINTSPRITE();
+    switch(mesh.states()) {
+    case Mesh::State::QUAD:
+        __disable_POINTSPRITE();
+        __enable_BLEND();
+        __disable_DEPTH_TEST();
+        __disable_CULLFACE();
+        break;
+    case Mesh::State::QUAD_ADDITIVE:
+        __disable_POINTSPRITE();
+        __enable_ADDITIVE_BLEND();
+        __disable_DEPTH_TEST();
+        __disable_CULLFACE();
+        break;
+    case Mesh::State::NORMAL:
+        __disable_POINTSPRITE();
+        if (use_alpha) {
             __enable_ADDITIVE_BLEND();
             __disable_DEPTH_TEST();
-            __disable_CULLFACE();
-            break;
-        case Mesh::State::NORMAL:
-            __disable_POINTSPRITE();
-            if (use_alpha) {
-                __enable_ADDITIVE_BLEND();
-                __disable_DEPTH_TEST();
-            } else {
-                __disable_BLEND();
-                __enable_DEPTH_TEST();
-            }
-
-            __enable_CULLFACE();
-            break;
-        case Mesh::State::PARTICLES:
-            __enable_POINTSPRITE();
-            __enable_ADDITIVE_BLEND();
-            __disable_DEPTH_TEST();
-            __disable_CULLFACE();
-            break;
-        case Mesh::State::LINES:
-            __disable_POINTSPRITE();
+        } else {
             __disable_BLEND();
-            __disable_DEPTH_TEST();
-            __disable_CULLFACE();
-            break;
-        case Mesh::State::NONE:
-            assert(false);
+            __enable_DEPTH_TEST();
         }
-        m_activeStates = mesh.states();
+
+        __enable_CULLFACE();
+        break;
+    case Mesh::State::PARTICLES:
+        __enable_POINTSPRITE();
+        __enable_ADDITIVE_BLEND();
+        __disable_DEPTH_TEST();
+        __disable_CULLFACE();
+        break;
+    case Mesh::State::LINES:
+        __disable_POINTSPRITE();
+        __disable_BLEND();
+        __disable_DEPTH_TEST();
+        __disable_CULLFACE();
+        break;
+    case Mesh::State::NONE:
+        assert(false);
+    }
+    m_activeStates = mesh.states();
     //}
 
     mesh.draw();
@@ -617,9 +620,9 @@ void Render::drawFlatNormalMap(const control::Material& material,
 }
 
 void Render::drawFlatDiffuseMap(const control::Material& material,
-                               const glm::vec3& center,
-                               float angle,
-                               float scale) const
+                                const glm::vec3& center,
+                                float angle,
+                                float scale) const
 {
     m_translateMatrix = glm::translate(center);
     m_scaleMatrix = glm::scale(glm::vec3(scale*material.model()->w, scale*material.model()->h, 1.0f));
@@ -753,22 +756,27 @@ void Render::drawFlatWithLight(const control::Material& material,
     }
 }
 
-glm::vec3 Render::lightDirectionFromWorldPosition(const glm::vec3& worldPosition) const
-{
-    glm::vec3 cameraPos(m_camera->position());
-    glm::vec3 diff(worldPosition-cameraPos);
-    diff.z = worldPosition.z;
-    return glm::normalize(diff);
-}
+//glm::vec3 Render::lightDirectionFromWorldPosition(const glm::vec3& worldPosition) const
+//{
+//    glm::vec3 cameraPos(m_camera->position());
+//    glm::vec3 diff(worldPosition-cameraPos);
+//    diff.z = worldPosition.z;
+//    return glm::normalize(diff);
+//}
 
 float Render::screenScale() const
 {
-    return (std::max(m_size.x, m_size.y)/2.0f);
+    return m_scale*m_size.y;
 }
 
 float Render::toScreenNorm(float val) const
 {
     return val/screenScale();
+}
+
+float Render::screenRatio() const
+{
+    return m_size.y/float(m_size.x);
 }
 
 glm::vec3 Render::toScreenCoordNorm(const glm::vec3& v) const
@@ -777,7 +785,8 @@ glm::vec3 Render::toScreenCoordNorm(const glm::vec3& v) const
     float backupz = v.z;
     glm::vec3 result(v);
     result -= m_camera->position();
-    result *= factor;
+    result /= factor;
+    result.x *= screenRatio();
     result.z = backupz;
     return result;
 }
@@ -797,6 +806,9 @@ GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScree
 
         glUniform4fv(glGetUniformLocation(program, "u_light_ambient"), 1, glm::value_ptr(glm::vec4(0.4, 0.4, 0.4, 1.0)));
 
+        glUniform1f(glGetUniformLocation(program, "u_screenRatio"), screenRatio());
+
+
         if (lights_num >= 1) {
             const Light& light0 = *lights.at(LIGHT0);
             glUniform4fv(glGetUniformLocation(program, "u_light0_diffuse"), 1, glm::value_ptr(light0.diffuse()));
@@ -814,6 +826,42 @@ GLuint Render::drawDefferedFlatLight(GLuint diffuseScreenMap, GLuint normalScree
             glUniform4fv(glGetUniformLocation(program, "u_light2_diffuse"), 1, glm::value_ptr(light2.diffuse()));
             glUniform3fv(glGetUniformLocation(program, "u_light2_position"), 1, glm::value_ptr(toScreenCoordNorm(light2.position())));
             glUniform1f(glGetUniformLocation(program, "u_light2_radius"), toScreenNorm(light2.radius()));
+        }
+        if (lights_num >= 4) {
+            const Light& light3 = *lights.at(LIGHT3);
+            glUniform4fv(glGetUniformLocation(program, "u_light3_diffuse"), 1, glm::value_ptr(light3.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light3_position"), 1, glm::value_ptr(toScreenCoordNorm(light3.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light3_radius"), toScreenNorm(light3.radius()));
+        }
+        if (lights_num >= 5) {
+            const Light& light4 = *lights.at(LIGHT4);
+            glUniform4fv(glGetUniformLocation(program, "u_light4_diffuse"), 1, glm::value_ptr(light4.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light4_position"), 1, glm::value_ptr(toScreenCoordNorm(light4.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light4_radius"), toScreenNorm(light4.radius()));
+        }
+        if (lights_num >= 6) {
+            const Light& light5 = *lights.at(LIGHT5);
+            glUniform4fv(glGetUniformLocation(program, "u_light5_diffuse"), 1, glm::value_ptr(light5.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light5_position"), 1, glm::value_ptr(toScreenCoordNorm(light5.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light5_radius"), toScreenNorm(light5.radius()));
+        }
+        if (lights_num >= 7) {
+            const Light& light6 = *lights.at(LIGHT6);
+            glUniform4fv(glGetUniformLocation(program, "u_light6_diffuse"), 1, glm::value_ptr(light6.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light6_position"), 1, glm::value_ptr(toScreenCoordNorm(light6.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light6_radius"), toScreenNorm(light6.radius()));
+        }
+        if (lights_num >= 8) {
+            const Light& light7 = *lights.at(LIGHT7);
+            glUniform4fv(glGetUniformLocation(program, "u_light7_diffuse"), 1, glm::value_ptr(light7.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light7_position"), 1, glm::value_ptr(toScreenCoordNorm(light7.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light7_radius"), toScreenNorm(light7.radius()));
+        }
+        if (lights_num >= 9) {
+            const Light& light8 = *lights.at(LIGHT8);
+            glUniform4fv(glGetUniformLocation(program, "u_light8_diffuse"), 1, glm::value_ptr(light8.diffuse()));
+            glUniform3fv(glGetUniformLocation(program, "u_light8_position"), 1, glm::value_ptr(toScreenCoordNorm(light8.position())));
+            glUniform1f(glGetUniformLocation(program, "u_light8_radius"), toScreenNorm(light8.radius()));
         }
 
         glActiveTexture(GL_TEXTURE0);
@@ -909,11 +957,11 @@ void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, c
 }
 
 void Render::draw(const Mesh& mesh, const control::Material& material, const glm::mat4& MM) const {
-//    if (material.model()->normalmap) {
-//        drawMeshLightNormalMap(mesh, material, MM);
-//    } else {
-        drawMeshWithLight(mesh, material, MM);
-//    }
+    //    if (material.model()->normalmap) {
+    //        drawMeshLightNormalMap(mesh, material, MM);
+    //    } else {
+    drawMeshWithLight(mesh, material, MM);
+    //    }
 }
 
 void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materialc, const glm::mat4& ModelMatrix) const
@@ -926,15 +974,15 @@ void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materi
     float ambient_factor = 0.25;
     const glm::vec3& eye_pos = m_camera->position();
     const MaterialModel& material = *materialc.model();
- 	 	
+
     __useProgram(m_programLight);
     {
-	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
-	
+        glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
+
         glUniformMatrix4fv(m_programLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(m_programLightLocation_uModelMatrix         , 1, GL_FALSE, &ModelMatrix[0][0]);
         glUniformMatrix3fv(m_programLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
-	            
+
         glUniform3fv(m_programLightLocation_uEyePos, 1, glm::value_ptr(eye_pos));
 
         const Light& light0 = *m_lightsManager.globalLight();
@@ -950,27 +998,27 @@ void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materi
         glUniform4fv(glGetUniformLocation(m_programLight, "u_Material.emission"), 1, glm::value_ptr(material.emission));
         glUniform1f(glGetUniformLocation(m_programLight,  "u_Material.shininess"), material.shininess);
 
-	    glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, materialc.model()->diffusemap);
         glUniform1i(m_programLightLocation_uTexture, 0);
-	                        
+
         __drawMesh(mesh, material.use_alpha);
-	}
+    }
 }
 
 void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     //float ambient_factor = 0.25f;
-    const glm::vec3& eye_pos = m_camera->target();   
+    const glm::vec3& eye_pos = m_camera->target();
 
     __useProgram(m_shaders.light_normalmap);
-	{
-	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));          
+    {
+        glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Matrices.projectionView"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Matrices.model")         , 1, GL_FALSE, &ModelMatrix[0][0]);
         glUniformMatrix3fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Matrices.normal")        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
-      
+
         glUniform3fv(glGetUniformLocation(m_shaders.light_normalmap, "u_EyePos"), 1, glm::value_ptr(eye_pos));
 
         const Light& light0 = *m_lightsManager.globalLight();
@@ -987,37 +1035,37 @@ void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& t
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.emission"), 1, glm::value_ptr(material.emission));
         glUniform1f(glGetUniformLocation(m_shaders.light_normalmap,  "u_Material.shininess"), material.shininess);
 
-		glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.light_normalmap, "u_Texture"), 0);
-		
-		glActiveTexture(GL_TEXTURE1);
+
+        glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->normalmap);
         glUniform1i(glGetUniformLocation(m_shaders.light_normalmap, "u_Normalmap"), 1);
-                  
+
         __drawMesh(mesh);
-	}
+    }
 } 
 
 void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {	
     __useProgram(m_shaders.multitexturing);
-	{
+    {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
-	
-		glActiveTexture(GL_TEXTURE0);                                
+
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.multitexturing, "Texture_0"), 0);
-		
-		glActiveTexture(GL_TEXTURE1);                                
+
+        glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->diffusemap);
         glUniform1i(glGetUniformLocation(m_shaders.multitexturing, "Texture_1"), 1);
-		
+
         glUniform2f(glGetUniformLocation(m_shaders.multitexturing, "displ"), textureOb.model()->texture_offset.x, textureOb.model()->texture_offset.y);
-				  
+
         __drawMesh(mesh);
-	}
+    }
 }  
 
 void Render::drawStar(GLuint texture) const
@@ -1046,79 +1094,79 @@ void Render::drawStar(GLuint texture) const
 
 void Render::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const
 {
-    // ugly 
+    // ugly
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
-    // ugly 
+    // ugly
 
     __useProgram(m_shaders.combine);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.combine, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-		
-		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, textures[0]);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textures[0]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_TextureScene"), 0);
-	
-		
-		glActiveTexture(GL_TEXTURE1);                                
-		glBindTexture(GL_TEXTURE_2D, textures[1]);
+
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textures[1]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass0_tex1"), 1);
-		
-		glActiveTexture(GL_TEXTURE2);        
-		glBindTexture(GL_TEXTURE_2D, textures[2]);
+
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, textures[2]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass0_tex2"), 2);
-		
-		glActiveTexture(GL_TEXTURE3);                                
-		glBindTexture(GL_TEXTURE_2D, textures[3]);
+
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, textures[3]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass0_tex3"), 3);
-		
-		glActiveTexture(GL_TEXTURE4);                                
-		glBindTexture(GL_TEXTURE_2D, textures[4]);
+
+        glActiveTexture(GL_TEXTURE4);
+        glBindTexture(GL_TEXTURE_2D, textures[4]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass0_tex4"), 4);
-		
-		
-		glActiveTexture(GL_TEXTURE5);                                
-		glBindTexture(GL_TEXTURE_2D, textures[5]);
+
+
+        glActiveTexture(GL_TEXTURE5);
+        glBindTexture(GL_TEXTURE_2D, textures[5]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass1_tex1"), 5);
-		
-		glActiveTexture(GL_TEXTURE6);                                
-		glBindTexture(GL_TEXTURE_2D, textures[6]);
+
+        glActiveTexture(GL_TEXTURE6);
+        glBindTexture(GL_TEXTURE_2D, textures[6]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass1_tex2"), 6);
-		
-		glActiveTexture(GL_TEXTURE7);                                
-		glBindTexture(GL_TEXTURE_2D, textures[7]);
+
+        glActiveTexture(GL_TEXTURE7);
+        glBindTexture(GL_TEXTURE_2D, textures[7]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass1_tex3"), 7);
-		
-		glActiveTexture(GL_TEXTURE8);                                
-		glBindTexture(GL_TEXTURE_2D, textures[8]);
+
+        glActiveTexture(GL_TEXTURE8);
+        glBindTexture(GL_TEXTURE_2D, textures[8]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass1_tex4"), 8);
-		
-		
-		glActiveTexture(GL_TEXTURE9);                                
-		glBindTexture(GL_TEXTURE_2D, textures[9]);
+
+
+        glActiveTexture(GL_TEXTURE9);
+        glBindTexture(GL_TEXTURE_2D, textures[9]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass2_tex1"), 9);
-		
-		glActiveTexture(GL_TEXTURE10);                                
-		glBindTexture(GL_TEXTURE_2D, textures[10]);
+
+        glActiveTexture(GL_TEXTURE10);
+        glBindTexture(GL_TEXTURE_2D, textures[10]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass2_tex2"), 10);
-		
-		glActiveTexture(GL_TEXTURE11);                                
-		glBindTexture(GL_TEXTURE_2D, textures[11]);
+
+        glActiveTexture(GL_TEXTURE11);
+        glBindTexture(GL_TEXTURE_2D, textures[11]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass2_tex3"), 11);
-		
-		glActiveTexture(GL_TEXTURE12);                                
-		glBindTexture(GL_TEXTURE_2D, textures[12]);
+
+        glActiveTexture(GL_TEXTURE12);
+        glBindTexture(GL_TEXTURE_2D, textures[12]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass2_tex4"), 12);
-	
+
         __drawMesh(*m_meshQuad);
-	}
+    }
 }
 
 void Render::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3& center, const glm::vec2& world_coord, float radius) const
 {
-    // ugly 
+    // ugly
     float scale = 1.0;
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
@@ -1126,77 +1174,77 @@ void Render::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3&
     // ugly
 
     __useProgram(m_shaders.fogwarspark);
-	{
+    {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.fogwarspark, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.fogwarspark, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-	
-		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, texture);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i (glGetUniformLocation(m_shaders.fogwarspark, "sceneTex"), 0);
-	
+
         glUniform2f(glGetUniformLocation(m_shaders.fogwarspark, "resolution"), w, h);
         glUniform2f(glGetUniformLocation(m_shaders.fogwarspark, "center"), center.x/(w*scale), center.y/(h*scale));
         glUniform1f(glGetUniformLocation(m_shaders.fogwarspark, "radius"), radius/(h*scale));
         glUniform2f(glGetUniformLocation(m_shaders.fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
-	
+
         glUniform1f(glGetUniformLocation(m_shaders.fogwarspark, "dcolor"), 0.5f/*npc->vehicle()->starsystem()->GetStar()->GetDeltaColor()*/);
-	
-         __drawMesh(*m_meshQuad);
-	}
+
+        __drawMesh(*m_meshQuad);
+    }
 }
 
 
 void Render::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int count, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
 {
-    // ugly 
+    // ugly
     //float scale = 1.0;
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-      	
+
     __useProgram(m_shaders.shockwave);
-	{
+    {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.shockwave, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.shockwave, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-	
-		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, scene_texture);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, scene_texture);
         glUniform1i (glGetUniformLocation(m_shaders.shockwave, "u_Texture"), 0);
-	
+
         glUniform1i (glGetUniformLocation(m_shaders.shockwave, "distortion_num"), count);
         glUniform2fv(glGetUniformLocation(m_shaders.shockwave, "center"),      count, *center_array);
         glUniform3fv(glGetUniformLocation(m_shaders.shockwave, "shockParams"), count, *xyz_array);
         glUniform1fv(glGetUniformLocation(m_shaders.shockwave, "time"),        count, time_array);
-	
+
         __drawMesh(*m_meshQuad);
-	}
+    }
 }
 
 
 
 void Render::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, float brightThreshold) const
 {
-    // ugly 
+    // ugly
     //float scale = 1.0;
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-       	                       
+
     __useProgram(m_shaders.extractbright);
-	{
+    {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.extractbright, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.extractbright, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-	
-		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, scene_texture);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, scene_texture);
         glUniform1i(glGetUniformLocation(m_shaders.extractbright, "source"), 0);
-	
+
         glUniform1f(glGetUniformLocation(m_shaders.extractbright, "threshold"), brightThreshold);
-		
+
         __drawMesh(*m_meshQuad);
-	}
+    }
 }
 
 void Render::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, int w, int h) const
@@ -1206,50 +1254,50 @@ void Render::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, in
     unsigned int quad_num_w = quad_num / 3;
     unsigned int quad_num_h = quad_num / 4;
 
-    int size_w = w/quad_num_w;  
-    int size_h = h/quad_num_w;  
+    int size_w = w/quad_num_w;
+    int size_h = h/quad_num_w;
 
     for (unsigned int i=0; i<quad_num_w; ++i) {
         for (unsigned int j=0; j<quad_num_h; ++j) {
-            // ugly 
+            // ugly
             glm::mat4 TranslateMatrix = glm::translate(glm::vec3(size_w+i*size_w, size_h+j*size_h, SCREEN_QUAD_ZPOS));
             glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(size_w, size_h, 1.0f));
             glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
-            // ugly 
-     	
+            // ugly
+
             __useProgram(m_shaders.basetexture); {
                 glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
                 glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
-				
-				glActiveTexture(GL_TEXTURE0);                                
-				glBindTexture(GL_TEXTURE_2D, textures[i+j]);
+
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, textures[i+j]);
                 glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_TextureScene"), 0);
-		
+
                 __drawMesh(*m_meshQuad);
-			}
+            }
         }
     }
 }
 
 void Render::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, int h)
 {
-    // ugly 
+    // ugly
     float scale = 1.0;
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
-    // ugly    
-     	
+    // ugly
+
     __useProgram(m_shaders.volumetriclight);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.volumetriclight, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.volumetriclight, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
 
-        glActiveTexture(GL_TEXTURE0);                                
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, m_bloom.GetFboFinal().colorBuffer());
         glUniform1i(glGetUniformLocation(m_shaders.volumetriclight, "FullSampler"), 0);
 
-        glActiveTexture(GL_TEXTURE1);                                
+        glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, m_bloom.GetTextureBlured());
         glUniform1i(glGetUniformLocation(m_shaders.volumetriclight, "BlurSampler"), 1);
 
@@ -1261,15 +1309,15 @@ void Render::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, 
 
 void Render::drawPostEffectBlur(GLuint texture, int w, int h) const
 {  
-    // ugly  
+    // ugly
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
- 	
+
     __useProgram(m_programBlur);
-    {    
-        glActiveTexture(GL_TEXTURE0);                              
+    {
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i(glGetUniformLocation(m_programBlur, "sceneTex"), 0);
         
@@ -1292,9 +1340,9 @@ void Render::drawScreenQuadTextured(GLuint texture) const
         glUniformMatrix4fv(glGetUniformLocation(program, "u_modelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture); 
+        glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i(glGetUniformLocation(program, "u_texture"), 0);
-                    
+
         __drawMesh(*m_meshQuad);
     }
 }
@@ -1363,12 +1411,12 @@ void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& ma
 
 void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
 {
-    // ugly 
+    // ugly
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
- 	
+
     __useProgram(m_shaders.starfield);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.starfield, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
@@ -1377,7 +1425,7 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
         glUniform2f(glGetUniformLocation(m_shaders.starfield, "resolution"), w, h);
         glUniform2f(glGetUniformLocation(m_shaders.starfield, "mouse"), pos_x, pos_y);
         glUniform1f(glGetUniformLocation(m_shaders.starfield, "time"), 1.0f);
-                    
+
         __drawMesh(*m_meshQuad);
     }
 }
@@ -1390,7 +1438,7 @@ void Render::__useProgram(GLint program) const
         glUseProgram(program);
     }
 }
- 
+
 void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
     //__useProgram(0);
@@ -1409,19 +1457,19 @@ void Render::drawLines(const Mesh& mesh) const
 //{
 //    drawQuad(*m_materialCollisionRadius, modelMatrix);
 //}
-      
+
 void Render::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
 {
     //glDisable(GL_TEXTURE_2D);
     
-    //ComposeModelMatrix(glm::mat4(1.0f)); 
+    //ComposeModelMatrix(glm::mat4(1.0f));
     
-    //glLineWidth(width); 
+    //glLineWidth(width);
     //glColor3f(1.0f, 1.0f, 1.0f);
     
-    //glBegin(GL_LINES);  
-        //glVertex3f(pos.x, pos.y, pos.z);
-        //glVertex3f(pos.x+length*v.x, pos.y+length*v.y, pos.z+length*v.z);
+    //glBegin(GL_LINES);
+    //glVertex3f(pos.x, pos.y, pos.z);
+    //glVertex3f(pos.x+length*v.x, pos.y+length*v.y, pos.z+length*v.z);
     //glEnd();
     
     //glEnable(GL_TEXTURE_2D);
@@ -1431,14 +1479,14 @@ void Render::drawVector(const glm::vec3& v, const glm::mat4& ModelMatrix, float 
 {
     //glDisable(GL_TEXTURE_2D);
     
-    //ComposeModelMatrix(Mm); 
+    //ComposeModelMatrix(Mm);
     
-    //glLineWidth(width); 
+    //glLineWidth(width);
     //glColor3f(1.0f, 1.0f, 1.0f);
     
-    //glBegin(GL_LINES);        
-        //glVertex3f(0.0f, 0.0f, 0.0f);
-        //glVertex3f(v.x, v.y, v.z);
+    //glBegin(GL_LINES);
+    //glVertex3f(0.0f, 0.0f, 0.0f);
+    //glVertex3f(v.x, v.y, v.z);
     //glEnd();
     
     //glEnable(GL_TEXTURE_2D);
@@ -1452,15 +1500,15 @@ void drawColoredTextWithBackground(const std::string& str, int font_size, const 
 {
     //float char_w = font_size;
     //float char_h = font_size;
-            
+
     //float string_w = char_w * str.size();
 
     //const TextureOb& texOb_textBg = GuiTextureObCollector::Instance().text_background;
     //Rect rect(pos.x - char_w, pos.y - char_h, string_w, 2*char_h);
-        
+
     //enable_BLEND();
     //{
-        //drawTexturedRect(texOb_textBg, rect, GUI::POS_Z);
+    //drawTexturedRect(texOb_textBg, rect, GUI::POS_Z);
     //}
     //disable_BLEND();
     
@@ -1471,16 +1519,16 @@ void drawColoredText(const std::string& str, int font_size, const glm::vec2& pos
 {
     //glPushMatrix();
     //{
-        //glLoadIdentity();
-        //Screen::Instance().DrawText(str, font_size, pos, color);
+    //glLoadIdentity();
+    //Screen::Instance().DrawText(str, font_size, pos, color);
     //}
     //glPopMatrix();
 }
 
 void drawInfoIn2Column(
-                    const std::vector<std::string>& info_title_list, 
-                    const std::vector<std::string>& info_value_list, 
-                    const glm::vec2& pos)
+        const std::vector<std::string>& info_title_list,
+        const std::vector<std::string>& info_value_list,
+        const glm::vec2& pos)
 { /*       
     int font_size = 13;
     float char_w = font_size;
@@ -1492,46 +1540,46 @@ void drawInfoIn2Column(
     for (unsigned int i=1; i<info_title_list.size(); i++)
     {
         int total_length = info_title_list[i].length() + info_value_list[i-1].length();
-        int title_length = info_title_list[i].length(); 
-    
+        int title_length = info_title_list[i].length();
+
         if (total_length > max_info_total_str_size)
             max_info_total_str_size = total_length;
-    
+
         if (title_length > max_info_title_str_size)
             max_info_title_str_size = title_length;
-    }    
+    }
 
     float info_total_string_w = char_w * max_info_total_str_size;
     float info_total_string_h = char_h * info_title_list.size();
-        
+
     //Rect rect(-char_w, -info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
     
     glm::ivec4 color_title(250, 250, 250, 255);
     glm::ivec4 color_info(250, 250, 0, 255);
 
     const TextureOb& texOb_textBg = *GuiTextureObCollector::Instance().text_background;
-                                    
+
     //glPushMatrix();
     {
         //glTranslatef(pos.x, pos.y, 0.0);
-    
+
         //drawTexturedRect(texOb_textBg, rect, -2);
-    
-        glm::vec2 curpos(info_total_string_w/3, 0.0); 
+
+        glm::vec2 curpos(info_total_string_w/3, 0.0);
         Screen::Instance().DrawText(info_title_list[0], font_size+1, curpos);
 
         for (unsigned int i=1; i<info_title_list.size(); i++)
         {
-            glm::vec2 curpos(0.0, -char_h*i); 
+            glm::vec2 curpos(0.0, -char_h*i);
             Screen::Instance().DrawText(info_title_list[i], font_size, curpos, color_title);
-        
-        }        
+
+        }
         for (unsigned int i=0; i<info_value_list.size(); i++)
         {
-            glm::vec2 curpos(max_info_title_str_size * (char_w - 1.2), -(char_h*(i + 1))); 
+            glm::vec2 curpos(max_info_title_str_size * (char_w - 1.2), -(char_h*(i + 1)));
             Screen::Instance().DrawText(info_value_list[i], font_size, curpos, color_info);
         }
-    }  
+    }
     //glPopMatrix();
 */
 }

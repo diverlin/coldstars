@@ -29,7 +29,7 @@
 
 namespace jeti {
 
-const int MAX_ACTIVE_LIGHTS = 6;
+const int MAX_ACTIVE_LIGHTS = 9;
 
 class LightsManager {
 public:
