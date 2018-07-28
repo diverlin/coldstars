@@ -50,7 +50,6 @@ namespace jeti {
 Render::Render(Camera* camera)
     :
       m_screenModelMatrix(glm::scale(glm::vec3(1.0, 1.0, 1.0f)))
-    , m_lightEmitter(this)
     , m_camera(camera)
 {
 
@@ -72,9 +71,9 @@ void Render::drawLightsPosition() const
     }
 }
 
-void Render::addLight(Light* light)
+void Render::addLight(const LightPtr& light)
 {
-    m_lightsManager.add(LightPtr(light));
+    m_lightsManager.add(light);
 }
 
 void Render::__enable_CULLFACE() const
@@ -184,7 +183,12 @@ void Render::update() {
     m_time += 0.01f;
 
     if (m_lightEmitterOn) {
-        m_lightEmitter.update(m_time);
+        m_lightEmitter.resize(m_size.x, m_size.y);
+        jeti::Light* newLight = m_lightEmitter.update(m_time);
+        if (newLight) {
+            addLight(LightPtr(newLight));
+        }
+
     }
     m_lightsManager.update(m_time);
 }

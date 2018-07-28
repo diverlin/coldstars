@@ -186,8 +186,7 @@ Light* LightBuilder::take()
 
 float LightBuilder::__getScreenWorldSize() const
 {
-    assert(m_width);
-    assert(m_height);
+    assert(m_width && m_height);
     return std::max(m_width, m_height);
 }
 

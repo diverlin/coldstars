@@ -28,6 +28,7 @@
 #include <jeti/light/Light.hpp>
 #include <jeti/light/LightsManager.hpp>
 #include <jeti/light/LightEmitter.hpp>
+#include <jeti/Colors.hpp>
 
 #include <ceti/Pack.hpp>
 #include <ceti/NonCopyable.hpp>
@@ -50,12 +51,6 @@ const float SCREEN_QUAD_ZPOS = 0.0f; // remove, make it 0
 const float ZDEFAULT = 0.0f;
 const float ZNEAR = 1.0f;
 const float ZFAR = 3000.0f;
-
-const glm::vec4 COLOR_YELLOW = glm::vec4(1.0f, 1.0f, 0.6f, 1.0f);
-const glm::vec4 COLOR_RED = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
-const glm::vec4 COLOR_BLUE = glm::vec4(0.6f, 0.6f, 1.0f, 1.0f);
-const glm::vec4 COLOR_WHITE = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-const glm::vec4 COLOR_PURPLE = glm::vec4(1.0f, 0.5f, 1.0f, 1.0f);
 
 enum {
     LIGHT0=0,
@@ -85,7 +80,7 @@ public:
     ~Render();
 
     void drawLightsPosition() const;
-    void addLight(Light*);
+    void addLight(const LightPtr&);
     void enableLightEmitter(bool flag) { m_lightEmitterOn = flag; }
 
     void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }

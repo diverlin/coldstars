@@ -983,23 +983,15 @@ void StarSystemViewer::__initDemoResources()
     if (!m_demoMaterials.empty())
         return;
 
-    m_render->enableLightEmitter(false);
+    m_render->enableLightEmitter(true);
 
-    float zpos = 0.0f;
-
-    jeti::LightBuilder builder(m_screen->width(), m_screen->height());
-
-    jeti::Light* l0 = builder.genGlobal().color(jeti::COLOR_YELLOW).position(glm::vec3(0.0f, 0.0f, zpos)).moveCircular(300.f, 1.0f).take();
-    jeti::Light* l1 = builder.genLocal(300.f).color(jeti::COLOR_RED).position(glm::vec3(400.0f, -400.0f, zpos)).moveCircular(500.f, -1.0f).take();
-    jeti::Light* l2 = builder.genLocal(300.f).color(jeti::COLOR_WHITE).position(glm::vec3(-400.0f, 400.0f, zpos)).moveCircular(200.f, -1.0f).take();
-    jeti::Light* l3 = builder.genLocal(300.f).color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take();
-    jeti::Light* l4 = builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take();
-
-    m_render->addLight(l0);
-    m_render->addLight(l1);
-    m_render->addLight(l2);
-    m_render->addLight(l3);
-    m_render->addLight(l4);
+    //float zpos = 0.0f;
+    //jeti::LightBuilder builder(m_screen->width(), m_screen->height());
+    //m_render->addLight( builder.genGlobal().position(glm::vec3(-2.0f, 0.0f, zpos)).color(jeti::COLOR_YELLOW).take() );
+    //m_render->addLight( builder.genLocal(300.f).color(jeti::COLOR_RED).position(glm::vec3(400.0f, -400.0f, zpos)).moveCircular(500.f, -1.0f).take() );
+    //m_render->addLight( builder.genLocal(300.f).color(jeti::COLOR_WHITE).position(glm::vec3(-400.0f, 400.0f, zpos)).moveCircular(200.f, -1.0f).take() ) ;
+    //m_render->addLight( builder.genLocal(300.f).color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take() );
+    //m_render->addLight( builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take() );
 
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
     m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
@@ -1043,13 +1035,14 @@ void StarSystemViewer::draw()
     float angle = m_render->time();
     //float angle = 0;
 
+    float r = 0.1f;
     for (int i=0; i<1; ++i) {
     {
         glm::vec3 pos(-800, 600, 0);
         for (auto material: m_demoMaterials) {
             float scale = 1.0f;
             int offset = 2*std::max(material->model()->w, material->model()->h);
-            m_render->drawFlatWithLight(*material, pos, angle, scale);
+            m_render->drawFlatWithLight(*material, pos, angle+r*float(offset), scale);
             pos.x += offset;
             if (pos.x >= 800) {
                 pos.y -= offset;
@@ -1086,13 +1079,14 @@ void StarSystemViewer::drawDeffered()
     int w = m_screen->width();
     int h = m_screen->height();
 
+    float r = 0.1f;
     m_render->fboFlatNormalMap().activate(w, h);
     {
         glm::vec3 pos(-800, 600, 0);
         for (auto material: m_demoMaterials) {
             float scale = 1.0f;
             int offset = 2*std::max(material->model()->w, material->model()->h);
-            m_render->drawFlatNormalMap(*material, pos, angle, scale);
+            m_render->drawFlatNormalMap(*material, pos, angle+r*float(offset), scale);
             pos.x += offset;
             if (pos.x >= 800) {
                 pos.y -= offset;
@@ -1108,7 +1102,7 @@ void StarSystemViewer::drawDeffered()
         for (auto material: m_demoMaterials) {
             float scale = 1.0f;
             int offset = 2*std::max(material->model()->w, material->model()->h);
-            m_render->drawFlatDiffuseMap(*material, pos, angle, scale);
+            m_render->drawFlatDiffuseMap(*material, pos, angle+r*float(offset), scale);
             //m_render->drawFlatWithLight(*material, pos, angle, scale);
             pos.x += offset;
             if (pos.x >= 800) {

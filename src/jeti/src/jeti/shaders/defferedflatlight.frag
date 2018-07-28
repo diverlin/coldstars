@@ -58,7 +58,7 @@ float diffuse_factor(vec3 light_pos, float radius, vec3 normal)
 {
 	vec2 light_dir2 = light_pos.xy - (v_texCoord.st - vec2(0.5, 0.5));
 	light_dir2.y *= u_screenRatio;
-	vec3 light_dir = vec3(light_dir2, 0.1);
+	vec3 light_dir = vec3(light_dir2, 0.0);
 	
 	float distance = length(light_dir);
 		
@@ -80,42 +80,37 @@ void main (void)
 		vec3 normal = normalize(texture2D(u_normalmap, v_texCoord.st).rgb * 2.0 - 1.0);
 		
 		// apply ambient component
-		vec4 color = texel*u_light_ambient;
+		vec3 lcolor = u_light_ambient.rgb;
 
 		// apply diffuse components
 		float factor0 = diffuse_factor(u_light0_position, u_light0_radius, normal);
-		color += factor0*texel*u_light0_diffuse;
-
 		float factor1 = diffuse_factor(u_light1_position, u_light1_radius, normal);
-		color += factor1*texel*u_light1_diffuse;
-
 		float factor2 = diffuse_factor(u_light2_position, u_light2_radius, normal);
-		color += factor2*texel*u_light2_diffuse;
-
 		float factor3 = diffuse_factor(u_light3_position, u_light3_radius, normal);
-		color += factor3*texel*u_light3_diffuse;
-
 		float factor4 = diffuse_factor(u_light4_position, u_light4_radius, normal);
-		color += factor4*texel*u_light4_diffuse;
-
 		float factor5 = diffuse_factor(u_light5_position, u_light5_radius, normal);
-		color += factor5*texel*u_light5_diffuse;
-
 		float factor6 = diffuse_factor(u_light6_position, u_light6_radius, normal);
-		color += factor6*texel*u_light6_diffuse;
-
 		float factor7 = diffuse_factor(u_light7_position, u_light7_radius, normal);
-		color += factor7*texel*u_light7_diffuse;
-
 		float factor8 = diffuse_factor(u_light8_position, u_light8_radius, normal);
-		color += factor8*texel*u_light8_diffuse;
-														
-		// Set the output color of our current pixel  	
-		color.a = texel.a;
+																
+		lcolor += factor0*u_light0_diffuse.rgb;
+		lcolor += factor1*u_light1_diffuse.rgb;
+		lcolor += factor2*u_light2_diffuse.rgb;
+		lcolor += factor3*u_light3_diffuse.rgb;
+		lcolor += factor4*u_light4_diffuse.rgb;
+		lcolor += factor5*u_light5_diffuse.rgb;
+		lcolor += factor6*u_light6_diffuse.rgb;
+		lcolor += factor7*u_light7_diffuse.rgb;
+		lcolor += factor8*u_light8_diffuse.rgb;
+				
+		lcolor *= texel.rgb;
+												
+		fragColor = vec4(lcolor, texel.a);
 
-		fragColor = color;
 	} else {
 		vec3 normal = normalize(vec3(0.0, 0.0, 1.0));
+		
+		vec3 lcolor;
 		
 		float factor0 = diffuse_factor(u_light0_position, u_light0_radius, normal);
 		float factor1 = diffuse_factor(u_light1_position, u_light1_radius, normal);
@@ -127,19 +122,16 @@ void main (void)
 		float factor7 = diffuse_factor(u_light7_position, u_light7_radius, normal);									
 		float factor8 = diffuse_factor(u_light8_position, u_light8_radius, normal);
 		
-		float factor = factor0;
-		factor += factor1;
-		factor += factor2;
-		factor += factor3;
-		factor += factor4;
-		factor += factor5;
-		factor += factor6;
-		factor += factor7;
-		factor += factor8;
+		lcolor += factor0*u_light0_diffuse.rgb;
+		lcolor += factor1*u_light1_diffuse.rgb;
+		lcolor += factor2*u_light2_diffuse.rgb;
+		lcolor += factor3*u_light3_diffuse.rgb;
+		lcolor += factor4*u_light4_diffuse.rgb;
+		lcolor += factor5*u_light5_diffuse.rgb;
+		lcolor += factor6*u_light6_diffuse.rgb;
+		lcolor += factor7*u_light7_diffuse.rgb;
+		lcolor += factor8*u_light8_diffuse.rgb;
 																
-		fragColor = vec4(factor);
-		fragColor.a = 1.0;
-	}
-	
-
+		fragColor = vec4(lcolor, 1.0);
+	}	
 }	

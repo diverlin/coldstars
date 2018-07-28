@@ -16,36 +16,16 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "LightEmitter.hpp"
 
-#include <jeti/light/Light.hpp>
+#pragma once
+
+#include <memory>
 
 namespace jeti {
 
-LightEmitter::LightEmitter(int w, int h)
-    :
-      m_width(w)
-    , m_height(h)
-{
-    m_builder.setSize(w, h);
-}
+class Light;
 
-void LightEmitter::resize(int w, int h)
-{
-    m_builder.setSize(w, h);
-}
-
-jeti::Light* LightEmitter::update(float time)
-{
-    jeti::Light* newLight = nullptr;
-    float elapsedTime = time - m_lastCreationTime;
-    if (elapsedTime > 0.5f) {
-        newLight = m_builder.genEffect().color().radius().moveLinear().take();
-        m_lastCreationTime = time;
-    }
-
-    return newLight;
-}
+using LightPtr = std::shared_ptr<Light>;
 
 } // namespace jeti
 

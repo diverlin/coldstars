@@ -58,7 +58,7 @@ private:
     enum class Move : int { STATIC, LINEAR, LINEARCYCLIC, CIRCULAR };
     enum class Role : int { GLOBAL, LOCAL, EFFECT };
 
-    Light(const glm::vec4& color = glm::vec4(1.0f), float ambient_factor=0.4f);
+    Light(const glm::vec4& color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), float ambient_factor=0.4f);
 
     void __makeGlobal();
     void __makeLocal();

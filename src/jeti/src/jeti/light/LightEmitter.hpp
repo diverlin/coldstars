@@ -21,26 +21,24 @@
 
 #include "LightBuilder.hpp"
 
-namespace jeti {
+#include <vector>
 
-class Render;
+namespace jeti {
 
 class LightEmitter {
 public:
-    LightEmitter(Render*);
+    LightEmitter(int w=0, int h=0);
     ~LightEmitter() = default;
 
-    void update(float time);
+    void resize(int w, int h);
+    jeti::Light* update(float time);
 
 private:
-    bool m_isInitialized = false;
+    bool m_width = 0;
+    bool m_height = 0;
     float m_lastCreationTime = 0.0f;
 
-    Render* m_render = nullptr;
     LightBuilder m_builder;
-
-    void __init();
-
 };
 
 } // namespace jeti

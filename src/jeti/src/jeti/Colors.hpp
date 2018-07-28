@@ -16,36 +16,19 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "LightEmitter.hpp"
 
-#include <jeti/light/Light.hpp>
+#pragma once
 
-namespace jeti {
+#include <glm/glm.hpp>
 
-LightEmitter::LightEmitter(int w, int h)
-    :
-      m_width(w)
-    , m_height(h)
-{
-    m_builder.setSize(w, h);
+namespace  jeti {
+
+const glm::vec4 COLOR_YELLOW = glm::vec4(1.0f, 1.0f, 0.6f, 1.0f);
+const glm::vec4 COLOR_RED = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
+const glm::vec4 COLOR_BLUE = glm::vec4(0.6f, 0.6f, 1.0f, 1.0f);
+const glm::vec4 COLOR_WHITE = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+const glm::vec4 COLOR_PURPLE = glm::vec4(1.0f, 0.5f, 1.0f, 1.0f);
+
 }
 
-void LightEmitter::resize(int w, int h)
-{
-    m_builder.setSize(w, h);
-}
-
-jeti::Light* LightEmitter::update(float time)
-{
-    jeti::Light* newLight = nullptr;
-    float elapsedTime = time - m_lastCreationTime;
-    if (elapsedTime > 0.5f) {
-        newLight = m_builder.genEffect().color().radius().moveLinear().take();
-        m_lastCreationTime = time;
-    }
-
-    return newLight;
-}
-
-} // namespace jeti
 
