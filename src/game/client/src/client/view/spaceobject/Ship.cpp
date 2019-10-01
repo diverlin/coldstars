@@ -34,6 +34,7 @@
 #include <jeti/Material.hpp>
 #include <jeti/PathVisual.hpp>
 
+#include <iostream>
 #include <meti/RandUtils.hpp>
 
 namespace view {

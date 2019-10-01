@@ -19,6 +19,8 @@
 #include "TagsComponent.hpp"
 #include <ceti/StringUtils.hpp>
 
+#include <iostream>
+
 namespace ceti {
 
 int TagsComponent::counter = 0;

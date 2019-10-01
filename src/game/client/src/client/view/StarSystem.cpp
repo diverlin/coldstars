@@ -983,37 +983,41 @@ void StarSystemViewer::__initDemoResources()
     if (!m_demoMaterials.empty())
         return;
 
-    m_render->enableLightEmitter(true);
+    //m_render->enableLightEmitter(true);
 
-    //float zpos = 0.0f;
-    //jeti::LightBuilder builder(m_screen->width(), m_screen->height());
-    //m_render->addLight( builder.genGlobal().position(glm::vec3(-2.0f, 0.0f, zpos)).color(jeti::COLOR_YELLOW).take() );
-    //m_render->addLight( builder.genLocal(300.f).color(jeti::COLOR_RED).position(glm::vec3(400.0f, -400.0f, zpos)).moveCircular(500.f, -1.0f).take() );
-    //m_render->addLight( builder.genLocal(300.f).color(jeti::COLOR_WHITE).position(glm::vec3(-400.0f, 400.0f, zpos)).moveCircular(200.f, -1.0f).take() ) ;
+    float zpos = 0.0f;
+    jeti::LightBuilder builder(m_screen->width(), m_screen->height());
+    m_render->addLight( jeti::LightPtr( builder.genGlobal().position(glm::vec3(-2.0f, 0.0f, zpos)).moveCircular(500.f, 1.0f).color(jeti::COLOR_YELLOW).take()) );
+//    m_render->addLight( jeti::LightPtr( builder.genLocal(300.f).color(jeti::COLOR_RED).position(glm::vec3(400.0f, -400.0f, zpos)).moveCircular(500.f, -1.0f).take()) );
+//    m_render->addLight( jeti::LightPtr( builder.genLocal(300.f).color(jeti::COLOR_WHITE).position(glm::vec3(-400.0f, 400.0f, zpos)).moveCircular(200.f, -1.0f).take()) ) ;
     //m_render->addLight( builder.genLocal(300.f).color(jeti::COLOR_PURPLE).radius(300.f).position(glm::vec3(-200.0f, 200.0f, zpos)).moveCircular(200.f, 1.0f).take() );
     //m_render->addLight( builder.genEffect().color(jeti::COLOR_BLUE).radiusVar(300.f, 1000.f, 50.f).position(glm::vec3(1000.0f, 0.0f, zpos)).take() );
 
-    m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/race4_trader_01.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/race6_warrior_00.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_10.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/race1_warrior_00.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/race4_trader_01.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/race6_warrior_00.png"));
 
-    m_demoMaterials.add(new jeti::control::Material("data/ship/race0_ranger_00.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/race4_warrior_00.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/race0_ranger_00.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/race4_warrior_00.png"));
 
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/1.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/2.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/3.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/1.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/2.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/3.png"));
 
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_10.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_11.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_12.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_13.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_10.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_11.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_12.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/ship/new/race0_ranger_13.png"));
 
-    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid1_sm.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid2_sm.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid3_sm.png"));
-    m_demoMaterials.add(new jeti::control::Material("data/asteroid/Starship.svg.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid1_sm.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid2_sm.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/asteroid/asteroid3_sm.png"));
+//    m_demoMaterials.add(new jeti::control::Material("data/asteroid/Starship.svg.png"));
+
+    for (int i=0; i<16; ++i) {
+        m_demoMaterials.add(new jeti::control::Material("data/test/ball.png"));
+    }
 }
 
 void StarSystemViewer::draw()
@@ -1073,8 +1077,8 @@ void StarSystemViewer::drawDeffered()
 
     __initDemoResources();
 
-    float angle = m_render->time();
-    //float angle = 0;
+    //float angle = m_render->time();
+    float angle = 0;
 
     int w = m_screen->width();
     int h = m_screen->height();
@@ -1113,15 +1117,31 @@ void StarSystemViewer::drawDeffered()
     }
     m_render->fboFlatDiffuseMap().deactivate();
 
+    const int DRAW_NM_CODE = 1;
+    const int DRAW_DIFF_CODE = 2;
+    const int DRAW_FULL_CODE = 3;
 
-    //m_render->drawScreenQuadTextured(m_render->fboFlatNormalMap().colorBuffer());
-    //m_render->drawScreenQuadTextured(m_render->fboFlatDiffuseMap().colorBuffer());
-    //m_render->drawScreenQuadTextured(m_demoMaterials.at(0)->model()->diffusemap);
+    int code = 3;
+    switch(code) {
+        case DRAW_NM_CODE: {
+        m_render->drawScreenQuadTextured(m_render->fboFlatNormalMap().colorBuffer());
+        break;
+    }
+    case DRAW_DIFF_CODE: {
+        m_render->drawScreenQuadTextured(m_render->fboFlatDiffuseMap().colorBuffer());
+        break;
+    }
+    case DRAW_FULL_CODE: {
+            GLuint resultMap = m_render->drawDefferedFlatLight(m_render->fboFlatDiffuseMap().colorBuffer(),
+                                                               m_render->fboFlatNormalMap().colorBuffer());
+            m_render->drawScreenQuadTextured(resultMap);
+        break;
+    }
+    }
 
 
-    GLuint resultMap = m_render->drawDefferedFlatLight(m_render->fboFlatDiffuseMap().colorBuffer(),
-                                                       m_render->fboFlatNormalMap().colorBuffer());
-    m_render->drawScreenQuadTextured(resultMap);
+
+
 
     m_render->drawLightsPosition();
 

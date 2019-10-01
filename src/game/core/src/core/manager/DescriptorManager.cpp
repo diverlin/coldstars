@@ -35,6 +35,7 @@
 
 #include <ceti/FsUtils.hpp>
 
+#include <iostream>
 #include <fstream>
 
 namespace core {

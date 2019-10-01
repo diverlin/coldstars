@@ -40,6 +40,7 @@ std::string to_string(const std::vector<int_t>&);
 std::string to_string(const pack<int>&);
 std::string to_string(const std::string& label, const std::vector<int_t>& ids);
 
+float to_float(const std::string&);
 int to_int(const std::string&);
 bool to_bool(const std::string&);
 

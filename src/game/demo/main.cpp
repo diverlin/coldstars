@@ -8,6 +8,7 @@
 #include <client/view/StarSystem.hpp>
 #include <client/session/client.hpp>
 #include <client/session/ClientSession.hpp>
+#include <client/gui/UserInput.hpp>
 
 
 int main()
@@ -27,6 +28,8 @@ int main()
     while(viewer->isOpened()) {
         viewer->update();
         viewer->draw();
+//        viewer->drawDeffered();
+        gui::UserInput::get().update();
         usleep(200);
     }
 

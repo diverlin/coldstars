@@ -18,6 +18,7 @@
 
 #include "StringUtils.hpp"
 
+#include <iostream>
 #include <iomanip>
 #include <algorithm>
 #include <sstream>
@@ -31,8 +32,7 @@ std::string to_string(float val, int digits)
     return out.str();
 }
 
-std::string
-to_string(const glm::vec2& v, int digits)
+std::string to_string(const glm::vec2& v, int digits)
 {
     std::ostringstream out;
     out << std::setprecision(digits) << std::fixed;
@@ -40,8 +40,7 @@ to_string(const glm::vec2& v, int digits)
     return out.str();
 }
 
-std::string
-to_string(const glm::vec3& v, int digits)
+std::string to_string(const glm::vec3& v, int digits)
 {
     std::ostringstream out;
     out << std::setprecision(digits) << std::fixed;
@@ -74,6 +73,11 @@ std::string to_string(const std::string& label, const std::vector<int_t>& ids)
         result += std::to_string(id) + ",";
     }
     return result;
+}
+
+float to_float(const std::string& val)
+{
+    return float(std::atof(val.c_str()));
 }
 
 int to_int(const std::string& val)
